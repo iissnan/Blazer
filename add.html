@@ -15,7 +15,7 @@
 
     <body>
         <div id="error" class="error"></div>
-        <form action="add.php" method="post" id="J_FormAdd">
+        <form action="add.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
             <p>
                 <label for="title">标题</label>
                 <input type="text" name="title" id="title" />
@@ -31,6 +31,10 @@
             <p>
                 <label for="cover">封面</label>
                 <input type="file" name="cover" id="cover" />
+            </p>
+            <p>
+                <label for="douban-link">豆瓣链接</label>
+                <input type="text" name="douban_link" id="douban-link"/>
             </p>
 
             <p>
