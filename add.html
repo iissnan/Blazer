@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>添加书籍</title>
+        <style type="text/css">
+            .error {
+                display: none;
+                padding: 5px;
+                color: white;
+                background: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="error" class="error"></div>
+        <form action="add.php" method="post" id="J_FormAdd">
+            <p>
+                <label for="title">标题</label>
+                <input type="text" name="title" id="title" />
+            </p>
+            <p>
+                <label for="author">作者</label>
+                <input type="text" name="author" id="author" />
+            </p>
+            <p>
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" id="isbn" />
+            </p>
+            <p>
+                <label for="cover">封面</label>
+                <input type="file" name="cover" id="cover" />
+            </p>
+
+            <p>
+                <input type="button" id="J_ActionAdd" value="提交" />
+            </p>
+        </form>
+        <script type="text/javascript">
+            (function () {
+                var form = document.getElementById("J_FormAdd");
+                var inputTitle = document.getElementById("title");
+                var inputAuthor = document.getElementById("author");
+                var actionAdd = document.getElementById("J_ActionAdd");
+                var error = document.getElementById("error");
+                if (actionAdd) {
+                    actionAdd.onclick = function () {
+                        if (inputTitle.value !== "") {
+                            form.submit();
+                        } else {
+                            error.innerHTML = "请输入标题";
+                            error.style.display = "block";
+                        }
+                    }
+                }
+            }());
+        </script>
+    </body>
+</html>

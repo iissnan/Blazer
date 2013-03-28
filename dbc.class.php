@@ -66,6 +66,7 @@ class DatabaseConnection
      * @param $table
      * @param array $fields
      * @param array $values
+     * @return mixed
      */
     public function insert($table, $fields, $values) {
         $fields = join(",", $fields);
@@ -76,7 +77,7 @@ class DatabaseConnection
         }
         $values = join(",", $values);
         $query = "INSERT INTO $table ($fields) VALUES($values)";
-        $this->query($query);
+        return $this->query($query);
     }
 
     /**
