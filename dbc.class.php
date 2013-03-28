@@ -56,7 +56,7 @@ class DatabaseConnection
      * @return mixed
      */
     public function get($table, $filter="", $num=10) {
-        $query = "SELECT * FROM `$table` LIMIT $num $filter";
+        $query = "SELECT * FROM $table LIMIT $num $filter";
         return $this->query($query);
     }
 
@@ -64,11 +64,18 @@ class DatabaseConnection
      * 向$table插入数据
      *
      * @param $table
-     * @param string $value
-     * @param string $field
+     * @param array $fields
+     * @param array $values
      */
-    public function insert($table, $value, $field="") {
-        $query = "INSERT INTO `$table` $field VALUES($value)";
+    public function insert($table, $fields, $values) {
+        $fields = join(",", $fields);
+
+        // 格式化values
+        foreach ($values as &$value) {
+            $value = "'" . $value . "'";
+        }
+        $values = join(",", $values);
+        $query = "INSERT INTO $table ($fields) VALUES($values)";
         $this->query($query);
     }
 
@@ -79,7 +86,7 @@ class DatabaseConnection
      * @param string $filter
      */
     public function remove($table, $filter="") {
-        $query = "DELETE FROM `$table` $filter";
+        $query = "DELETE FROM $table $filter";
         $this->query($query);
     }
 
@@ -92,7 +99,7 @@ class DatabaseConnection
     public function query($query) {
         $result = $this->db->query($query);
         if ($result === false) {
-            die("Error: Could not execute this query: " . $query);
+            die("<br />Error: Could not execute this query: " . $query);
         } else {
             return $result;
         }
