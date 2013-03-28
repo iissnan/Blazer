@@ -1,6 +1,6 @@
 <?php
     header("Content-Type: text/html; charset=utf-8");
-    require_once("dbc.class.php");
+    require_once("class/dbc.class.php");
 
     $title = trim($_POST["title"]);
     $author = trim($_POST["author"]);
