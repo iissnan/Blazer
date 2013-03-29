@@ -73,7 +73,8 @@ class DatabaseConnection
 
         // 格式化values
         foreach ($values as &$value) {
-            $value = "'" . $value . "'";
+            // 处理特殊字符 mysqli_real_escape_string
+            $value = "'" . $this->db->real_escape_string($value) . "'";
         }
         $values = join(",", $values);
         $query = "INSERT INTO $table ($fields) VALUES($values)";

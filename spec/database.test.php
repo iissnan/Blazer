@@ -1,7 +1,7 @@
 <?php
 
 header('Content-Type: text/html; charset=utf-8');
-require_once("../dbc.class.php");
+require_once("../class/dbc.class.php");
 $table = "books";
 
 // 创建数据库链接对象
