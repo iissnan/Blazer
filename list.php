@@ -18,10 +18,11 @@
                 for ($i = 0; $i < $books_length; $i++) {
                     $book = $books_all->fetch_assoc();
                     echo "<tr>";
+                    echo "<td>" . "<img width='106' height='150' src='" . $book["cover"] . "'/>" . "</td>";
                     echo "<td>" . $book["title"] . "</td>";
                     echo "<td>" . $book["author"] . "</td>";
                     echo "<td>" . $book["isbn"] . "</td>";
-                    echo "<td>" . "<img width='106' height='150' src='" . $book["cover"] . "'/>" . "</td>";
+                    echo "<td><a href='edit.php?id=" . $book["id"] . "'>编辑</a></td>";
                     echo "</tr>";
                 }
                 echo "</table>";

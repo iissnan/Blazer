@@ -54,15 +54,7 @@
     <head>
         <meta charset="utf-8" />
         <title>添加书籍</title>
-        <style type="text/css">
-            .error {
-                display: none;
-                padding: 5px;
-                color: white;
-                font-weight: bold;
-                background: red;
-            }
-        </style>
+        <link rel="stylesheet" href="assets/css/admin.css"/>
     </head>
 
     <body>
@@ -95,24 +87,6 @@
 
             <input type="hidden" name="submitted" value="yes"/>
         </form>
-        <script type="text/javascript">
-            (function () {
-                var form = document.getElementById("J_FormAdd");
-                var inputTitle = document.getElementById("title");
-                var inputAuthor = document.getElementById("author");
-                var actionAdd = document.getElementById("J_ActionAdd");
-                var error = document.getElementById("error");
-                if (actionAdd) {
-                    actionAdd.onclick = function () {
-                        if (inputTitle.value !== "") {
-                            form.submit();
-                        } else {
-                            error.innerHTML = "请输入标题";
-                            error.style.display = "block";
-                        }
-                    }
-                }
-            }());
-        </script>
+        <script type="text/javascript" src="assets/js/admin.js"></script>
     </body>
 </html>
