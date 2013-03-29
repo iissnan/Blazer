@@ -56,7 +56,7 @@ class DatabaseConnection
      * @return mixed
      */
     public function get($table, $filter="", $num=10) {
-        $query = "SELECT * FROM $table LIMIT $num $filter";
+        $query = "SELECT * FROM $table $filter LIMIT $num";
         return $this->query($query);
     }
 
@@ -99,12 +99,15 @@ class DatabaseConnection
      * @return mixed
      */
     public function query($query) {
+        //echo $query . "<br />";
         $result = $this->db->query($query);
-        if ($result === false) {
+
+        // 当执行query发生异常时返回false
+        if (!$result) {
             die("<br />Error: Could not execute this query: " . $query);
-        } else {
-            return $result;
         }
+
+        return $result;
     }
 
     /**

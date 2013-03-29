@@ -1,11 +1,18 @@
 <?php
 
+require_once("dbc.class.php");
+
 class Book {
     private $title;
     private $author;
     private $isbn;
     private $category;
     private $douban_link;
+    private $dbc;
+
+    public function __construct() {
+        $this->dbc = new DatabaseConnection("localhost", "root", "123456", "bookshelf");
+    }
 
     /**
      * 添加书籍
@@ -24,7 +31,14 @@ class Book {
         $this->douban_link = $douban_link;
     }
 
-    public function all(){}
+    /**
+     * 获取所有书籍
+     *
+     * @return mixed
+     */
+    public function all(){
+        return $this->dbc->get("books");
+    }
 
     /**
      * 获取指定title的书籍
