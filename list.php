@@ -22,7 +22,9 @@
                     echo "<td>" . $book["title"] . "</td>";
                     echo "<td>" . $book["author"] . "</td>";
                     echo "<td>" . $book["isbn"] . "</td>";
+                    echo "<td>" . $book["category"] . "</td>";
                     echo "<td><a href='edit.php?id=" . $book["id"] . "'>编辑</a></td>";
+                    echo "<td><a onclick='return confirmDelete(this)' href='delete.php?id=" . $book["id"] . "'>删除</a></td>";
                     echo "</tr>";
                 }
                 echo "</table>";
@@ -30,5 +32,6 @@
                 echo "没有书籍";
             }
         ?>
+        <script type="text/javascript" src="assets/js/admin.js"></script>
     </body>
 </html>

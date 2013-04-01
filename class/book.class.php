@@ -4,6 +4,7 @@ require_once("dbc.class.php");
 
 class Book {
     private $dbc;
+    private $table = "books";
 
     public function __construct() {
         $this->dbc = new DatabaseConnection("localhost", "root", "123456", "bookshelf");
@@ -22,7 +23,7 @@ class Book {
      */
     public function add($title, $author, $isbn, $cover, $category, $douban_link) {
         $result = $this->dbc->insert(
-            "books",
+            $this->table,
             array("title", "author", "isbn", "category", "cover", "douban_link"),
             array($title, $author, $isbn, $category, $this->handleCover($cover), $douban_link)
         );
@@ -36,7 +37,7 @@ class Book {
      * @return mixed
      */
     public function all(){
-        return $this->dbc->get("books");
+        return $this->dbc->get($this->table);
     }
 
     /**
@@ -47,12 +48,13 @@ class Book {
      */
     public function get($key) {
         $filter = gettype($key) == "string" ? "title = '$key'" : " id = $key";
-        return $this->dbc->get("books", $filter, 1);
+        return $this->dbc->get($this->table, $filter, 1);
     }
 
     /**
      * 更新书籍
      *
+     * @param string $id
      * @param string $title 标题
      * @param string $author 作者
      * @param string $isbn ISBN
@@ -62,29 +64,28 @@ class Book {
      *
      * @return boolean 执行成功或者失败
      */
-    public function update($title, $author, $isbn, $category, $cover, $douban_link) {
+    public function update($id, $title, $author, $isbn, $category, $cover, $douban_link) {
+        $cover = gettype($cover) == "array" ? $this->handleCover($cover) : $cover;
         $fields = array(
             "title" => $title,
             "author" => $author,
             "isbn" => $isbn,
             "category" => $category,
-            "cover" => $this->handleCover($cover),
+            "cover" => $cover,
             "douban_link" => $douban_link,
             "update_at" => date("Y-m-d H:i:s")
         );
-        $values = "";
-        $result = $this->dbc->update("books", $fields, $values);
-        return ($result && $result->num_rows > 0);
+        return $this->dbc->update($this->table, $fields, "id=$id");
     }
 
     /**
      * 删除书籍
      *
-     * @param $key
-     * @return mixed
+     * @param $id
+     * @return boolean
      */
-    public function remove($key) {
-        return $this->dbc->remove($key);
+    public function remove($id) {
+        return $this->dbc->remove($this->table, "id = $id");
     }
 
     /**
@@ -93,6 +94,32 @@ class Book {
      * @return string
      */
     protected function handleCover($cover) {
-        return "";
+        // 封面存储路径
+        define("DIR_COVER", "cover");
+
+        // 上传的图片最大限制为500K
+        define("MAX_SIZE", 500000);
+
+        if (! is_dir(DIR_COVER)) {
+            mkdir(DIR_COVER);
+        }
+
+        // 允许的上传图片类型
+        $allow_mimes = array("image/png", "image/jpeg", "image/gif");
+        if ($cover["size"] == 0) {}
+        if ($cover["size"] > MAX_SIZE) {
+            echo "图片大小必需小于500K";
+            return "";
+        }
+        if (! in_array($cover["type"], $allow_mimes)) {
+            echo "仅支持PNG, GIF和JPG格式的图片";
+            return "";
+        }
+        if (!move_uploaded_file($cover["tmp_name"], DIR_COVER . '/' . $cover["name"])) {
+            echo "图片上传失败";
+            return "";
+        } else {
+            return DIR_COVER . "/" . $cover["name"];
+        }
     }
 }

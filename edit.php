@@ -1,6 +1,7 @@
 <?php
     header("Content-Type: text/html; charset=utf-8");
     require_once("class/book.class.php");
+    $book_instance = new Book();
 
     // 提交数据
     if ($_POST["submitted"] == "yes") {
@@ -9,25 +10,23 @@
         if ($title == "") {
             echo "标题不能为空";
         }
-
+        $id = $_POST["id"];
         $author = $_POST["author"];
-        $category = "";
+        $category = $_POST["category"];
         $isbn = $_POST["isbn"];
-        $cover = $_FILES["cover"];
+        if ($_FILES["cover"]["name"] != "") {
+            $cover = $_FILES["cover"];
+        } else {
+            $cover = $_POST["current-cover"];
+        }
         $douban_link = $_POST["douban_link"];
 
-        $book->update($title, $author, $isbn, $category, $cover, $douban_link);
-        if (!$book) {
-            echo "<p>编辑失败</p>";
-        } else {
-            echo "<p>编辑成功</p>";
-            echo "<p><a href='list.php'>返回列表</a> | <a href='add.php'>添加书籍</a>";
-        }
+        $result = $book_instance->update($id, $title, $author, $isbn, $category, $cover, $douban_link);
+        echo "<script>location.href='edit_result.html?code=" . $result . "';</script>";
     } else {
         // 获取数据
         if (isset($_GET["id"])) {
             $id = (int)$_GET["id"];
-            $book_instance = new Book();
             $book = $book_instance->get($id);
             if ($book->num_rows > 0) {
                 $book = $book->fetch_assoc();
@@ -36,13 +35,14 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>添加书籍</title>
+    <title>编辑书籍</title>
     <link rel="stylesheet" href="assets/css/admin.css"/>
 </head>
 
 <body>
     <div id="error" class="error"></div>
-    <form action="add.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
+    <form action="edit.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
+        <input type="hidden" name="id" value="<?php echo $book["id"];?>"/>
         <p>
             <label for="title">标题</label>
             <input type="text" name="title" id="title" value="<?php echo $book["title"] ?>" />
@@ -58,7 +58,12 @@
         <p>
             <label for="cover">封面</label>
             <img width="106" height="150" src="<?php echo $book["cover"]?>" />
+            <input type="hidden" name="current-cover" value="<?php echo $book["cover"]?>"/>
             <input type="file" name="cover" id="cover" />
+        </p>
+        <p>
+            <label for="category">分类</label>
+            <input type="text" name="category" id="category" value="<?php echo $book["category"]; ?>"/>
         </p>
         <p>
             <label for="douban-link">豆瓣链接</label>

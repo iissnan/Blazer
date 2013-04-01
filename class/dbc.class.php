@@ -81,8 +81,7 @@ class DatabaseConnection
         $values = join(",", $values);
 
         $query = "INSERT INTO $table ($fields) VALUES($values)";
-        $result = $this->execute($query);
-        return ($result && $result->num_rows);
+        return $this->execute($query);
     }
 
     /**
@@ -95,13 +94,16 @@ class DatabaseConnection
      */
     public function update($table, $pair, $filter) {
         $update_fields = "";
+        $index = 0;
         foreach ($pair as $field => $value) {
-            $update_fields = $update_fields . "," . $field . "=" . $value;
+            $update_fields = $index == 0 ?
+                $field . "='" . $value ."'" :
+                $update_fields . "," . $field . "='" . $value . "'";
+            $index++;
         }
         $filter = $filter == "" ? "" : "WHERE $filter";
         $query = "UPDATE $table SET $update_fields $filter";
-        $result = $this->execute($query);
-        return ($result && $result->num_rows > 0);
+        return $this->execute($query);
     }
 
     /**
@@ -114,8 +116,7 @@ class DatabaseConnection
     public function remove($table, $filter="") {
         $filter = $filter == "" ? "" : "WHERE $filter";
         $query = "DELETE FROM $table $filter";
-        $result = $this->execute($query);
-        return ($result && $result->num_rows > 0);
+        return $this->execute($query);
     }
 
     /**

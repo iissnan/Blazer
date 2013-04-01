@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>删除操作结果</title>
+</head>
+<body>
+<script type="text/javascript">
+    (function () {
+        var code = location.search.substring(1).split("=");
+        if (code[1] === "1") {
+            document.write("删除成功");
+        } else {
+            document.write("删除失败");
+        }
+    }());
+</script>
+    <p>
+        <a href="list.php">列表页</a>
+    </p>
+</body>
+</html>

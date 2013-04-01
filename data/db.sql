@@ -28,9 +28,10 @@ CREATE TABLE `books` (
   `cover` varchar(100) default NULL,
   `douban_link` varchar(100) default NULL,
   `create_at` datetime default NULL,
+  `update_at` datetime default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
 
 -- 
 -- 导出表中的数据 `books`

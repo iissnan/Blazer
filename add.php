@@ -1,11 +1,14 @@
 <?php
     header("Content-Type: text/html; charset=utf-8");
+    require_once "class/book.class.php";
 
     if ($_POST["submitted"] == "yes") {
-        require_once("class/dbc.class.php");
         $title = trim($_POST["title"]);
         $author = trim($_POST["author"]);
         $isbn = trim($_POST["isbn"]);
+        $category = trim($_POST["category"]);
+        $douban_link = trim($_POST["douban_link"]);
+        $cover = $_FILES["cover"];
 
         // title为必需值
         if ($title == "") {
@@ -13,40 +16,9 @@
             exit();
         }
 
-        // 封面处理
-        define("DIR_COVER", "cover");
-        define("MAX_SIZE", 500000); // 500K
-        if (! is_dir(DIR_COVER)) {
-            mkdir(DIR_COVER);
-        }
-
-        $allow_mimes = array("image/png", "image/jpeg", "image/gif");
-        $cover = $_FILES["cover"];
-        if ($cover["size"] == 0) {}
-        if ($cover["size"] > MAX_SIZE) {
-            echo "图片大小必需小于500K";
-            exit();
-        }
-        if (! in_array($cover["type"], $allow_mimes)) {
-            echo "仅支持PNG, GIF和JPG格式的图片";
-            exit();
-        }
-        if (!move_uploaded_file($cover["tmp_name"], DIR_COVER . '/' . $cover["name"])) {
-            echo "图片上传失败";
-        } else {
-            $cover = DIR_COVER . "/" . $cover["name"];
-        }
-
-        $dbc = new DatabaseConnection("localhost", "root", "123456", "bookshelf");
-        $result = $dbc->insert(
-            "books",
-            array("title", "author", "isbn", "cover"),
-            array($title, $author, $isbn, $cover)
-        );
-        if ($result) {
-            echo "添加成功!";
-            echo "<script>window.location ='add_success.html';</script>";
-        }
+        $book_instance = new Book();
+        $result = $book_instance->add($title, $author, $isbn, $cover, $category, $douban_link);
+        echo "<script>window.location ='add_success.html?code=" . $result . "';</script>";
     }
 ?>
 <!DOCTYPE html>
@@ -75,6 +47,10 @@
             <p>
                 <label for="cover">封面</label>
                 <input type="file" name="cover" id="cover" />
+            </p>
+            <p>
+                <label for="category">分类</label>
+                <input type="text" name="category" id="category"/>
             </p>
             <p>
                 <label for="douban-link">豆瓣链接</label>
