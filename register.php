@@ -1,5 +1,9 @@
 <?php
+    session_start();
     header("Content-Type: text/html; charset=utf-8");
+    if (isset($_SESSION["user"])) {
+        echo "<script>location.href='list.php';</script>";
+    }
     require_once("class/user.class.php");
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,11 @@
 <?php
+    session_start();
     header("Content-Type: text/html; charset=utf-8");
+
+    if (!isset($_SESSION["user"])) {
+        echo "<script>location.href='login.php';</script>";
+    }
+
     require_once("class/book.class.php");
     $book_instance = new Book();
 
@@ -40,6 +46,9 @@
 </head>
 
 <body>
+    <?php
+        require_once("inc/admin_header.php");
+    ?>
     <div id="error" class="error"></div>
     <form action="edit.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
         <input type="hidden" name="id" value="<?php echo $book["id"];?>"/>

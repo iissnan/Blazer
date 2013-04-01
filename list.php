@@ -1,5 +1,10 @@
 <?php
+    session_start();
     require_once("class/book.class.php");
+
+    if (!isset($_SESSION["user"])) {
+        echo "<script>location.href='login.php';</script>";
+    }
 
     $book = new Book();
     $books_all = $book->all();
@@ -11,6 +16,9 @@
         <title>列表</title>
     </head>
     <body>
+        <?php
+            require_once("inc/admin_header.php");
+        ?>
         <?php
             if ($books_all) {
                 echo "<table>";

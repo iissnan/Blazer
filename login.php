@@ -1,5 +1,11 @@
 <?php
+    session_start();
     header("Content-Type: text/html; charset=utf-8");
+
+    if (isset($_SESSION["user"])) {
+        echo "<script>location.href='list.php';</script>";
+    }
+
     require_once("class/user.class.php");
 ?>
 <!DOCTYPE html>
@@ -32,6 +38,7 @@
                     $user_instance = new User();
                     $user = $user_instance->get($email, $password);
                     if ($user->error == 0) {
+                        $_SESSION["user"] = $user;
                         echo "<script>location.href='list.php';</script>";
                     } else {
                         echo "<div class='error' id='error' style='display: block'>$user->msg</div>";

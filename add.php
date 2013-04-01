@@ -1,5 +1,10 @@
 <?php
+    session_start();
     header("Content-Type: text/html; charset=utf-8");
+    if (!isset($_SESSION["user"])) {
+        echo "<script>location.href='login.php';</script>";
+    }
+
     require_once "class/book.class.php";
 
     if ($_POST["submitted"] == "yes") {
@@ -30,6 +35,9 @@
     </head>
 
     <body>
+        <?php
+            require_once("inc/admin_header.php");
+        ?>
         <div id="error" class="error"></div>
         <form action="add.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
             <p>
