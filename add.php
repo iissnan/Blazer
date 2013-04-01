@@ -18,7 +18,7 @@
 
         $book_instance = new Book();
         $result = $book_instance->add($title, $author, $isbn, $cover, $category, $douban_link);
-        echo "<script>window.location ='add_success.html?code=" . $result . "';</script>";
+        echo "<script>location.href = 'add_result.html?code=" . $result . "';</script>";
     }
 ?>
 <!DOCTYPE html>

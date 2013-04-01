@@ -42,6 +42,11 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `nickname` varchar(100) NOT NULL,
+  `create_at` datetime default NULL,
+  `update_at` datetime default NULL,
+  `last_login_at` datetime default NULL,
+  `times` int(11) NOT NULL default '0',
+  `deactive` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
