@@ -33,7 +33,16 @@ CREATE TABLE `books` (
   UNIQUE KEY `title` (`title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
 
--- 
--- 导出表中的数据 `books`
--- 
+--
+-- 表的结构 `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(100) NOT NULL auto_increment,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `nickname` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
