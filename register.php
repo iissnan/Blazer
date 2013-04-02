@@ -16,13 +16,13 @@
     <body>
         <?php
             if ($_POST["submitted"] == "yes") {
-                $email = $_POST["email"];
-                $password = $_POST["password"];
-                $re_password = $_POST["re-password"];
-                $nickname = $_POST["nickname"];
+                $email = trim($_POST["email"]);
+                $password = trim($_POST["password"]);
+                $re_password = trim($_POST["re-password"]);
+                $nickname = trim($_POST["nickname"]);
 
                 $isValidate = true;
-                if ($email == "") {
+                if ($email == "" || preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
                     $isValidate = false;
                     echo "<div class='error' id='error' style='display:block'>登录邮箱有误</div>";
                 }
@@ -49,7 +49,7 @@
                 }
             }
         ?>
-        <form action="register.php" method="post">
+        <form action="register.php" method="post" id="registerForm">
             <p>
                 <label for="email">登录邮箱</label> <br />
                 <input type="text" name="email" id="email" value="<?php echo $_POST["email"];?>"/>

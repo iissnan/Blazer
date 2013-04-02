@@ -21,10 +21,10 @@
         <?php
             if ($_POST["submitted"] == "yes") {
                 $isValidate = true;
-                $email = $_POST["email"];
-                $password = $_POST["password"];
+                $email = trim($_POST["email"]);
+                $password = trim($_POST["password"]);
 
-                if ($email == "") {
+                if ($email == "" || preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
                     $isValidate = false;
                     echo "<div class='error' id='error' style='display: block'>请输入登录邮箱</div>";
                 }
