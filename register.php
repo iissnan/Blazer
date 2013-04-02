@@ -15,7 +15,7 @@
     </head>
     <body>
         <?php
-            if ($_POST["submitted"] == "yes") {
+            if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
                 $email = trim($_POST["email"]);
                 $password = trim($_POST["password"]);
                 $re_password = trim($_POST["re-password"]);
@@ -52,23 +52,28 @@
         <form action="register.php" method="post" id="registerForm">
             <p>
                 <label for="email">登录邮箱</label> <br />
-                <input type="text" name="email" id="email" value="<?php echo $_POST["email"];?>"/>
+                <input type="text" name="email" id="email"
+                       value="<?php echo isset($_POST["email"]) ? $_POST["email"] : "";?>"/>
             </p>
             <p>
                 <label for="password">登录密码</label> <br />
-                <input type="password" name="password" id="password" value="<?php echo $_POST["password"];?>"/>
+                <input type="password" name="password" id="password"
+                       value="<?php echo isset($_POST["password"]) ? $_POST["password"] : "";?>"/>
             </p>
             <p>
                 <label for="re-password">密码确认</label> <br />
-                <input type="password" name="re-password" id="re-password" value="<?php echo $_POST["re-password"];?>"/>
+                <input type="password" name="re-password" id="re-password"
+                       value="<?php echo isset($_POST["re-password"]) ? $_POST["re-password"] : "";?>"/>
             </p>
             <p>
                 <label for="invitation">邀请码</label> <br />
-                <input type="text" name="invitation" id="invitation" value="<?php echo $_POST["invitation"];?>"/>
+                <input type="text" name="invitation" id="invitation"
+                       value="<?php echo isset($_POST["invitation"]) ? $_POST["invitation"] : "";?>"/>
             </p>
             <p>
                 <label for="nickname">昵称</label> <br />
-                <input type="text" name="nickname" id="nickname" value="<?php echo $_POST["nickname"];?>"/>
+                <input type="text" name="nickname" id="nickname"
+                       value="<?php echo isset($_POST["nickname"]) ? $_POST["nickname"] : "";?>"/>
             </p>
             <p>
                 <input type="submit" value="注册"/>

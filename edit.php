@@ -10,7 +10,7 @@
     $book_instance = new Book();
 
     // 提交数据
-    if ($_POST["submitted"] == "yes") {
+    if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = $_POST["title"];
 
         if ($title == "") {

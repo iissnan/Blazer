@@ -7,7 +7,7 @@
 
     require_once "class/book.class.php";
 
-    if ($_POST["submitted"] == "yes") {
+    if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = trim($_POST["title"]);
         $author = trim($_POST["author"]);
         $isbn = trim($_POST["isbn"]);
