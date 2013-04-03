@@ -51,3 +51,20 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 表的结构 `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `books_categories` (
+  `book_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
