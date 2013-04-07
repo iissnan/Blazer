@@ -1,6 +1,5 @@
 <?php
-class DatabaseConnection
-{
+class DatabaseConnection {
     private $hostname;
     private $username;
     private $password;
@@ -30,11 +29,21 @@ class DatabaseConnection
      * 连接数据库
      */
     public function connect() {
-        $db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
-        if (mysqli_connect_errno()) {
-            die("Error: Could not to connect to the database.");
+        try {
+            $db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+            if (mysqli_connect_errno()) {
+                throw new Exception("Error: Could not to connect to MySQL.");
+            }
+            $this->db = $db;
+            if (isset($this->database)) {
+                $this->use_database($this->database);
+                if (mysqli_connect_errno()) {
+                    throw new Exception("Error: Could not to connect to the database.");
+                }
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
         }
-        $this->db = $db;
     }
 
     /**

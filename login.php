@@ -19,14 +19,14 @@
     <body>
         <div class="error" id="error"></div>
         <?php
-            if ($_POST["submitted"] == "yes") {
+            if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
                 $isValidate = true;
-                $email = $_POST["email"];
-                $password = $_POST["password"];
+                $email = trim($_POST["email"]);
+                $password = trim($_POST["password"]);
 
-                if ($email == "") {
+                if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
                     $isValidate = false;
-                    echo "<div class='error' id='error' style='display: block'>请输入登录邮箱</div>";
+                    echo "<div class='error' id='error' style='display: block'>请输入正确的登录邮箱地址</div>";
                 }
 
                 if ($password == "") {
@@ -50,11 +50,13 @@
         <form action="login.php" method="post" id="J_LoginForm">
             <p>
                 <label for="email">登录邮箱</label> <br />
-                <input type="text" name="email" id="email" value="<?php echo $_POST["email"];?>" />
+                <input type="text" name="email" id="email"
+                       value="<?php echo isset($_POST["email"]) ? $_POST["email"] : "";?>" />
             </p>
             <p>
                 <label for="password">登录密码</label> <br />
-                <input type="password" name="password" id="password" value="<?php echo $_POST["password"];?>" />
+                <input type="password" name="password" id="password"
+                       value="<?php echo isset($_POST["password"]) ? $_POST["password"] : "";?>" />
             </p>
 
             <p>
