@@ -24,9 +24,9 @@
                 $email = trim($_POST["email"]);
                 $password = trim($_POST["password"]);
 
-                if ($email == "" || preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
+                if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
                     $isValidate = false;
-                    echo "<div class='error' id='error' style='display: block'>请输入登录邮箱</div>";
+                    echo "<div class='error' id='error' style='display: block'>请输入正确的登录邮箱地址</div>";
                 }
 
                 if ($password == "") {
