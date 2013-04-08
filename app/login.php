@@ -6,7 +6,7 @@
     require_once("config.php");
     require_once("class/user.class.php");
 
-    $error = "";
+    $alert = "";
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $isValidate = true;
         $email = trim($_POST["email"]);
@@ -25,7 +25,7 @@
         if (!$isValidate) {
             $smarty->assign("email", $email);
             $smarty->assign("password", $password);
-            $error = "<div class='error' id='error'><ul>$error_message</ul></div>";
+            $alert = "<div class='alert alert-error' id='alert'><ul>$error_message</ul></div>";
         } else {
             $user_instance = new User();
             $user = $user_instance->get($email, $password);
@@ -36,9 +36,10 @@
                 $smarty->assign("email", $email);
                 $smarty->assign("password", $password);
                 $error_message = "<li>$user->msg</li>";
-                $error = "<div class='error' id='error'><ul>" . $error_message . "</ul></div>";
+                $error = "<div class='alert alert-error' id='alert'><ul>" .
+                    $error_message . "</ul></div>";
             }
         }
     }
-    $smarty->assign("error", $error);
+    $smarty->assign("alert", $alert);
     $smarty->display("login.tpl");

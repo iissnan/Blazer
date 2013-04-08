@@ -3,54 +3,42 @@
 <head>
     <meta charset="utf-8" />
     <title>登录</title>
-    <link rel="stylesheet" href="assets/css/admin.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 
 <body>
-    {$error}
-    <form action="login.php" method="post" id="J_LoginForm">
-        <p>
-            <label for="email">登录邮箱</label> <br />
-            <input type="text" name="email" id="email" value="{$email}" />
-        </p>
-        <p>
-            <label for="password">登录密码</label> <br />
-            <input type="password" name="password" id="password" value="{$password}" />
-        </p>
+    <div class="container login-wrap">
+        {$alert}
+        <form action="login.php" method="post" id="J_LoginForm">
+            <div class="control-group">
+                <label for="email" class="control-label">登录邮箱</label>
+                <input type="text" name="email" id="email"
+                       class="input-block-level" value="{$email}" />
+            </div>
 
-        <p>
-            <input type="submit" value="登录"/>
-        </p>
-        <input type="hidden" name="submitted" value="yes"/>
-    </form>
-    <script type="text/javascript">
-        (function(){
-            "use strict";
-            var loginForm = document.getElementById("J_LoginForm");
-            if (loginForm) {
-                var emailInput = document.getElementById("email");
-                var passwordInput = document.getElementById("password");
-                var error = document.getElementById("error");
-                loginForm.onsubmit = function () {
-                    var error = document.getElementById("error");
-                    if (!error) {
-                        error = document.createElement("div");
-                        error.setAttribute("id", "error");
-                        document.body.insertBefore(error, document.body.childNodes[0]);
-                    }
-                    if (emailInput.value === "") {
-                        error.innerHTML = "请输入登录邮箱";
-                        error.setAttribute("class", "error");
-                        return false;
-                    }
-                    if (passwordInput.value === "") {
-                        error.innerHTML = "请输入登录密码";
-                        error.setAttribute("class", "error");
-                        return false;
-                    }
-                };
-            }
-        }());
-    </script>
+            <div class="control-group">
+                <label for="password" class="control-label">登录密码</label>
+                <input type="password" name="password" id="password"
+                       class="input-block-level" value="{$password}" />
+            </div>
+
+            <label for="remember" class="checkbox">
+                <input type="checkbox" name="remember" id="remember" />  Remember me?
+            </label>
+
+            <div class="mt30">
+                <input type="submit" class="btn btn-primary btn-block btn-large" value="登录"/>
+                <input type="hidden" name="submitted" value="yes"/>
+            </div>
+            <p class="mt30 pull-right">
+                <a href="register.php">立即注册 &raquo;</a>
+            </p>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="assets/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
 </html>

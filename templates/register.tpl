@@ -3,35 +3,43 @@
 <head>
     <meta charset="utf-8" />
     <title>注册</title>
-    <link rel="stylesheet" href="assets/css/admin.css"/>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
 <body>
-    {$error}
-    <form action="register.php" method="post" id="registerForm">
-        <p>
-            <label for="email">登录邮箱</label> <br />
-            <input type="text" name="email" id="email" value="{$email}" />
-        </p>
-        <p>
-            <label for="password">登录密码</label> <br />
-            <input type="password" name="password" id="password" value="{$password}" />
-        </p>
-        <p>
-            <label for="re-password">密码确认</label> <br />
-            <input type="password" name="re-password" id="re-password" value="{$re_password}" />
-        </p>
-        <p>
-            <label for="invitation">邀请码</label> <br />
-            <input type="text" name="invitation" id="invitation" value="{$invitation}" />
-        </p>
-        <p>
-            <label for="nickname">昵称</label> <br />
-            <input type="text" name="nickname" id="nickname" value="{$nickname}" />
-        </p>
-        <p>
-            <input type="submit" value="注册"/>
-        </p>
-        <input type="hidden" name="submitted" value="yes" />
-    </form>
+    <div class="container login-wrap mt30">
+        {$alert}
+        <form action="register.php" method="post" id="registerForm">
+            <div class="control-group">
+                <label for="nickname" class="control-label">昵称</label>
+                <input type="text" name="nickname" id="nickname"
+                       class="control input-block-level" value="{$nickname}" />
+            </div>
+            <div class="control-group">
+                <label for="email" class="control-label">登录邮箱</label>
+                <input type="text" name="email" id="email"
+                       class="control input-block-level" value="{$email}" />
+            </div>
+            <div class="control-group">
+                <label for="password" class="control-label">登录密码</label>
+                <input type="password" name="password" id="password"
+                       class="control input-block-level" value="{$password}" />
+            </div>
+            <div class="control-group">
+                <label for="re-password" class="control-label">密码确认</label>
+                <input type="password" name="re-password" id="re-password"
+                       class="control input-block-level" value="{$re_password}" />
+            </div>
+            <div class="control-group">
+                <label for="invitation" class="control-label">邀请码</label>
+                <input type="text" name="invitation" id="invitation"
+                       class="control input-block-level" value="{$invitation}" />
+            </div>
+            <div class="mt30">
+                <input type="hidden" name="submitted" value="yes" />
+                <input type="submit" class="btn btn-large btn-primary btn-block" value="注册"/>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

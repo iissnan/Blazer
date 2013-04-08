@@ -6,7 +6,7 @@
     require_once("config.php");
     require_once("class/user.class.php");
 
-    $error = "";
+    $alert = "";
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $email = trim($_POST["email"]);
         $password = trim($_POST["password"]);
@@ -38,12 +38,14 @@
                 echo "<script>location.href = 'login.php';</script>";
             } else {
                 $error_message = "<li>注册失败，请稍后再试</li>";
-                $error = "<div class='error' id='error'><ul>" . $error_message . "</ul></div>";
-                $smarty->assign("error", $error);
+                $alert = "<div class='alert alert-error' id='alert'><ul>" .
+                    $error_message . "</ul></div>";
+                $smarty->assign("alert", $alert);
             }
         } else {
-            $error = "<div class='error' id='error'><ul>" . $error_message . "</ul></div>";
-            $smarty->assign("error", $error);
+            $alert = "<div class='alert alert-error' id='alert'><ul>" .
+                $error_message . "</ul></div>";
+            $smarty->assign("alert", $alert);
             $smarty->assign("email", $email);
             $smarty->assign("password", $password);
             $smarty->assign("re_password", $re_password);
