@@ -1,7 +1,7 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    isset($_SESSION["user"]) and header("Location: list.php");
+    isset($_SESSION["user"]) and header("Location: admin/list.php");
 
     require_once("class/user.class.php");
     require_once("vendor/smarty/Smarty.class.php");
@@ -32,7 +32,7 @@
             $user = $user_instance->get($email, $password);
             if ($user->error == 0) {
                 $_SESSION["user"] = $user;
-                echo "<script>location.href='list.php';</script>";
+                echo "<script>location.href='admin/list.php';</script>";
             } else {
                 $smarty->assign("email", $email);
                 $smarty->assign("password", $password);

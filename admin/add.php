@@ -1,11 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    if (!isset($_SESSION["user"])) {
-        echo "<script>location.href='login.php';</script>";
-    }
+    !isset($_SESSION["user"])  and header("Location: ../login.php");
 
-    require_once "class/book.class.php";
+    require_once "../class/book.class.php";
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = trim($_POST["title"]);
@@ -23,7 +21,7 @@
 
         $book_instance = new Book();
         $result = $book_instance->add($title, $author, $isbn, $cover, $category, $douban_link);
-        echo "<script>location.href = 'add_result.html?code=" . $result . "';</script>";
+        echo "<script>location.href = 'result.php?action=add&code=" . $result . "';</script>";
     }
 ?>
 <!DOCTYPE html>
@@ -31,12 +29,12 @@
     <head>
         <meta charset="utf-8" />
         <title>添加书籍</title>
-        <link rel="stylesheet" href="assets/css/admin.css"/>
+        <link rel="stylesheet" href="../assets/css/admin.css"/>
     </head>
 
     <body>
         <?php
-            require_once("inc/admin_header.php");
+            require_once("include/admin_header.php");
         ?>
         <div id="error" class="error"></div>
         <form action="add.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
@@ -71,6 +69,6 @@
 
             <input type="hidden" name="submitted" value="yes"/>
         </form>
-        <script type="text/javascript" src="assets/js/admin.js"></script>
+        <script type="text/javascript" src="../assets/js/admin.js"></script>
     </body>
 </html>

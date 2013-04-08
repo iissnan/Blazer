@@ -1,12 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
+    !isset($_SESSION["user"]) and header("Location: ../login.php");
 
-    if (!isset($_SESSION["user"])) {
-        echo "<script>location.href='login.php';</script>";
-    }
-
-    require_once("class/book.class.php");
+    require_once("../class/book.class.php");
     $book_instance = new Book();
 
     // 提交数据
@@ -28,7 +25,7 @@
         $douban_link = $_POST["douban_link"];
 
         $result = $book_instance->update($id, $title, $author, $isbn, $category, $cover, $douban_link);
-        echo "<script>location.href='edit_result.html?code=" . $result . "';</script>";
+        echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
     } else {
         // 获取数据
         if (isset($_GET["id"])) {
@@ -42,12 +39,12 @@
 <head>
     <meta charset="utf-8" />
     <title>编辑书籍</title>
-    <link rel="stylesheet" href="assets/css/admin.css"/>
+    <link rel="stylesheet" href="../assets/css/admin.css"/>
 </head>
 
 <body>
     <?php
-        require_once("inc/admin_header.php");
+        require_once("include/admin_header.php");
     ?>
     <div id="error" class="error"></div>
     <form action="edit.php" method="post" enctype="multipart/form-data" id="J_FormAdd">
@@ -66,7 +63,7 @@
         </p>
         <p>
             <label for="cover">封面</label>
-            <img width="106" height="150" src="<?php echo $book["cover"]?>" />
+            <img width="106" height="150" src="<?php echo "../" . $book["cover"]?>" />
             <input type="hidden" name="current-cover" value="<?php echo $book["cover"]?>"/>
             <input type="file" name="cover" id="cover" />
         </p>
@@ -85,7 +82,7 @@
 
         <input type="hidden" name="submitted" value="yes"/>
     </form>
-    <script type="text/javascript" src="assets/js/admin.js"></script>
+    <script type="text/javascript" src="../assets/js/admin.js"></script>
 </body>
 </html>
 <?php

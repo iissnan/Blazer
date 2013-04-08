@@ -1,10 +1,7 @@
 <?php
     session_start();
-    require_once("class/book.class.php");
-
-    if (!isset($_SESSION["user"])) {
-        echo "<script>location.href='login.php';</script>";
-    }
+    !isset($_SESSION["user"]) and header("Location: ../login.php");
+    require_once("../class/book.class.php");
 
     $book = new Book();
     $books_all = $book->all();
@@ -17,7 +14,7 @@
     </head>
     <body>
         <?php
-            require_once("inc/admin_header.php");
+            require_once("include/admin_header.php");
         ?>
         <?php
             if ($books_all) {
@@ -26,7 +23,7 @@
                 for ($i = 0; $i < $books_length; $i++) {
                     $book = $books_all->fetch_assoc();
                     echo "<tr>";
-                    echo "<td>" . "<img width='106' height='150' src='" . $book["cover"] . "'/>" . "</td>";
+                    echo "<td>" . "<img width='106' height='150' src='../" . $book["cover"] . "'/>" . "</td>";
                     echo "<td>" . $book["title"] . "</td>";
                     echo "<td>" . $book["author"] . "</td>";
                     echo "<td>" . $book["isbn"] . "</td>";
@@ -40,6 +37,6 @@
                 echo "没有书籍";
             }
         ?>
-        <script type="text/javascript" src="assets/js/admin.js"></script>
+        <script type="text/javascript" src="../assets/js/admin.js"></script>
     </body>
 </html>
