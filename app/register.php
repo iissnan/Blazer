@@ -15,7 +15,7 @@
         $invitation = trim($_POST["invitation"]);
 
         $isValidate = true;
-        if ($email == "" || preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
+        if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
             $isValidate = false;
             $error_message = "<li>登录邮箱有误</li>";
         }

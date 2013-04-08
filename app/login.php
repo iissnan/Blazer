@@ -35,9 +35,9 @@
             } else {
                 $smarty->assign("email", $email);
                 $smarty->assign("password", $password);
-                $error_message = "<li>$user->msg</li>";
-                $error = "<div class='alert alert-error' id='alert'><ul>" .
-                    $error_message . "</ul></div>";
+                $error_message = "$user->msg";
+                $alert = "<div class='alert alert-error' id='alert'>" .
+                    $error_message . "</div>";
             }
         }
     }
