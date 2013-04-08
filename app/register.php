@@ -2,9 +2,9 @@
     session_start();
     header("Content-Type: text/html; charset=utf-8");
     isset($_SESSION["user"]) and header("Location: list.php");
+
+    require_once("config.php");
     require_once("class/user.class.php");
-    require_once("vendor/smarty/Smarty.class.php");
-    $smarty = new Smarty();
 
     $error = "";
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
