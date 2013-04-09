@@ -61,12 +61,13 @@ class DatabaseConnection {
      *
      * @param $table
      * @param string $filter
-     * @param int $num
+     * @param int $offset
+     * @param int $row_count
      * @return mixed
      */
-    public function get($table, $filter="", $num=10) {
+    public function get($table, $filter="", $offset=0, $row_count=10) {
         $filter = $filter == "" ? "" : "WHERE $filter";
-        $query = "SELECT * FROM $table $filter LIMIT $num";
+        $query = "SELECT * FROM $table $filter LIMIT $offset, $row_count";
         return $this->execute($query);
     }
 

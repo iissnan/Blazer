@@ -10,12 +10,20 @@ class Invitation {
         $this->dbc = new DatabaseConnection("localhost", "root", "123456", "bookshelf");
     }
 
-    public function getItems($page=1, $page_size=10){
-        return $this->dbc->get($this->table);
+    /**
+     * 获取多条数据
+     *
+     * @param string $filter 过滤语句
+     * @param int $page 指定数据offset
+     * @param int $page_size 指定数据条数
+     * @return mixed
+     */
+    public function getItems($filter="", $page=1, $page_size=10){
+        return $this->dbc->get($this->table, $filter, $page * $page_size, $page_size);
     }
 
     /**
-     * 获取邀请码
+     * 获取单个数据
      *
      * @param string $value
      * @return mixed

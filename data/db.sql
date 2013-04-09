@@ -55,7 +55,7 @@ CREATE TABLE `users` (
 -- 表的结构 `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(100) default NULL,
   PRIMARY KEY  (`id`)

@@ -16,7 +16,7 @@
         <div class="row">
             <div class="span12">
                 <div class="admin-main">
-                    <h2>更新 {$book->title}</h2>
+                    <h2>更新 《{$book->title}》</h2>
                     {$error}
                     <form action="edit.php" method="post" enctype="multipart/form-data"
                           id="J_FormAdd" class="form-horizontal">
@@ -45,7 +45,7 @@
                         <div class="control-group">
                             <label for="cover"  class="control-label">封面</label>
                             <div class="controls">
-                                <img width="106" height="150" src="../{$book->cover}" />
+                                <img width="106" height="150" src="{$book->cover}" />
                                 <input type="hidden" name="current-cover" value="{$book->cover}"/>
                                 <input type="file" name="cover" id="cover" />
                             </div>
