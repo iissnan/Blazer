@@ -68,3 +68,14 @@ CREATE TABLE `books_categories` (
   KEY `book_id` (`book_id`),
   KEY `category_id` (`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 表的结构 `invitations`
+--
+
+CREATE TABLE `invitations` (
+  `id` int(11) NOT NULL auto_increment,
+  `value` varchar(100) NOT NULL,
+  `number` int(11) NOT NULL default '10',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

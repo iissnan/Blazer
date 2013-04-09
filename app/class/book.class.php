@@ -95,12 +95,12 @@ class Book {
      */
     protected function handleCover($cover) {
         // 封面存储路径
-        define("DIR_COVER", "cover");
+        define("DIR_COVER", "../cover");
 
         // 上传的图片最大限制为500K
         define("MAX_SIZE", 500000);
 
-        if (! is_dir(DIR_COVER)) {
+        if (!is_dir(DIR_COVER)) {
             mkdir(DIR_COVER);
         }
 

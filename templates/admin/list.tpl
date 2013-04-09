@@ -29,7 +29,7 @@
                             {while $book = $books->fetch_object()}
                                 <tr>
                                     <td>
-                                        <img src="../{$book->cover}" width="80" alt="{$book->title}"/>
+                                        <img src="{$book->cover}" width="80" alt="{$book->title}"/>
                                     </td>
                                     <td>{$book->title}</td>
                                     <td>{$book->author}</td>
