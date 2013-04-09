@@ -1,7 +1,7 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    !isset($_SESSION["user"])  and header("Location: ../login.php");
+    require_once("verify.php");
 
     require_once("./config.php");
     require_once("../class/book.class.php");

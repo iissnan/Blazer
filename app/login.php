@@ -11,6 +11,7 @@
         $isValidate = true;
         $email = trim($_POST["email"]);
         $password = trim($_POST["password"]);
+        $remember = $_POST["remember"];
 
         if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
             $isValidate = false;
@@ -31,7 +32,16 @@
             $user = $user_instance->get($email, $password);
             if ($user->error == 0) {
                 $_SESSION["user"] = $user;
-                echo "<script>location.href='admin/list.php';</script>";
+
+                // 自动登录
+                if (isset($remember)) {
+                    setcookie(
+                        "bs_identity",
+                        $email . "|" . sha1($password),
+                        time() + 14 * 24 * 3600
+                    );
+                }
+                header("location: admin/list.php");
             } else {
                 $smarty->assign("email", $email);
                 $smarty->assign("password", $password);

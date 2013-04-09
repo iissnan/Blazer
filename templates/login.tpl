@@ -26,7 +26,7 @@
             </div>
 
             <label for="remember" class="checkbox">
-                <input type="checkbox" name="remember" id="remember" />  Remember me?
+                <input type="checkbox" name="remember" id="remember" />  下次自动登录?
             </label>
 
             <div class="mt30">

@@ -25,7 +25,7 @@ class User {
             $user->msg = "用户不存在";
         } else {
             $user = $result->fetch_object();
-            if ($user->password != $password) {
+            if ($user->password != sha1($password)) {
                 $user->error = 2;
                 $user->msg = "用户名与密码不匹配";
             } else if ($user->deactive == 1) {
@@ -59,7 +59,7 @@ class User {
         return $this->dbc->insert(
             $this->table,
             array("email", "password", "nickname", "create_at", "update_at"),
-            array($email, $password, $nickname, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
+            array($email, sha1($password), $nickname, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
         );
     }
 
