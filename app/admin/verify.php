@@ -10,8 +10,8 @@ if (!isset($_SESSION["user"])) {
 
     require_once("../class/user.class.php");
     $User = new User();
-    $identity = explode("|", $_COOKIE["bs_identity"]);
-    $user = $User->get($identity[0], $identity[1]);
+    list($email, $password) = explode("|", $_COOKIE["bs_identity"]);
+    $user = $User->get($email, $password);
     if ($user->error != 0) {
         header("location: ../login.php");
     } else {
