@@ -6,6 +6,7 @@
     <title>邀请码添加结果</title>
     <link rel="shortcut icon" href="../assets/img/favicon.ico"/>
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../assets/css/gbootstrap.css"/>
     <link rel="stylesheet" href="../assets/css/main.css"/>
 </head>
 <body>
