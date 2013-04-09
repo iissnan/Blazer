@@ -19,16 +19,9 @@
 
     /**
      * 删除确认
-     * @param link
      */
-    window.confirmDelete = function (link) {
-        if (window.confirm("确认删除？")) {
-            var id = link.innerHTML;
-            if (id) {
-                location.href = "delete.php?id=" + id;
-            }
-        }
-        return false;
+    window.confirmDelete = function () {
+        return window.confirm("确认删除？");
     };
 
 }());

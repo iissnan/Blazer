@@ -135,7 +135,7 @@ class DatabaseConnection {
      * @return mixed 查询执行结果
      */
     public function execute($query) {
-        //echo $query . "<br />";
+        //die($query . "<br />");
         return $this->db->query($query);
     }
 

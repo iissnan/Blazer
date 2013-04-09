@@ -3,6 +3,8 @@
     header("Content-Type: text/html; charset=utf-8");
     !isset($_SESSION["user"]) and header("Location: ../login.php");
 
+    require_once("config.php");
+
     $action = $_GET["action"];
     $code = $_GET["code"];
 
@@ -10,6 +12,7 @@
         die("无效操作");
     }
 
+    $title = "";
     switch($action) {
         case "add":
             $title = "添加";
@@ -21,21 +24,17 @@
             $title = "删除";
             break;
     }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title><?php echo $title ?>操作结果</title>
-</head>
-<body>
-    <?php
-        echo "<p>" . $title . ($code == "1" ?  "成功" : "失败" ) . "</p>";
-    ?>
-    <p>
-        <a href="list.php">返回列表</a>
-        |
-        <a href="add.php">添加书籍</a>
-    </p>
-</body>
-</html>
+    if ($code == "1") {
+        $alert_type = "success";
+        $result = "成功";
+    } else {
+        $alert_type = "error";
+        $result = "失败";
+    }
+
+    $smarty->assign("action", $title);
+    $smarty->assign("alert_type", $alert_type);
+    $smarty->assign("result", $result);
+    $smarty->display("admin/result.tpl");
+
+

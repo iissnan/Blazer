@@ -2,6 +2,7 @@
 body{
     color: #666;
     background: #ccc url("../img/noise-f1.gif");
+    font-family: "WenQuanYi Micro Hei", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif
 }
 .login-wrap{
     margin-top: 100px;
@@ -16,4 +17,21 @@ label{
 
 .mt30{
     margin-top: 30px;
+}
+
+.admin-wrap{
+    margin-top: 20px;
+    min-height: 500px;
+    background: #fff;
+}
+.admin-wrap td{
+    vertical-align: middle;
+}
+.admin-main{
+    padding: 20px;
+}
+.admin-main h2{
+    margin-bottom: 25px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #ccc;
 }

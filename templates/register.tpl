@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>注册</title>
+    <link rel="shortcut icon" href="assets/img/favicon.ico"/>
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
