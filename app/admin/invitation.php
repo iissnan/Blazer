@@ -6,7 +6,7 @@
     // TODO: Show Invitation when user belongs to "Admin" group
     require_once("../class/invitation.class.php");
     $Invitation = new Invitation();
-    $invitations = $Invitation->get();
+    $invitations = $Invitation->getItems();
     $invitations_size = $invitations->num_rows;
 
     require_once("config.php");

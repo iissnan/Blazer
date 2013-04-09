@@ -53,9 +53,28 @@ class User {
      * @param string $email
      * @param string $password
      * @param string $nickname
+     * @param string $invitation_value 13位的邀请码
      * @return boolean 注册成功或者失败
      */
-    public function add($email, $password, $nickname) {
+    public function add($email, $password, $nickname, $invitation_value) {
+        require_once("invitation.class.php");
+        $Invitation = new Invitation();
+        $invitation = $Invitation->getItem($invitation_value);
+
+        // 邀请码不存在
+        if ($invitation->num_rows == 0) {
+            return false;
+        }
+
+        // 检测邀请码个数
+        list(, , $inv_num) = $invitation->fetch_array();
+        if ($inv_num < 1) {
+            // 邀请码无效
+            return false;
+        }
+
+        $Invitation->minus($invitation_value);
+
         return $this->dbc->insert(
             $this->table,
             array("email", "password", "nickname", "create_at", "update_at"),

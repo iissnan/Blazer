@@ -4,6 +4,9 @@ body{
     background: #ccc url("../img/noise-f1.gif");
     font-family: "WenQuanYi Micro Hei", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif
 }
+input, button, select, textarea {
+    font-family: "WenQuanYi Micro Hei", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif
+}
 .login-wrap{
     margin-top: 100px;
     padding: 30px;

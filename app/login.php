@@ -51,5 +51,17 @@
             }
         }
     }
+
     $smarty->assign("alert", $alert);
+
+    $source = $_GET["s"];
+    $code = $_GET["code"];
+
+    if (isset($source) && $source == "reg") {
+        if ($code == "1") {
+            $alert = "<div class='alert alert-success' id='alert'>注册成功，请登录</div>";
+            $smarty->assign("alert", $alert);
+        }
+    }
+
     $smarty->display("login.tpl");

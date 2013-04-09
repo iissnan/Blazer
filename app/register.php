@@ -15,36 +15,36 @@
         $invitation = trim($_POST["invitation"]);
 
         $isValidate = true;
-        if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
-            $isValidate = false;
-            $error_message = "<li>登录邮箱有误</li>";
-        }
-        if ($password == "") {
-            $isValidate = false;
-            $error_message .= "<li>密码不能为空</li>";
-        }
-        if ($password != $_POST["re-password"]) {
-            $isValidate = false;
-            $error_message .= "<li>确认密码不匹配</li>";
-        }
         if ($nickname == "") {
             $isValidate = false;
-            $error_message .= "<li>昵称不能为空</li>";
+            $error_message .= "昵称不能为空";
+        } else if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
+            $isValidate = false;
+            $error_message = "登录邮箱有误";
+        } else if ($password == "") {
+            $isValidate = false;
+            $error_message .= "密码不能为空";
+        } else if ($password != $_POST["re-password"]) {
+            $isValidate = false;
+            $error_message .= "确认密码不匹配";
+        } else if ($invitation == "") {
+            $isValidate = false;
+            $error_message = "请输入邀请码";
         }
 
         if ($isValidate) {
             $user = new User();
-            if ($user->add($email, $password, $nickname)) {
-                echo "<script>location.href = 'login.php';</script>";
+            if ($user->add($email, $password, $nickname, $invitation)) {
+                header("location: login.php?s=reg&code=1");
             } else {
-                $error_message = "<li>注册失败，请稍后再试</li>";
-                $alert = "<div class='alert alert-error' id='alert'><ul>" .
-                    $error_message . "</ul></div>";
+                $error_message = "注册失败，请稍后再试";
+                $alert = "<div class='alert alert-error' id='alert'>" .
+                    $error_message . "</div>";
                 $smarty->assign("alert", $alert);
             }
         } else {
-            $alert = "<div class='alert alert-error' id='alert'><ul>" .
-                $error_message . "</ul></div>";
+            $alert = "<div class='alert alert-error' id='alert'>" .
+                $error_message . "</div>";
             $smarty->assign("alert", $alert);
             $smarty->assign("email", $email);
             $smarty->assign("password", $password);

@@ -30,7 +30,7 @@
             </label>
 
             <div class="mt30">
-                <input type="submit" class="btn btn-primary btn-block btn-large" value="登录"/>
+                <input type="submit" class="btn btn-primary btn-block btn-large" value="登    录"/>
                 <input type="hidden" name="submitted" value="yes"/>
             </div>
             <p class="mt30 pull-right">
@@ -40,6 +40,6 @@
     </div>
 
     <script type="text/javascript" src="assets/vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/account.js"></script>
 </body>
 </html>

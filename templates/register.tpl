@@ -38,9 +38,15 @@
             </div>
             <div class="mt30">
                 <input type="hidden" name="submitted" value="yes" />
-                <input type="submit" class="btn btn-large btn-primary btn-block" value="注册"/>
+                <input type="submit" class="btn btn-large btn-primary btn-block" value="注  册"/>
             </div>
+
+            <p class="mt30">
+                <a href="login.php" class="pull-right">登录 &raquo;</a>
+            </p>
         </form>
     </div>
+    <script type="text/javascript" src="assets/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/account.js"></script>
 </body>
 </html>
