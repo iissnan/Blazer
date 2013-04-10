@@ -25,7 +25,7 @@
                     <p>
                         <a href="invitation.php">返回邀请码列表</a>
                         |
-                        <a href="list.php">返回书籍列表</a>
+                        <a href="index.php">返回书籍列表</a>
                     </p>
                 </div>
             </div>

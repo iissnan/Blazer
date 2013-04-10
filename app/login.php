@@ -1,9 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    isset($_SESSION["user"]) and header("Location: admin/list.php");
+    isset($_SESSION["user"]) and header("Location: admin/index.php");
 
-    require_once("config.php");
+    require_once("smarty.php");
     require_once("class/user.class.php");
 
     $alert = "";
@@ -36,12 +36,12 @@
                 // 自动登录
                 if (isset($remember)) {
                     setcookie(
-                        "bs_identity",
+                        "bs_auth",
                         $email . "|" . sha1($password),
                         time() + 14 * 24 * 3600
                     );
                 }
-                header("location: admin/list.php");
+                header("location: admin/index.php");
             } else {
                 $smarty->assign("email", $email);
                 $smarty->assign("password", $password);

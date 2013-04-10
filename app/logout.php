@@ -2,7 +2,7 @@
     session_start();
     unset($_SESSION["user"]);
     session_destroy();
-    setcookie("bs_identity", "", time() - 1);
+    setcookie("bs_auth", "", time() - 1);
 
-    require_once("config.php");
+    require_once("smarty.php");
     $smarty->display("logout.tpl");

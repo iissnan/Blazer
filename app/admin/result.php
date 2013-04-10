@@ -1,9 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("verify.php");
+    require_once("auth.php");
 
-    require_once("config.php");
+    require_once("smarty.php");
 
     $action = $_GET["action"];
     $code = $_GET["code"];

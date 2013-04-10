@@ -46,7 +46,7 @@ class Book {
      * @param mixed $key (int)id 或者 (string)title
      * @return mixed
      */
-    public function get($key) {
+    public function getItem($key) {
         $filter = gettype($key) == "string" ? "title = '$key'" : " id = $key";
         return $this->dbc->get($this->table, $filter, 1);
     }

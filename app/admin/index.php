@@ -1,12 +1,12 @@
 <?php
     session_start();
-    require_once("verify.php");
+    require_once("auth.php");
 
     require_once("../class/book.class.php");
-    $book_instance = new Book();
-    $books = $book_instance->all();
+    $Book = new Book();
+    $books = $Book->all();
 
-    require_once("./config.php");
+    require_once("smarty.php");
     $smarty->assign("books", $books);
     $smarty->assign("books_size", $books->num_rows);
     $smarty->display("admin/list.tpl");

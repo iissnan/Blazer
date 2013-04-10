@@ -18,8 +18,8 @@ class Invitation {
      * @param int $page_size 指定数据条数
      * @return mixed
      */
-    public function getItems($filter="", $page=1, $page_size=10){
-        return $this->dbc->get($this->table, $filter, $page * $page_size, $page_size);
+    public function getItems($filter="number > 0", $page=0, $page_size=10){
+        return $this->dbc->get($this->table, $filter, $page_size, $page * $page_size);
     }
 
     /**

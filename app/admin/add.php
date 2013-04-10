@@ -1,9 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("verify.php");
+    require_once("auth.php");
 
-    require_once("./config.php");
+    require_once("smarty.php");
     require_once("../class/book.class.php");
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
@@ -27,8 +27,8 @@
             ));
             $smarty->display("admin/add.tpl");
         } else {
-            $book_instance = new Book();
-            $result = $book_instance->add($title, $author, $isbn, $cover, $category, $douban_link);
+            $Book = new Book();
+            $result = $Book->add($title, $author, $isbn, $cover, $category, $douban_link);
             echo "<script>location.href = 'result.php?action=add&code=" . $result . "';</script>";
         }
     } else {

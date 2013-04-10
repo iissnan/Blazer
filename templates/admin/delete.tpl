@@ -17,7 +17,7 @@
             <div class="admin-main">
                 <p class="alert alert-error">缺少id参数</p>
                 <p>
-                    <a href="list.php">返回列表</a>
+                    <a href="index.php">返回列表</a>
                     |
                     <a href="add.php">添加书籍</a>
                 </p>
