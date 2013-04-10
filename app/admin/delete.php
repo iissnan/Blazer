@@ -1,9 +1,10 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("auth.php");
+    require_once("../include/auth.php");
+    !isLogin() and header("location: ../login.php");
 
-    require_once("smarty.php");
+    require_once("../include/smarty.php");
     require_once("../class/book.class.php");
 
     if (isset($_GET["id"]) && $_GET["id"] != "") {

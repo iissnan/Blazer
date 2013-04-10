@@ -4,5 +4,5 @@
     session_destroy();
     setcookie("bs_auth", "", time() - 1);
 
-    require_once("smarty.php");
+    require_once("include/smarty.php");
     $smarty->display("logout.tpl");
