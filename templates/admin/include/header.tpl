@@ -2,10 +2,9 @@
     <div class="navbar navbar-static-top navbar-inverse">
         <div class="navbar-inner">
             <div class="container">
-                <a href="index.php" class="brand">BookShelf</a>
+                {*<a href="index.php" class="brand">BookShelf</a>*}
                 <ul class="nav">
-                    <li><a href='index.php'>列表页</a>
-                    <li><a href='add.php'>添加书籍</a>
+                    <li><a href='index.php'>书籍列表</a>
                     <li><a href="invitation.php">邀请码</a></li>
                 </ul>
                 <ul class="nav pull-right">

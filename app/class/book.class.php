@@ -2,6 +2,9 @@
 
 require_once("dbc.class.php");
 
+/**
+ * 书籍工厂类
+ */
 class Book {
     private $dbc;
     private $table = "books";
@@ -31,13 +34,27 @@ class Book {
         return $result;
     }
 
+
     /**
-     * 获取所有书籍
+     * 获取书籍的总数
      *
+     * @return number
+     */
+    public function total() {
+        $result = $this->dbc->count($this->table);
+        return !$result ? 0 : $result->fetch_object()->total;
+    }
+
+    /**
+     * 获取多本书籍
+     *
+     * @param string $filter 过滤条件
+     * @param number $row_count 数量
+     * @param number $offset 偏移量
      * @return mixed
      */
-    public function all(){
-        return $this->dbc->get($this->table);
+    public function getItems($filter, $row_count, $offset){
+        return $this->dbc->get($this->table, $filter, $row_count, ($offset - 1) * $row_count);
     }
 
     /**

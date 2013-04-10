@@ -67,7 +67,21 @@ class DatabaseConnection {
      */
     public function get($table, $filter="", $row_count=10, $offset=0)  {
         $filter = $filter == "" ? "" : "WHERE $filter";
-        $query = "SELECT * FROM $table $filter LIMIT $offset, $row_count";
+        $query = "SELECT * FROM $table $filter ORDER BY id LIMIT $offset, $row_count";
+        return $this->execute($query);
+    }
+
+    /**
+     * 获取数据的总条目
+     *
+     * @param $table
+     * @param string $filter
+     * @param string $field
+     * @return mixed
+     */
+    public function count($table, $filter="", $field="*") {
+        $filter = $filter == "" ? "" : "WHERE $filter";
+        $query = "SELECT count(*) AS total FROM $table $filter";
         return $this->execute($query);
     }
 

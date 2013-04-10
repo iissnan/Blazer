@@ -4,3 +4,8 @@
     font-weight: bold;
     background: red;
 }
+
+.cover{
+    max-height: 60px;
+    max-width: 60px;
+}
