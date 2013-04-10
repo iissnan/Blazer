@@ -1,3 +1,10 @@
-cover/
+# 上传的封面
+app/cover/*
+!app/cover/default.png
+
+# Smarty编译后的文件
 templates_c/
+cache/
+
+# 通过Bower管理的第三方前端框架/库
 app/assets/vendor/
