@@ -16,7 +16,13 @@
     $page_total = $paginator->getTotal();
 
     // 获取多本书籍
-    $books = $Book->getItems("", $page_size, $page);
+    $books = $Book->getJoinItems(
+        array("books_authors", "authors"),
+        $page_size,
+        $page,
+        "books.id = books_authors.book_id and books_authors.author_id = authors.id"
+    );
+    dir(var_dump($books));
 
     require_once("../include/smarty.php");
     if ($paginator->hasPagination()) {

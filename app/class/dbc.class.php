@@ -65,9 +65,24 @@ class DatabaseConnection {
      * @param int $row_count
      * @return mixed
      */
-    public function get($table, $filter="", $row_count=10, $offset=0)  {
-        $filter = $filter == "" ? "" : "WHERE $filter";
+    public function get($table, $row_count=10, $offset=0, $filter="") {
+        $filter == "" or $filter = "WHERE $filter";
         $query = "SELECT * FROM $table $filter ORDER BY id LIMIT $offset, $row_count";
+        return $this->execute($query);
+    }
+
+    /*
+     * 关联查询
+     *
+     * @param string $table
+     * @param string $join_table 关联表
+     * @param integer $row_count 获取行数
+     * @param integer $offset 位移
+     * @param string $filter 等价关联条件
+     */
+    public function getJoin($table, $join_table, $row_count=10, $offset=0, $filter) {
+        $filter == "" or $filter = "WHERE $filter";
+        $query = "SELECT * FROM $table, $join_table $filter ORDER BY $table.id LIMIT $offset, $row_count";
         return $this->execute($query);
     }
 
@@ -80,7 +95,7 @@ class DatabaseConnection {
      * @return mixed
      */
     public function count($table, $filter="", $field="*") {
-        $filter = $filter == "" ? "" : "WHERE $filter";
+        $filter == "" or $filter = "WHERE $filter";
         $query = "SELECT count(*) AS total FROM $table $filter";
         return $this->execute($query);
     }
@@ -125,7 +140,7 @@ class DatabaseConnection {
                 $update_fields . "," . $field . "='" . $value . "'";
             $index++;
         }
-        $filter = $filter == "" ? "" : "WHERE $filter";
+        $filter == "" or $filter = "WHERE $filter";
         $query = "UPDATE $table SET $update_fields $filter";
         return $this->execute($query);
     }
@@ -138,7 +153,7 @@ class DatabaseConnection {
      * @return boolean 执行成功或者失败
      */
     public function remove($table, $filter="") {
-        $filter = $filter == "" ? "" : "WHERE $filter";
+        $filter == "" or $filter = "WHERE $filter";
         $query = "DELETE FROM $table $filter";
         return $this->execute($query);
     }
@@ -150,7 +165,7 @@ class DatabaseConnection {
      * @return mixed 查询执行结果
      */
     public function execute($query) {
-        //die($query . "<br />");
+        echo($query . "<br />");
         $this->db->query("SET NAMES 'utf8'");
         return $this->db->query($query);
     }
