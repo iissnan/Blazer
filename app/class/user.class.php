@@ -19,7 +19,7 @@ class User {
      */
     public function get($email, $password) {
         $user = (object) array("error" => 0, "msg" => "");
-        $result = $this->dbc->get($this->table, "email='" . $email . "'");
+        $result = $this->dbc->get($this->table, 1, 0, "email='" . $email . "'");
         if ($result->num_rows == 0) {
             $user->error = 1;
             $user->msg = "用户不存在";

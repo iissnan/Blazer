@@ -3,7 +3,7 @@
 require_once("dbc.class.php");
 
 /**
- * 书籍工厂类
+ * Book Model
  */
 class Book {
     private $dbc;
@@ -20,15 +20,14 @@ class Book {
      * @param string $author
      * @param string $isbn
      * @param array $cover
-     * @param string $category
      * @param string $douban_link
      * @return mixed
      */
-    public function add($title, $author, $isbn, $cover, $category, $douban_link) {
+    public function add($title, $author, $isbn, $cover, $douban_link) {
         $result = $this->dbc->insert(
             $this->table,
-            array("title", "author", "isbn", "category", "cover", "douban_link"),
-            array($title, $author, $isbn, $category, $this->handleCover($cover), $douban_link)
+            array("title", "author", "isbn", "cover", "douban_link"),
+            array($title, $author, $isbn, $this->handleCover($cover), $douban_link)
         );
 
         return $result;
@@ -53,8 +52,26 @@ class Book {
      * @param number $offset 偏移量
      * @return mixed
      */
-    public function getItems($filter, $row_count, $offset){
+    public function getItems($row_count, $offset, $filter){
         return $this->dbc->get($this->table, $filter, $row_count, ($offset - 1) * $row_count);
+    }
+
+    /*
+     * 获取关联查询的结果
+     *
+     * @param array $join_table
+     * @param integer $row_count
+     * @param integer $offset
+     * @param string $filter
+     */
+    public function getJoinItems($join_tables, $row_count, $offset, $filter) {
+        return $this->dbc->getJoin(
+            $this->table,
+            join(",", $join_tables),
+            $row_count,
+            ($offset - 1) * $row_count,
+            $filter
+        );
     }
 
     /**
@@ -75,19 +92,17 @@ class Book {
      * @param string $title 标题
      * @param string $author 作者
      * @param string $isbn ISBN
-     * @param string $category 分类
      * @param array $cover 封面（文件上传数组）
      * @param string $douban_link 豆瓣链接
      *
      * @return boolean 执行成功或者失败
      */
-    public function update($id, $title, $author, $isbn, $category, $cover, $douban_link) {
+    public function update($id, $title, $author, $isbn, $cover, $douban_link) {
         $cover = gettype($cover) == "array" ? $this->handleCover($cover) : $cover;
         $fields = array(
             "title" => $title,
             "author" => $author,
             "isbn" => $isbn,
-            "category" => $category,
             "cover" => $cover,
             "douban_link" => $douban_link,
             "update_at" => date("Y-m-d H:i:s")
