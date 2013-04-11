@@ -151,6 +151,7 @@ class DatabaseConnection {
      */
     public function execute($query) {
         //die($query . "<br />");
+        $this->db->query("SET NAMES 'utf8'");
         return $this->db->query($query);
     }
 
