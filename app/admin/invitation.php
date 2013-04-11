@@ -6,12 +6,24 @@
 
     // TODO: Show Invitation when user belongs to "Admin" group
     require_once("../class/invitation.class.php");
+    require_once("../class/paginator.class.php");
     $Invitation = new Invitation();
-    $invitations = $Invitation->getItems();
-    $invitations_size = $invitations->num_rows;
+    $page = !isset($_GET["page"]) ? 1 : $_GET["page"];
+    $page_size = 10;
+    $inv_total = $Invitation->total();
+    $paginator = new Paginator($inv_total, $page, $page_size);
+    $page = $paginator->getPage();
+    $page_total = $paginator->getTotal();
+    $invitations = $Invitation->getItems($page_size, $page);
 
     require_once("../include/smarty.php");
-    $smarty->assign("invitations_size", $invitations_size);
+    $smarty->assign("invitations_size", $inv_total);
     $smarty->assign("invitations", $invitations);
+
+    if ($paginator->hasPagination()) {
+        $smarty->assign("pagination", true);
+        $smarty->assign("page_current", $page);
+        $smarty->assign("page_total", $page_total);
+    }
     $smarty->display("admin/invitation.tpl");
 

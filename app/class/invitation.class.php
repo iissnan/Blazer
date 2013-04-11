@@ -14,12 +14,12 @@ class Invitation {
      * 获取多条数据
      *
      * @param string $filter 过滤语句
-     * @param int $page 指定数据offset
-     * @param int $page_size 指定数据条数
+     * @param int $row_count 指定数据offset
+     * @param int $offset 指定数据条数
      * @return mixed
      */
-    public function getItems($filter="number > 0", $page=0, $page_size=10){
-        return $this->dbc->get($this->table, $filter, $page_size, $page * $page_size);
+    public function getItems($row_count, $offset, $filter="number > 0") {
+        return $this->dbc->get($this->table, $filter, $row_count, ($offset - 1) * $row_count);
     }
 
     /**
@@ -30,6 +30,16 @@ class Invitation {
      */
     public function getItem($value) {
         return $this->dbc->get($this->table, "value = '$value'");
+    }
+
+    /**
+     * 获取数量大于零的数据总数
+     *
+     * @return boolean
+     */
+    public function total() {
+        $result = $this->dbc->count($this->table, "number > 0");
+        return !$result ? 0 : $result->fetch_object()->total;
     }
 
     /**

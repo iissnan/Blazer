@@ -19,7 +19,7 @@
                         <a href="invitation_add.php" class="btn btn-primary pull-right">生  成</a>
                     </div>
                     {if $invitations_size > 0}
-                        <table class="table">
+                        <table class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>邀请码</th>
@@ -33,6 +33,18 @@
                                 </tr>
                             {/while}
                         </table>
+                        {*分页*}
+                        {if $pagination}
+                            <div class="pagination">
+                                <ul>
+                                    {for $i = 1 to $page_total}
+                                        <li class="{if $i == $page_current}active{/if}">
+                                            <a href="invitation.php?page={$i}">{$i}</a>
+                                        </li>
+                                    {/for}
+                                </ul>
+                            </div>
+                        {/if}
                     {else}
                         <p>没有邀请码</p>
                     {/if}
