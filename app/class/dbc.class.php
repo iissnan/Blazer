@@ -5,7 +5,7 @@ class DatabaseConnection {
     private $password;
     private $database;
 
-    private $db;
+    public $db;
 
 
     /**
@@ -30,15 +30,20 @@ class DatabaseConnection {
      */
     public function connect() {
         try {
-            $db = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+            @$db = new mysqli($this->hostname, $this->username, $this->password);
+
+            // mysqli实例化失败
+            // 因此此时只能调用mysqli_connect_errno()来判断，而非$db->connect_errno
             if (mysqli_connect_errno()) {
                 throw new Exception("Error: Could not to connect to MySQL.");
             }
             $this->db = $db;
+
+            // 数据库选择
             if (isset($this->database)) {
                 $this->use_database($this->database);
-                if (mysqli_connect_errno()) {
-                    throw new Exception("Error: Could not to connect to the database.");
+                if ($this->db->errno) {
+                    throw new Exception($this->db->error);
                 }
             }
         } catch (Exception $e) {
@@ -91,11 +96,17 @@ class DatabaseConnection {
      *
      * @param $table
      * @param string $filter
-     * @param string $field
+     * @param array $join_table 关联表
      * @return mixed
      */
-    public function count($table, $filter="", $field="*") {
+    public function count($table, $filter, $join_table) {
         $filter == "" or $filter = "WHERE $filter";
+
+        // 关联表格处理
+        if ($join_table) {
+            array_unshift($join_table, $table);
+            $table = join(",", $join_table);
+        }
         $query = "SELECT count(*) AS total FROM $table $filter";
         return $this->execute($query);
     }
@@ -146,6 +157,29 @@ class DatabaseConnection {
     }
 
     /**
+     * 关联更新
+     *
+     * @param string $table
+     * @param string $join_tables
+     * @param array $data
+     * @param string $filter
+     * @return mixed
+     */
+    public function updateJoin($table, $join_tables, $data, $filter) {
+        $update_fields = "";
+        $index = 0;
+        foreach ($data as $field => $value) {
+            $update_fields = $index == 0 ?
+                $field . "='" . $value ."'" :
+                $update_fields . "," . $field . "='" . $value . "'";
+            $index++;
+        }
+        $filter == "" or $filter = "WHERE $filter";
+        $query = "UPDATE $table, $join_tables SET $update_fields $filter";
+        return $this->execute($query);
+    }
+
+    /**
      * 删除$table下的数据
      *
      * @param string $table 表名字
@@ -165,7 +199,7 @@ class DatabaseConnection {
      * @return mixed 查询执行结果
      */
     public function execute($query) {
-        //die($query . "<br />");
+        echo($query . "<br />");
         $this->db->query("SET NAMES 'utf8'");
         return $this->db->query($query);
     }

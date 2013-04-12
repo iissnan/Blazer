@@ -31,26 +31,26 @@
                                     <th>操作</th>
                                 </tr>
                             </thead>
-                            {while $book = $books->fetch_object()}
+                            {foreach $books as $book}
                                 <tr>
                                     <td>
-                                        <img src="{if $book->cover == ""}../cover/default.png{else}{$book->cover}{/if}"
-                                            class="cover img-polaroid" width="80" alt="{$book->title}"/>
+                                        <img src="{if $book["cover"] == ""}../cover/default.png{else}{$book["cover"]}{/if}"
+                                            class="cover img-polaroid" width="80" alt="{$book["title"]}"/>
                                     </td>
-                                    <td>{$book->title}</td>
-                                    <td>{$book->author}</td>
-                                    <td>{$book->isbn}</td>
-                                    <td>{$book->category}</td>
+                                    <td>{$book["title"]}</td>
+                                    <td>{$book["author"]}</td>
+                                    <td>{$book["isbn"]}</td>
+                                    <td>{$book["category"]}</td>
                                     <td>
-                                        <a href="edit.php?id={$book->id}"
+                                        <a href="edit.php?id={$book["id"]}"
                                            class="btn btn-mini btn-primary">编辑</a>
                                         &nbsp;
-                                        <a href="delete.php?id={$book->id}"
+                                        <a href="delete.php?id={$book["id"]}"
                                            class="btn btn-mini btn-danger"
                                            onclick="return confirmDelete()">删除</a>
                                     </td>
                                 </tr>
-                            {/while}
+                            {/foreach}
                         </table>
 
                         {*分页*}
