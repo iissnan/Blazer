@@ -199,7 +199,7 @@ class DatabaseConnection {
      * @return mixed 查询执行结果
      */
     public function execute($query) {
-        echo($query . "<br />");
+        //echo($query . "<br />");
         $this->db->query("SET NAMES 'utf8'");
         return $this->db->query($query);
     }
