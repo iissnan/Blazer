@@ -9,8 +9,11 @@
 
     if (isset($_GET["id"]) && $_GET["id"] != "") {
         $item_id = $_GET["id"];
-        $Book = new Book();
-        $result = (int)$Book->remove($item_id);
+        $book_model = new BookModel();
+        $book_model->startTransaction();
+        $result = (int)$book_model->remove("id='$item_id'");
+        $book_model->updateCategory($item_id, "");
+        $result ? $book_model->commit() : $book_model->rollback();
 
         echo "<script>location.href = 'result.php?action=delete&code=" . $result . "'</script>";
     } else {

@@ -5,8 +5,8 @@
 
     require_once("../class/book.class.php");
     require_once("../class/paginator.class.php");
-    $Book = new Book();
-    $books_total = $Book->total();
+    $book_model = new BookModel();
+    $books_total = $book_model->total();
 
     // 分页
     $page = !isset($_GET["page"]) ? 1 : $_GET["page"];
@@ -17,8 +17,9 @@
     $page = $paginator->getPage();
     $page_total = $paginator->getTotal();
 
+
     // 获取多本书籍
-    $books_rs = $Book->getItems($page_size, $page, "");
+    $books_rs = $book_model->getItems($page_size, $page, "");
     if ($books_rs) {
         $Category = new Model("categories");
         $Author = new Model("authors");
@@ -30,8 +31,6 @@
             // 获取作者信息
             $category_result = $Category->getJoinItems(
                 array("books_categories" ),
-                100,
-                1,
                 "books_categories.book_id=" . $book["id"] . " AND books_categories.category_id=categories.id"
             );
             if ($category_result) {
@@ -45,8 +44,6 @@
             // 获取分类信息
             $author_result = $Author->getJoinItems(
                 array("books_authors"),
-                100,
-                1,
                 "books_authors.book_id=" . $book["id"] . " AND books_authors.author_id=authors.id"
             );
             if ($author_result) {

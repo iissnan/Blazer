@@ -1,10 +1,13 @@
 <?php
 
-require_once("dbc.class.php");
+require_once("model.class.php");
 
 class Invitation extends Model {
-    private $table = "invitations";
+    protected $table = "invitations";
 
+    public function __construct() {
+        parent::__construct($this->table);
+    }
     /**
      * 次数随使用次数递减
      *

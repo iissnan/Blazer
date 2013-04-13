@@ -1,13 +1,13 @@
 <?php
 
-require_once("dbc.class.php");
+require_once("model.class.php");
 
-class User {
-    private $table = "users";
-    private $dbc;
+class User extends Model {
+    public $dbc;
+    protected $table = "users";
 
     function __construct () {
-        $this->dbc = new DatabaseConnection("localhost", "root", "123456", "bookshelf");
+        parent::__construct($this->table);
     }
 
     /**
@@ -59,7 +59,7 @@ class User {
     public function add($email, $password, $nickname, $invitation_value) {
         require_once("invitation.class.php");
         $Invitation = new Invitation();
-        $invitation = $Invitation->getItem($invitation_value);
+        $invitation = $Invitation->getItem("value", $invitation_value);
 
         // 邀请码不存在
         if ($invitation->num_rows == 0) {

@@ -80,11 +80,11 @@ class Model {
      * 获取关联查询的数据
      *
      * @param array $join_table
+     * @param string $filter
      * @param integer $row_count
      * @param integer $offset
-     * @param string $filter
      */
-    public function getJoinItems($join_tables, $row_count, $offset, $filter) {
+    public function getJoinItems($join_tables, $filter, $row_count=100, $offset=1) {
         return $this->dbc->getJoin(
             $this->table,
             join(",", $join_tables),
@@ -102,7 +102,7 @@ class Model {
      * @return mixed
      */
     public function getItem($key, $value) {
-        $filter = "$key = $value";
+        $filter = "$key = '$value'";
         return $this->dbc->get($this->table, 1, 0, $filter);
     }
 

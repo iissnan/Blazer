@@ -5,11 +5,48 @@ require_once("model.class.php");
 /**
  * Book Model
  */
-class Book extends Model{
+class BookModel extends Model{
     protected $table = "books";
 
     public function __construct() {
         parent::__construct($this->table);
+    }
+
+    public function updateCategory($id, $category) {
+        $category = trim($category);
+        $category_model = new Model("categories");
+        $book_category_model = new Model("books_categories");
+
+        // 取书籍旧的分类数据
+        $book_category_result = $category_model->getJoinItems(
+            array("books_categories"),
+            "books_categories.book_id=$id AND books_categories.category_id=categories.id"
+        );
+
+        // 如果分类为空，执行删除操作
+        if ($category == "") {
+            $book_category_model->remove("book_id='$id'");
+        } else {
+            // 执行更新操作
+            $category_model->updateJoin(
+                array("books_categories"),
+                "books_categories.book_id=$id".
+                    " AND books_categories.category_id=categories.id ",
+                array("categories.name" => $category)
+            );
+        }
+
+        // 处理书籍的旧分类数据：若旧的分类在books_categories里的引用为0，则在categories删除掉
+        for ( $i = 0; $i < $book_category_result->num_rows; $i++) {
+            $book_category = $book_category_result->fetch_object();
+            $count_result = $book_category_model->total(
+                "books_categories.category_id=categories.id AND categories.name='$book_category->name'",
+                array("categories")
+            );
+            if ($count_result == 0) {
+                $category_model->remove("name='$book_category->name'");
+            }
+        }
     }
 
     /**

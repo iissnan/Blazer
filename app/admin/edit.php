@@ -6,7 +6,7 @@
 
     require_once("../include/smarty.php");
     require_once("../class/book.class.php");
-    $Book = new Book();
+    $book_model = new BookModel();
 
     // 提交数据
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
@@ -27,7 +27,7 @@
             "isbn" => $isbn,
             "cover" => $cover,
             "douban_link" => $douban_link,
-            "updated_at" => date("Y-m-d H:i:s")
+            "update_at" => date("Y-m-d H:i:s")
         );
 
         if ($title == "") {
@@ -40,27 +40,23 @@
         } else {
             $categories = explode(",", $category);
             $authors = explode(",", $author);
-            $Category = new Model("categories");
-            $Book_Category = new Model("books_categories");
+
             $Author = new Model("authors");
             $Book_Author = new Model("books_authors");
-            $Book->startTransaction();
+            $book_model->startTransaction();
 
+
+            echo "<p>START 更新分类: </p>";
             // 更新分类
             foreach($categories as $category) {
-                if ($category == "") {
-                    $Book_Category->remove("book_id=$id");
-                } else {
-                     $Category->updateJoin(
-                        array("books_categories"),
-                        "books_categories.book_id=$id".
-                            " AND books_categories.category_id=categories.id ",
-                        array("categories.name" => $category)
-                    );
-                }
+                $book_model->updateCategory($id, $category);
             }
+            echo "<p>END 更新分类 </p>";
+            die("aa");
+
             // 更新作者信息
             foreach($authors as $author) {
+                $author = trim($author);
                 if ($author == "") {
                     $Book_Author->remove("book_id=$id");
                 } else {
@@ -73,17 +69,55 @@
                 }
 
             }
-            $result = $Book->update("id=" . $id, $book);
-            $result and $Book->commit() or $Book->rollback();
+            $result = $book_model->update("id=" . $id, $book);
+            $result and $book_model->commit() or $book_model->rollback();
             //echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
         }
     } else {
         // 获取数据
         if (isset($_GET["id"])) {
             $id = (int)$_GET["id"];
-            $book = $Book->getItem("id", $id);
+            $book = $book_model->getItem("id", $id);
             if ($book->num_rows > 0) {
                 $book = $book->fetch_object();
+
+                // 获取作者
+                $author_model = new Model("authors");
+                $authors = "";
+                $author_result = $author_model->getJoinItems(
+                    array("books_authors"),
+                    "books_authors.book_id=$book->id AND authors.id=books_authors.author_id"
+                );
+                if ($author_result) {
+                    $author_numbers = $author_result->num_rows;
+                    for ($i = 0; $i < $author_numbers; $i++) {
+                        $author = $author_result->fetch_object();
+                        $authors = $i == 0 ?
+                            $author->name :
+                            $authors . ", $author->name";
+                    }
+                }
+                $book->author = $authors;
+
+                // 获取分类
+                $category_model = new Model("categories");
+                $categories = "";
+                $category_result = $category_model->getJoinItems(
+                    array("books_categories"),
+                    "books_categories.book_id=$book->id AND categories.id=books_categories.category_id"
+                );
+                if ($category_result) {
+                    $category_numbers = $category_result->num_rows;
+                    echo $category_numbers;
+                    for ($i = 0; $i < $category_numbers; $i++) {
+                        $category = $category_result->fetch_object();
+                        $categories = $i == 0 ?
+                            $category->name :
+                            $categories . ", $category->name";
+                    }
+                }
+                $book->category = $categories;
+
                 $smarty->assign("book", $book);
                 $smarty->display("admin/edit.tpl");
             } else {
