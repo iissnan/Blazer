@@ -41,29 +41,21 @@
             $result = $book_model->add($book_data);
             if ($result) {
                 $book_id = $book_model->dbc->db->insert_id;
+                $isProcessWell = true;
 
-                $book_model->startTransaction();
                 // 分类处理
-                $categories = explode(",", $category);
-                $Category = new Model("categories");
-                $Book_Category = new Model("books_categories");
-                foreach($categories as $category) {
-                    $result = $Category->add(array("name" => trim($category)));
-                    $category_id = $Category->dbc->db->insert_id;
-                    $Book_Category->add(array("book_id" => $book_id, "category_id" => $category_id));
-                }
+                $isProcessWell = $book_model->add_category($book_id, $category);
 
                 // 作者处理
-                $authors = explode(",", $author);
-                $Author = new Model("authors");
-                $Book_Author = new Model("books_authors");
-                foreach($authors as $author) {
-                    $result = $Author->add(array("name" => trim($author)));
-                    $author_id = $Author->dbc->db->insert_id;
-                    $Book_Author->add(array("book_id" => $book_id, "author_id" => $author_id));
+                $isProcessWell = $book_model->add_author($book_id, $author);
+
+                if ($isProcessWell) {
+                    echo "<script>location.href = 'result.php?action=add&code=" . $result . "';</script>";
+                } else {
+                    $alert = "<div class='alert alert-error' id='alert'>" . $book_model->dbc->db->error . "</div>";
+                    $smarty->assign("alert", $alert);
+                    $smarty->display("admin/add.tpl");
                 }
-                $result and $book_model->commit() or $book_model->rollback();
-                echo "<script>location.href = 'result.php?action=add&code=" . $result . "';</script>";
             } else {
                 $alert = "<div class='alert alert-error' id='alert'>" . $book_model->dbc->db->error . "</div>";
                 $smarty->assign("alert", $alert);

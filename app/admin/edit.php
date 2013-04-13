@@ -38,40 +38,17 @@
             $smarty->assign("book", $book);
             $smarty->display("admin/edit.tpl");
         } else {
-            $categories = explode(",", $category);
-            $authors = explode(",", $author);
-
-            $Author = new Model("authors");
-            $Book_Author = new Model("books_authors");
-            $book_model->startTransaction();
-
-
-            echo "<p>START 更新分类: </p>";
-            // 更新分类
-            foreach($categories as $category) {
-                $book_model->updateCategory($id, $category);
-            }
-            echo "<p>END 更新分类 </p>";
-            die("aa");
-
-            // 更新作者信息
-            foreach($authors as $author) {
-                $author = trim($author);
-                if ($author == "") {
-                    $Book_Author->remove("book_id=$id");
-                } else {
-                    $Author->updateJoin(
-                        array("books_authors"),
-                        "books_authors.book_id=$id" .
-                            " AND books_authors.author_id=authors.id ",
-                        array("authors.name" => $author)
-                    );
-                }
-
-            }
             $result = $book_model->update("id=" . $id, $book);
-            $result and $book_model->commit() or $book_model->rollback();
-            //echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
+
+            if ($result) {
+                $book_model->update_category($id, $category);
+                $book_model->update_author($id, $author);
+                echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
+            } else {
+                $alert = "<div class='alert alert-error' id='alert'>更新失败</div>";
+                $smarty->assign("alert", $alert);
+                $smarty->display("admin/edit.tpl");
+            }
         }
     } else {
         // 获取数据
