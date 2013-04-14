@@ -2,7 +2,7 @@
     session_start();
     header("Content-Type: text/html; charset=utf-8");
     require_once("../include/auth.php");
-    !isLogin() and header("location: ../login.php");
+    redirect_unless_login("../login.php");
 
     require_once("../include/smarty.php");
 

@@ -2,7 +2,7 @@
     session_start();
     header("Content-Type: text/html; charset=utf-8");
     require_once("../include/auth.php");
-    !isLogin() and header("location: ../login.php");
+    redirect_unless_login("../login.php");
 
     // TODO: Show Invitation when user belongs to "Admin" group
     require_once("../class/invitation.class.php");
@@ -14,7 +14,7 @@
     $paginator = new Paginator($inv_total, $page, $page_size);
     $page = $paginator->getPage();
     $page_total = $paginator->getTotal();
-    $invitations = $Invitation->getItems($page_size, $page);
+    $invitations = $Invitation->getItems($page_size, $page, "number > 0");
 
     require_once("../include/smarty.php");
     $smarty->assign("invitations_size", $inv_total);

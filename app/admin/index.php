@@ -1,7 +1,7 @@
 <?php
     session_start();
     require_once("../include/auth.php");
-    !isLogin() and header("location: ../login.php");
+    redirect_unless_login("../login.php");
 
     require_once("../class/book.class.php");
     require_once("../class/paginator.class.php");

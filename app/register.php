@@ -34,7 +34,7 @@
         }
 
         if ($isValidate) {
-            $user = new User();
+            $user = new UserModel();
             if ($user->add($email, $password, $nickname, $invitation)) {
                 header("location: login.php?s=reg&code=1");
             } else {

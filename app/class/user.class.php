@@ -2,7 +2,7 @@
 
 require_once("model.class.php");
 
-class User extends Model {
+class UserModel extends Model {
     public $dbc;
     protected $table = "users";
 

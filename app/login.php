@@ -29,7 +29,7 @@
             $smarty->assign("password", $password);
             $alert = "<div class='alert alert-error' id='alert'><ul>$error_message</ul></div>";
         } else {
-            $user_instance = new User();
+            $user_instance = new UserModel();
             $user = $user_instance->get($email, $password);
             if ($user->error == 0) {
                 $_SESSION["user"] = $user;
