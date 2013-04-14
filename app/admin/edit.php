@@ -43,7 +43,7 @@
             if ($result) {
                 $book_model->update_category($id, $category);
                 $book_model->update_author($id, $author);
-                echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
+                //echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
             } else {
                 $alert = "<div class='alert alert-error' id='alert'>更新失败</div>";
                 $smarty->assign("alert", $alert);

@@ -16,24 +16,32 @@ class BookModel extends Model{
      * 添加分类
      *
      * @param integer $book_id
-     * @param string $categories_raw
+     * @param mixed $categories_raw
      * @return boolean
      */
     public function add_category($book_id, $categories_raw) {
-        $categories = explode(",", $categories_raw);
+        $categories = gettype($categories_raw) == "array" ?
+            $categories_raw :
+            explode(",", $categories_raw);
         $category_model = new Model("categories");
         $book_category_model = new Model("books_categories");
         $processResult = false;
         foreach($categories as $category) {
             $category = trim($category);
             $category_id = false;
-            $result = $category_model->add(array("name" => $category));
-            if ($result) {
-                $category_id = $category_model->dbc->db->insert_id;
+
+            if ($category == "") {
+                continue;
+            }
+
+            // 检索分类是否已存在
+            $category_result = $category_model->getItem("name", $category);
+            if ($category_result && $category_result->num_rows > 0) {
+                $category_id = $category_result->fetch_object()->id;
             } else {
-                $category_result = $category_model->getItem("name", $category);
-                if ($category_result) {
-                    $category_id = $category_result->fetch_object()->id;
+                $result = $category_model->add(array("name" => $category));
+                if ($result) {
+                    $category_id = $category_model->dbc->db->insert_id;
                 }
             }
             if ($category_id !== false) {
@@ -53,19 +61,30 @@ class BookModel extends Model{
      * @return bool
      */
     public function add_author($book_id, $authors) {
-        $authors = explode(",", $authors);
+        $authors = gettype($authors) == "array" ?
+            $authors :
+            explode(",", $authors);
         $author_model = new Model("authors");
         $book_author_model = new Model("books_authors");
         $processResult = false;
         $author_id = false;
         foreach($authors as $author) {
             $author = trim($author);
-            $author_result = $author_model->add(array("name" => $author));
-            if ($author_result) {
-                $author_id = $author_model->dbc->db->insert_id;
+
+            if ($author == "") {
+                continue;
+            }
+
+            // 检测作者是否已存在
+            $author_query_result = $author_model->getItem("name", $author);
+            if ($author_query_result && $author_query_result->num_rows > 0) {
+                $author_id = $author_query_result->fetch_object()->id;
             } else {
-                $author_query_result = $author_model->getItem("name", $author);
-                $author_query_result and $author_id = $author_query_result->fetch_object()->id;
+                $author_result = $author_model->add(array("name" => $author));
+
+                if ($author_result) {
+                    $author_id = $author_model->dbc->db->insert_id;
+                }
             }
             if ($author_id !== false) {
                 if ($book_author_model->add(array("book_id" => $book_id, "author_id" => $author_id))) {
@@ -104,16 +123,22 @@ class BookModel extends Model{
             }, $categories);
 
             // 删除旧的分类
+            $categories_for_query = array_map(function($item) {
+                return "'$item'";
+            }, $categories_clean);
+            $categories_for_query = join(',', $categories_for_query);
             $category_model->dbc->execute(
                 "DELETE FROM books_categories " .
-                    "WHERE id IN (SELECT id FROM categories WHERE categories.name NOT IN ($categories_clean))"
+                    "WHERE books_categories.book_id=$book_id " .
+                    "AND books_categories.category_id " .
+                    "IN (SELECT id FROM categories WHERE categories.name NOT IN ($categories_for_query))"
             );
 
             // 新增的分类
             if (count($categories_old) > 0) {
                 $categories_new = array();
                 foreach($categories_clean as $category_clean) {
-                    if (!in_array($category_clean, $categories_old)) {
+                    if (!in_array($category_clean, $categories_old) && $category_clean != "") {
                         array_push($categories_new, $category_clean);
                     }
                 }
@@ -122,43 +147,59 @@ class BookModel extends Model{
             }
             $this->add_category($book_id, $categories_new);
         }
-
-
-
-        // 删除冗余的分类数据：
-        //   若旧的分类在books_categories里的引用为0，则在categories删除掉
-        for ( $i = 0; $i < count($categories_old); $i++) {
-            $count_result = $book_category_model->total(
-                "books_categories.category_id=categories.id AND categories.name='$categories_old[$i]'",
-                array("categories")
-            );
-            if ($count_result == 0) {
-                $category_model->remove("name='$categories_old[$i]'");
-            }
-        }
-
     }
 
-    public function update_author($book_id, $author_raw) {
-        /*
-        $authors = explode(",", $author);
+    public function update_author($book_id, $authors_raw) {
         $author_model = new Model("authors");
         $book_author_model = new Model("books_authors");
-        foreach($authors as $author) {
-            $author = trim($author);
-            if ($author == "") {
-                $Book_Author->remove("book_id=$id");
-            } else {
-                $author_model->updateJoin(
-                    array("books_authors"),
-                    "books_authors.book_id=$id" .
-                        " AND books_authors.author_id=authors.id ",
-                    array("authors.name" => $author)
-                );
-            }
 
+        // 获取书籍旧的作者数据
+        $authors_old = array();
+        $authors_old_result = $author_model->getJoinItems(
+            array("books_authors"),
+            "books_authors.book_id=$book_id AND books_authors.author_id=authors.id"
+        );
+        if ($authors_old_result) {
+            for ( $i = 0; $i < $authors_old_result->num_rows; $i++) {
+                $book_author = $authors_old_result->fetch_object();
+                array_push($authors_old, $book_author->name);
+            }
         }
-        */
+
+        // 如果作者为空，执行删除操作
+        if ($authors_raw == "") {
+            $book_author_model->remove("book_id='$book_id'");
+        } else {
+            $authors = explode(",", $authors_raw);
+            $authors_clean = array_map(function($item){
+                return trim($item);
+            }, $authors);
+
+            // 删除旧的作者
+            $authors_for_query = array_map(function($item) {
+                return "'$item'";
+            }, $authors_clean);
+            $authors_for_query = join(',', $authors_for_query);
+            $author_model->dbc->execute(
+                "DELETE FROM books_authors " .
+                    "WHERE books_authors.book_id=$book_id " .
+                    "AND books_authors.author_id " .
+                    "IN (SELECT id FROM authors WHERE authors.name NOT IN ($authors_for_query))"
+            );
+
+            // 新增的作者
+            if (count($authors_old) > 0) {
+                $authors_new = array();
+                foreach($authors_clean as $author_clean) {
+                    if (!in_array($author_clean, $authors_old) && $author_clean != "") {
+                        array_push($authors_new, $author_clean);
+                    }
+                }
+            } else {
+                $authors_new = $authors_clean;
+            }
+            $this->add_author($book_id, $authors_new);
+        }
     }
 
     /**
