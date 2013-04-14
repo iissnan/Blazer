@@ -32,9 +32,8 @@ class DatabaseConnection {
         try {
             @$db = new mysqli($this->hostname, $this->username, $this->password);
 
-            // mysqli实例化失败
-            // 因此此时只能调用mysqli_connect_errno()来判断，而非$db->connect_errno
-            if (mysqli_connect_errno()) {
+            // $db->connect_error 需要PHP ver > 5.2.9
+            if ($db->connect_error) {
                 throw new Exception("Error: Could not to connect to MySQL.");
             }
             $this->db = $db;

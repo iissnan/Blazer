@@ -8,3 +8,5 @@ cache/
 
 # 通过Bower管理的第三方前端框架/库
 app/assets/vendor/
+
+.idea/
