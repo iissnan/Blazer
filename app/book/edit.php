@@ -85,7 +85,6 @@
                 );
                 if ($category_result) {
                     $category_numbers = $category_result->num_rows;
-                    echo $category_numbers;
                     for ($i = 0; $i < $category_numbers; $i++) {
                         $category = $category_result->fetch_object();
                         $categories = $i == 0 ?

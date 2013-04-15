@@ -38,8 +38,15 @@
                             {foreach $books as $book}
                                 <tr>
                                     <td>
-                                        <img src="{if $book["cover"] == ""}../cover/default.png{else}{$book["cover"]}{/if}"
-                                            class="cover img-polaroid" width="80" alt="{$book["title"]}"/>
+                                        <img src="
+                                            {if $book["cover"] == ""}
+                                                ../assets/cover/default.png
+                                            {else}
+                                                ../assets/cover/{$book["cover"]}
+                                            {/if}"
+                                             alt="{$book["title"]}"
+                                             class="cover img-polaroid"
+                                        />
                                     </td>
                                     <td>{$book["title"]}</td>
                                     <td>{$book["author"]}</td>

@@ -18,7 +18,7 @@
 
         // title为必需值
         if ($title == "") {
-            $alert = "<div class='alert alert-error' id='alert'>请输入标题</div>";
+            $alert = "<div class='alert alert-error' id='alert'>请输入书籍标题</div>";
             $smarty->assign("alert", $alert);
             $smarty->assign(array(
                 "title" => $title,
@@ -27,15 +27,16 @@
                 "douban_link" => $douban_link,
                 "category" => $category
             ));
-            $smarty->display("admin/add.tpl");
+            $smarty->display("book/add.tpl");
         } else {
-            $book_model = new BookModel("books");
+            $book_model = new BookModel();
             $book_data = array(
                 "title" => $title,
                 "isbn" => $isbn,
                 "cover" => $cover,
                 "douban_link" => $douban_link,
-                "create_at" => date("Y-m-d H:i:s")
+                "create_at" => date("Y-m-d H:i:s"),
+                "update_at" => date("Y-m-d H:i:s")
             );
 
             $result = $book_model->add($book_data);

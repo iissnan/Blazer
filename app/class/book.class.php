@@ -12,6 +12,13 @@ class BookModel extends Model{
         parent::__construct($this->table);
     }
 
+    public function add($data) {
+        $cover = $data["cover"];
+        $cover = gettype($cover) == "array" ? $this->handle_cover($cover) : $cover;
+        $data["cover"] = $cover;
+        return parent::add($data);
+    }
+
     /**
      * 添加分类
      *
@@ -20,6 +27,9 @@ class BookModel extends Model{
      * @return boolean
      */
     public function add_category($book_id, $categories_raw) {
+        if (!$categories_raw) {
+            return true;
+        }
         $categories = gettype($categories_raw) == "array" ?
             $categories_raw :
             explode(",", $categories_raw);
@@ -61,6 +71,9 @@ class BookModel extends Model{
      * @return bool
      */
     public function add_author($book_id, $authors) {
+        if (!$authors) {
+            return true;
+        }
         $authors = gettype($authors) == "array" ?
             $authors :
             explode(",", $authors);
@@ -127,7 +140,7 @@ class BookModel extends Model{
             // 删除旧的分类
             $categories_for_query = array_map(function($item) {
                 return "'$item'";
-            }, $categories_clean);
+            }, $categories);
             $categories_for_query = join(',', $categories_for_query);
             $category_model->dbc->execute(
                 "DELETE FROM books_categories " .
@@ -139,13 +152,13 @@ class BookModel extends Model{
             // 新增的分类
             if (count($categories_old) > 0) {
                 $categories_new = array();
-                foreach($categories_clean as $category_clean) {
+                foreach($categories as $category_clean) {
                     if (!in_array($category_clean, $categories_old) && $category_clean != "") {
                         array_push($categories_new, $category_clean);
                     }
                 }
             } else {
-                $categories_new = $categories_clean;
+                $categories_new = $categories;
             }
             $this->add_category($book_id, $categories_new);
         }
@@ -210,13 +223,12 @@ class BookModel extends Model{
      * @param $cover
      * @return string
      */
-    public function handleCover($cover) {
-        $cover = gettype($cover) == "array" ? $this->handleCover($cover) : $cover;
+    public function handle_cover($cover) {
         // 封面存储路径
-        define("DIR_COVER", "../cover");
+        define("DIR_COVER", "../assets/cover");
 
-        // 上传的图片最大限制为500K
-        define("MAX_SIZE", 500000);
+        // 上传的图片最大限制为2M
+        define("MAX_SIZE", 2000000);
 
         if (!is_dir(DIR_COVER)) {
             mkdir(DIR_COVER);
@@ -226,18 +238,19 @@ class BookModel extends Model{
         $allow_mimes = array("image/png", "image/jpeg", "image/gif");
         if ($cover["size"] == 0) {}
         if ($cover["size"] > MAX_SIZE) {
-            echo "图片大小必需小于500K";
+            //echo "图片大小必需小于2M";
             return "";
         }
-        if (! in_array($cover["type"], $allow_mimes)) {
-            echo "仅支持PNG, GIF和JPG格式的图片";
+        if (!in_array($cover["type"], $allow_mimes) && $cover["size"] != 0) {
+            //echo "仅支持PNG, GIF和JPG格式的图片";
             return "";
         }
-        if (!move_uploaded_file($cover["tmp_name"], DIR_COVER . '/' . $cover["name"])) {
-            echo "图片上传失败";
+        $filename = md5($cover["name"]);
+        if (!move_uploaded_file($cover["tmp_name"], DIR_COVER . '/' . $filename)) {
+            //echo "图片上传失败";
             return "";
         } else {
-            return DIR_COVER . "/" . $cover["name"];
+            return $filename;
         }
     }
 }

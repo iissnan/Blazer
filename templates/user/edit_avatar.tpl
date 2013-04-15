@@ -24,7 +24,7 @@
                     {$alert}
                     <form action="edit_avatar.php" method="post" enctype="multipart/form-data" class="form-inline">
                         <div class="current-avatar">
-                            <span>当前头像</span>
+                            <span>当前头像：</span>
                             <span class="controls">
                                 {if $current_avatar != ""}
                                     <img src="{$current_avatar}" class="img-rounded" alt="" width="120" />
@@ -45,7 +45,7 @@
                             </span>
                         </div>
                         <div class="control-group mt30">
-                            <label for="update-custom" class="control-label inline">更新</label>
+                            <label for="update-custom" class="control-label inline">更新头像： </label>
                             <input type="file" name="avatar" id="update-custom" class="inline"/>
                         </div>
                         <div class="control-group mt30">
