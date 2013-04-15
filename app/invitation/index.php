@@ -25,5 +25,5 @@
         $smarty->assign("page_current", $page);
         $smarty->assign("page_total", $page_total);
     }
-    $smarty->display("admin/invitation.tpl");
+    $smarty->display("invitation/index.tpl");
 

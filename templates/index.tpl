@@ -18,7 +18,7 @@
                 <div class="admin-main">
                     {if $is_login}
                         <div class="action">
-                            <a href="add.php" class="btn btn-primary pull-right">添  加</a>
+                            <a href="book/add.php" class="btn btn-primary pull-right">添  加</a>
                         </div>
                     {/if}
                     {if $total > 0}
@@ -30,7 +30,9 @@
                                     <th>作者</th>
                                     <th>ISBN</th>
                                     <th>分类</th>
-                                    <th>操作</th>
+                                    {if $is_login}
+                                        <th>操作</th>
+                                    {/if}
                                 </tr>
                             </thead>
                             {foreach $books as $book}
@@ -43,14 +45,16 @@
                                     <td>{$book["author"]}</td>
                                     <td>{$book["isbn"]}</td>
                                     <td>{$book["category"]}</td>
-                                    <td>
-                                        <a href="edit.php?id={$book["id"]}"
-                                           class="btn btn-mini btn-primary">编辑</a>
-                                        &nbsp;
-                                        <a href="delete.php?id={$book["id"]}"
-                                           class="btn btn-mini btn-danger"
-                                           onclick="return confirmDelete()">删除</a>
-                                    </td>
+                                    {if $is_login}
+                                        <td>
+                                            <a href="book/edit.php?id={$book["id"]}"
+                                               class="btn btn-mini btn-primary">编辑</a>
+                                            &nbsp;
+                                            <a href="book/delete.php?id={$book["id"]}"
+                                               class="btn btn-mini btn-danger"
+                                               onclick="return confirmDelete()">删除</a>
+                                        </td>
+                                    {/if}
                                 </tr>
                             {/foreach}
                         </table>

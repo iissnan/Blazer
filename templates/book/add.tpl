@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    {include file="./include/header.tpl"}
+    {include file="../include/header.tpl"}
     <div class="admin-wrap container">
         <div class="row">
             <div class="span12">
                 <div class="admin-main">
                     <h2>添加书籍</h2>
-                    {$error}
+                    {$alert}
                     <form action="add.php" method="post" enctype="multipart/form-data"
                           id="J_FormAdd" class="form-horizontal">
                         <div class="control-group">

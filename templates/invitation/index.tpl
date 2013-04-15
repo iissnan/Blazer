@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="../assets/css/main.css"/>
 </head>
 <body>
-    {include file="./include/header.tpl"}
+    {include file="../include/header.tpl"}
     <div class="admin-wrap container">
         <div class="row">
             <div class="span12">
                 <div class="admin-main">
                     <div class="action">
-                        <a href="invitation_add.php" class="btn btn-primary pull-right">生  成</a>
+                        <a href="add.php" class="btn btn-primary pull-right">生  成</a>
                     </div>
                     {if $invitations_size > 0}
                         <table class="table table-striped table-hover">
@@ -39,7 +39,7 @@
                                 <ul>
                                     {for $i = 1 to $page_total}
                                         <li class="{if $i == $page_current}active{/if}">
-                                            <a href="invitation.php?page={$i}">{$i}</a>
+                                            <a href="index.php?page={$i}">{$i}</a>
                                         </li>
                                     {/for}
                                 </ul>

@@ -54,14 +54,14 @@
                 } else {
                     $alert = "<div class='alert alert-error' id='alert'>" . $book_model->dbc->db->error . "</div>";
                     $smarty->assign("alert", $alert);
-                    $smarty->display("admin/add.tpl");
+                    $smarty->display("book/add.tpl");
                 }
             } else {
                 $alert = "<div class='alert alert-error' id='alert'>" . $book_model->dbc->db->error . "</div>";
                 $smarty->assign("alert", $alert);
-                $smarty->display("admin/add.tpl");
+                $smarty->display("book/add.tpl");
             }
         }
     } else {
-        $smarty->display("admin/add.tpl");
+        $smarty->display("book/add.tpl");
     }

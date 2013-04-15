@@ -42,7 +42,7 @@
                         time() + 14 * 24 * 3600
                     );
                 }
-                header("location: admin/index.php");
+                header("location: index.php");
             } else {
                 $smarty->assign("email", $email);
                 $smarty->assign("password", $password);

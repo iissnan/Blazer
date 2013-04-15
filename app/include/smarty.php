@@ -9,3 +9,5 @@ $smarty->setTemplateDir($parentDirectoryPath . "/../../templates");
 $smarty->setCompileDir($parentDirectoryPath . "/../../templates_c");
 $smarty->setCacheDir($parentDirectoryPath . "/../../cache");
 $smarty->setConfigDir($parentDirectoryPath . "/../../config");
+
+is_login() and $smarty->assign("is_login", true);

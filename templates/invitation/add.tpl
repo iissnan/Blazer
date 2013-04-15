@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/css/main.css"/>
 </head>
 <body>
-    {include file="./include/header.tpl"}
+    {include file="../include/header.tpl"}
     <div class="admin-wrap container">
         <div class="row">
             <div class="span12">
@@ -23,9 +23,9 @@
                     </p>
                     {/if}
                     <p>
-                        <a href="invitation.php">返回邀请码列表</a>
+                        <a href="index.php">返回邀请码列表</a>
                         |
-                        <a href="index.php">返回书籍列表</a>
+                        <a href="/index.php">返回书籍书架</a>
                     </p>
                 </div>
             </div>

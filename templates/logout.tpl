@@ -13,7 +13,10 @@
 <body>
     <div class="container login-wrap">
         <p>已退出登录</p>
-        <p><a href="login.php">重新登录</a></p>
+        <ul>
+            <li><a href="index.php">书架</a></li>
+            <li><a href="login.php">重新登录</a></li>
+        </ul>
     </div>
 </body>
 </html>

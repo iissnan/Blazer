@@ -57,7 +57,6 @@
     }
 
     require_once("include/smarty.php");
-    is_login() and $smarty->assign("is_login", true);
     if ($paginator->hasPagination()) {
         $smarty->assign(array(
             "pagination" => true,
@@ -67,4 +66,4 @@
     }
     $smarty->assign("total", $books_total);
     $smarty->assign("books", $books);
-    $smarty->display("admin/list.tpl");
+    $smarty->display("index.tpl");

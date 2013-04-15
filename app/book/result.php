@@ -36,6 +36,6 @@
     $smarty->assign("action", $title);
     $smarty->assign("alert_type", $alert_type);
     $smarty->assign("result", $result);
-    $smarty->display("admin/result.tpl");
+    $smarty->display("book/result.tpl");
 
 

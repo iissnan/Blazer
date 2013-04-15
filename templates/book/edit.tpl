@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    {include file="./include/header.tpl"}
+    {include file="../include/header.tpl"}
     <div class="admin-wrap container">
         <div class="row">
             <div class="span12">

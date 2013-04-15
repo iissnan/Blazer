@@ -17,4 +17,4 @@
         $smarty->assign("alert_type", "error");
         $smarty->assign("result", "失败");
     }
-    $smarty->display("admin/invitation_add.tpl");
+    $smarty->display("invitation/add.tpl");

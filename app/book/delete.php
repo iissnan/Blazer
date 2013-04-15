@@ -15,6 +15,6 @@
 
         echo "<script>location.href = 'result.php?action=delete&code=" . $result . "'</script>";
     } else {
-        $smarty->display("admin/delete.tpl");
+        $smarty->display("book/delete.tpl");
     }
 

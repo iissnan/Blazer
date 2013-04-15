@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="../assets/css/main.css"/>
 </head>
 <body>
-    {include file="./include/header.tpl"}
+    {include file="../include/header.tpl"}
     <div class="admin-wrap container">
         <div class="row">
             <div class="span12">
                 <div class="admin-main">
                     <p class="alert alert-{$alert_type}">{$action}{$result}</p>
                     <p>
-                        <a href="index.php">返回列表</a>
+                        <a href="/index.php">返回书架</a>
                         |
                         <a href="add.php">添加书籍</a>
                     </p>
