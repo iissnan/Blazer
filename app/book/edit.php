@@ -8,6 +8,8 @@
     require_once("../class/book.class.php");
     $book_model = new BookModel();
 
+    $smarty->assign("title", "编辑书籍");
+
     // 提交数据
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = $_POST["title"];

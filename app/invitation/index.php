@@ -17,6 +17,7 @@
     $invitations = $Invitation->getItems($page_size, $page, "number > 0");
 
     require_once("../include/smarty.php");
+    $smarty->assign("title", "我的邀请码");
     $smarty->assign("invitations_size", $inv_total);
     $smarty->assign("invitations", $invitations);
 

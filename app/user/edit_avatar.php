@@ -17,6 +17,7 @@
 
     require_once("../class/user.class.php");
     require_once("../include/smarty.php");
+    $smarty->assign("title", "头像设置");
 
     if (isset($_POST["submit"]) && $_POST["submit"] == "yes") {
         if (isset($_FILES["avatar"])) {

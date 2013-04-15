@@ -8,6 +8,9 @@
     require_once("../class/model.class.php");
     require_once("../class/book.class.php");
 
+    // 避免与书籍的title冲突
+    $smarty->assign("page_title", "添加书籍");
+
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = trim($_POST["title"]);
         $author = trim($_POST["author"]);

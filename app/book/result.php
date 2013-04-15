@@ -34,6 +34,7 @@
     }
 
     $smarty->assign("action", $title);
+    $smarty->assign("title", "$title 操作结果");
     $smarty->assign("alert_type", $alert_type);
     $smarty->assign("result", $result);
     $smarty->display("book/result.tpl");

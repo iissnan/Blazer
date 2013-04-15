@@ -7,6 +7,8 @@
     require_once("../include/smarty.php");
     require_once("../class/book.class.php");
 
+    $smarty->assign("title", "删除书籍");
+
     if (isset($_GET["id"]) && $_GET["id"] != "") {
         $item_id = $_GET["id"];
         $book_model = new BookModel();

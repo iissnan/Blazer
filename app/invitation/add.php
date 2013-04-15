@@ -9,6 +9,7 @@
     $inv_value = uniqid();
 
     require_once("../include/smarty.php");
+    $smarty->assign("title", "添加邀请码");
     if ($inv->add(array("value" => $inv_value, "number" => 5))) {
         $smarty->assign("alert_type", "success");
         $smarty->assign("result", "成功");

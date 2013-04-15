@@ -1,23 +1,21 @@
-<div id="navigation" >
-    <div class="navbar navbar-static-top navbar-inverse">
-        <div class="navbar-inner">
-            <div class="container">
-                {*<a href="index.php" class="brand">BookShelf</a>*}
-                <ul class="nav">
-                    <li><a href="/index.php">书架</a>
-                    <li><a href="/user/favorite.php">我的收藏</a></li>
-                </ul>
-                <ul class="nav pull-right">
-                    {if $is_login}
-                        <li><a href="/user/index.php">设置</a></li>
-                        <li><a href="/logout.php">退出登录</a></li>
-                    {else}
-                        <li><a href="/login.php">登录</a></li>
-                        <li class="divider-vertical"></li>
-                        <li><a href="/register.php">注册</a></li>
-                    {/if}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{$title}</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/css/gbootstrap.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+</head>
+
+<body>
+    {include "include/nav.tpl"}
+    <div class="admin-wrap container">
+        <div class="row">
+            {*span9*}
+            {*span3*}
+        {*row*}
+    {*container*}
+{*body*}
