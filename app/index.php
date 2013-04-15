@@ -1,10 +1,9 @@
 <?php
     session_start();
-    require_once("../include/auth.php");
-    redirect_unless_login("../login.php");
+    require_once("include/auth.php");
 
-    require_once("../class/book.class.php");
-    require_once("../class/paginator.class.php");
+    require_once("class/book.class.php");
+    require_once("class/paginator.class.php");
     $book_model = new BookModel();
     $books_total = $book_model->total();
 
@@ -57,7 +56,8 @@
         }
     }
 
-    require_once("../include/smarty.php");
+    require_once("include/smarty.php");
+    is_login() and $smarty->assign("is_login", true);
     if ($paginator->hasPagination()) {
         $smarty->assign(array(
             "pagination" => true,

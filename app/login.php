@@ -2,7 +2,7 @@
     session_start();
     header("Content-Type: text/html; charset=utf-8");
     require_once("include/auth.php");
-    isLogin() and header("location: admin/index.php");
+    is_login() and header("location: index.php");
 
     require_once("include/smarty.php");
     require_once("class/user.class.php");
@@ -55,10 +55,10 @@
 
     $smarty->assign("alert", $alert);
 
-    $source = $_GET["s"];
-    $code = $_GET["code"];
+    $source = isset($_GET["s"]) ? $_GET["s"] : "";
+    $code = isset($_GET["code"]) ? $_GET["code"] : "0";
 
-    if (isset($source) && $source == "reg") {
+    if ($source == "reg") {
         if ($code == "1") {
             $alert = "<div class='alert alert-success' id='alert'>注册成功，请登录</div>";
             $smarty->assign("alert", $alert);

@@ -16,6 +16,7 @@
         <div class="row">
             <div class="span12">
                 <div class="admin-main">
+                    <a href="edit_avatar.php">更新头像</a>
                 </div>
             </div>
         </div>

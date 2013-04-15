@@ -1,6 +1,10 @@
 # 上传的封面
-app/cover/*
-!app/cover/default.png
+app/assets/cover/*
+!app/assets/cover/default.png
+
+# 用户头像
+app/assets/avatar/*
+!app/assets/avatar/default.png
 
 # Smarty编译后的文件
 templates_c/

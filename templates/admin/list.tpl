@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>书籍列表</title>
+    <title>书架</title>
     <link rel="shortcut icon" href="../assets/img/favicon.ico"/>
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../assets/css/gbootstrap.css"/>
@@ -16,9 +16,11 @@
         <div class="row">
             <div class="span12">
                 <div class="admin-main">
-                    <div class="action">
-                        <a href="add.php" class="btn btn-primary pull-right">添  加</a>
-                    </div>
+                    {if $is_login}
+                        <div class="action">
+                            <a href="add.php" class="btn btn-primary pull-right">添  加</a>
+                        </div>
+                    {/if}
                     {if $total > 0}
                         <table class="table table-striped">
                             <thead>

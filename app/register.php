@@ -2,7 +2,7 @@
     session_start();
     header("Content-Type: text/html; charset=utf-8");
     require_once("include/auth.php");
-    isLogin() and header("location: admin/index.php");
+    is_login() and header("location: index.php");
 
     require_once("include/smarty.php");
     require_once("class/user.class.php");
@@ -35,7 +35,8 @@
 
         if ($isValidate) {
             $user = new UserModel();
-            if ($user->add($email, $password, $nickname, $invitation)) {
+            $result = $user->add(array($email, $password, $nickname, $invitation));
+            if ($result) {
                 header("location: login.php?s=reg&code=1");
             } else {
                 $error_message = "注册失败，请稍后再试";

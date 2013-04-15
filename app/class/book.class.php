@@ -118,9 +118,11 @@ class BookModel extends Model{
             $book_category_model->remove("book_id='$book_id'");
         } else {
             $categories = explode(",", $categories_raw);
-            $categories_clean = array_map(function($item){
-                return trim($item);
-            }, $categories);
+
+            // 剔除首尾空格
+            foreach ($categories as &$category) {
+                $category = trim($category);
+            }
 
             // 删除旧的分类
             $categories_for_query = array_map(function($item) {

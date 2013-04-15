@@ -4,12 +4,17 @@
             <div class="container">
                 {*<a href="index.php" class="brand">BookShelf</a>*}
                 <ul class="nav">
-                    <li><a href='index.php'>书籍管理</a>
-                    <li><a href="user/index.php">我的信息</a></li>
-                    <li><a href="invitation.php">邀请码</a></li>
+                    <li><a href="/index.php">书架</a>
+                    <li><a href="/user/index.php">我的收藏</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href='../logout.php'>退出登录</a></li>
+                    {if $is_login}
+                        <li><a href="/logout.php">退出登录</a></li>
+                    {else}
+                        <li><a href="/login.php">登录</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="/register.php">注册</a></li>
+                    {/if}
                 </ul>
             </div>
         </div>

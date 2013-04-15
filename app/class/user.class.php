@@ -50,13 +50,11 @@ class UserModel extends Model {
     /**
      * 添加用户
      *
-     * @param string $email
-     * @param string $password
-     * @param string $nickname
-     * @param string $invitation_value 13位的邀请码
+     * @param array $data
      * @return boolean 注册成功或者失败
      */
-    public function add($email, $password, $nickname, $invitation_value) {
+    public function add($data) {
+        list($email, $password, $nickname, $invitation_value) = $data;
         require_once("invitation.class.php");
         $Invitation = new Invitation();
         $invitation = $Invitation->getItem("value", $invitation_value);
