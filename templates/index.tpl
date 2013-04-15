@@ -1,6 +1,5 @@
-{include "include/header.tpl" title=$title}
-<div class="span9 box-wrap">
-    <div class="admin-main box">
+{extends "layout.tpl"}
+    {block name="content"}
         {if $is_login}
             <div class="action">
                 <a href="book/add.php" class="btn btn-primary pull-right">添  加</a>
@@ -66,9 +65,6 @@
         {else}
             <p>没有书籍</p>
         {/if}
-    </div>
-</div>
-<div class="span3 box-wrap">
-    <div class="box"></div>
-</div>
-{include "include/footer.tpl"}
+    {/block}
+    {block name="sidebar"}
+    {/block}
