@@ -18,14 +18,14 @@
         $isValidate = true;
         if ($nickname == "") {
             $isValidate = false;
-            $error_message .= "昵称不能为空";
+            $error_message .= "用户名不能为空";
         } else if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
             $isValidate = false;
             $error_message = "登录邮箱有误";
-        } else if ($password == "") {
+        } else if (strlen($password) < 7 ) {
             $isValidate = false;
             $error_message .= "密码不能为空";
-        } else if ($password != $_POST["re-password"]) {
+        } else if ($password != trim($_POST["re-password"])) {
             $isValidate = false;
             $error_message .= "确认密码不匹配";
         } else if ($invitation == "") {

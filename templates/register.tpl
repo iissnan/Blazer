@@ -13,7 +13,7 @@
         {$alert}
         <form action="register.php" method="post" id="registerForm">
             <div class="control-group">
-                <label for="nickname" class="control-label">昵称</label>
+                <label for="nickname" class="control-label">用户名</label>
                 <input type="text" name="nickname" id="nickname"
                        class="control input-block-level" value="{$nickname}" />
             </div>

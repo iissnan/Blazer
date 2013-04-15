@@ -14,7 +14,7 @@
     <div class="container login-wrap">
         <p>已退出登录</p>
         <ul>
-            <li><a href="index.php">书架</a></li>
+            <li><a href="index.php">查看书架</a></li>
             <li><a href="login.php">重新登录</a></li>
         </ul>
     </div>

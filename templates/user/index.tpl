@@ -17,6 +17,7 @@
             <div class="span12">
                 <div class="admin-main">
                     <a href="edit_avatar.php">更新头像</a>
+                    <a href="edit_password.php">修改密码</a>
                     <a href="/invitation/index.php">邀请码</a>
                 </div>
             </div>
