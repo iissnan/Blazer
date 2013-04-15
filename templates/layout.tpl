@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/css/gbootstrap.css"/>
     <link rel="stylesheet" href="/assets/css/main.css"/>
-    {block name="header-link"}{/block}
+    {block name="header_link"}{/block}
 </head>
 
 <body>
@@ -45,10 +45,25 @@
                 </div>
             </div>
             <div class="span3 box-wrap sidebar">
-                {block name="sidebar"}{/block}
+                {if $is_login }
+                    <div class="user-profile">
+                        <div class="user-summary clearfix">
+                            <img src="{if $user->avatar == ""}
+                                    /assets/avatar/default.png
+                                    {else}
+                                    /assets/avatar/{$user->avatar}
+                                    {/if}
+                                    "
+                                 alt="{$user->nickname}" class="img-rounded pull-left" style="max-width: 64px; margin-right: 10px"/>
+                            <p class="pull-left">{$user->nickname}</p>
+                        </div>
+                    </div>
+                {/if}
+                {block name="sidebar"}
+                {/block}
             </div>
         </div>
     </div>
-    {block name="footer-link"}{/block}
+    {block name="footer_link"}{/block}
 </body>
 </html>

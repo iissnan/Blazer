@@ -65,6 +65,12 @@
             "page_total" => $page_total
         ));
     }
+
+    // 获取用户信息
+    if (isset($_SESSION["user"])) {
+        $smarty->assign("user", $_SESSION["user"]);
+    }
+
     $smarty->assign("total", $books_total);
     $smarty->assign("books", $books);
     $smarty->display("index.tpl");

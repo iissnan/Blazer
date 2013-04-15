@@ -57,3 +57,6 @@ a.btn{
     cursor: pointer;
 }
 
+.sidebar .user-profile{
+    margin: 10px;
+}

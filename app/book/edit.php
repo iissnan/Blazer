@@ -9,6 +9,7 @@
     $book_model = new BookModel();
 
     $smarty->assign("title", "编辑书籍");
+    $smarty->assign("user", $_SESSION["user"]);
 
     // 提交数据
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {

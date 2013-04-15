@@ -10,6 +10,7 @@
 
     require_once("../include/smarty.php");
     $smarty->assign("title", "添加邀请码");
+    $smarty->assign("user", $_SESSION["user"]);
     if ($inv->add(array("value" => $inv_value, "number" => 5))) {
         $smarty->assign("alert_type", "success");
         $smarty->assign("result", "成功");

@@ -1,4 +1,11 @@
 {extends "layout.tpl"}
+{block name="header_link"}
+    <style type="text/css">
+        .current-avatar img{
+            vertical-align: bottom;
+        }
+    </style>
+{/block}
 {block name="content"}
     {$alert}
     <form action="edit_avatar.php" method="post" enctype="multipart/form-data" class="form-inline">

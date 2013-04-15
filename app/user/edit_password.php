@@ -41,7 +41,9 @@
 
         $alert = "<div class='alert $alert_type'>$alert_message</div>";
         $smarty->assign("alert", $alert);
+        $smarty->assign("user", $_SESSION["user"]);
         $smarty->display("user/edit_password.tpl");
     } else {
+        $smarty->assign("user", $_SESSION["user"]);
         $smarty->display("user/edit_password.tpl");
     }

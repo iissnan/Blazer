@@ -74,9 +74,14 @@
 
             $smarty->assign("alert", $alert);
             $smarty->assign("current_avatar", $current_avatar);
+            $smarty->assign("user", $_SESSION["user"]);
             $smarty->display("user/edit_avatar.tpl");
         }
     } else {
-        $smarty->assign("current_avatar", "../assets/avatar/" . $_SESSION["user"]->avatar);
+        $current_avatar = "/assets/avatar/" . (isset($_SESSION["user"]->avatar) ?
+            $_SESSION["user"]->avatar :
+            "default.png");
+        $smarty->assign("current_avatar", $current_avatar);
+        $smarty->assign("user", $_SESSION["user"]);
         $smarty->display("user/edit_avatar.tpl");
     }

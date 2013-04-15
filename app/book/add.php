@@ -10,6 +10,7 @@
 
     // 避免与书籍的title冲突
     $smarty->assign("page_title", "添加书籍");
+    $smarty->assign("user", $_SESSION["user"]);
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = trim($_POST["title"]);

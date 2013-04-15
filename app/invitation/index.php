@@ -18,6 +18,7 @@
 
     require_once("../include/smarty.php");
     $smarty->assign("title", "我的邀请码");
+    $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("invitations_size", $inv_total);
     $smarty->assign("invitations", $invitations);
 
