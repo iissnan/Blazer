@@ -41,3 +41,19 @@ label{
 .box{
     margin: 20px;
 }
+.sidebar .box{
+    margin: 0;
+}
+    .sidebar .box-header{
+        padding: 10px 10px 5px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .sidebar .box-body{
+        margin: 10px;
+    }
+
+a.btn{
+    cursor: pointer;
+}
+

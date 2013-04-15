@@ -26,9 +26,11 @@
                             <li><a href="/user/index.php">设置</a></li>
                             <li><a href="/logout.php">退出登录</a></li>
                         {else}
+                            {*
                             <li><a href="/login.php">登录</a></li>
                             <li class="divider-vertical"></li>
                             <li><a href="/register.php">注册</a></li>
+                            *}
                         {/if}
                     </ul>
                 </div>
@@ -42,10 +44,8 @@
                     {block name="content"}{/block}
                 </div>
             </div>
-            <div class="span3 box-wrap">
-                <div class="box">
-                    {block name="sidebar"}{/block}
-                </div>
+            <div class="span3 box-wrap sidebar">
+                {block name="sidebar"}{/block}
             </div>
         </div>
     </div>

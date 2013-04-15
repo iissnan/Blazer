@@ -67,4 +67,28 @@
         {/if}
     {/block}
     {block name="sidebar"}
+        {if not $is_login}
+            <div class="box">
+                <div class="box-header">
+                    <i class="icon-user"></i>
+                    用户登录
+                    <a href="register.php" class="pull-right">注  册 &raquo;</a>
+                </div>
+                <div class="box-body">
+                    <form action="login.php" method="post" >
+                        <input id="email" type="text"  name="email" placeholder="登录邮箱"
+                                class="email input-block-level"/>
+                        <input type="password" name="password" placeholder="登录密码"
+                             class="password input-block-level" id="password" />
+                        <div class="control-group">
+                            <label class="checkbox">
+                                <input type="checkbox" name="remember" />下次自动登录？
+                            </label>
+                        </div>
+                        <input class="btn btn-primary btn-block" type="submit" value="登  录"/>
+                        <input type="hidden" name="submitted" value="yes"/>
+                    </form>
+                </div>
+            </div>
+        {/if}
     {/block}
