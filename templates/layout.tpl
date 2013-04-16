@@ -48,14 +48,10 @@
                 {if $is_login }
                     <div class="user-profile">
                         <div class="user-summary clearfix">
-                            <img src="{if $user->avatar == ""}
-                                    /assets/avatar/default.png
-                                    {else}
-                                    /assets/avatar/{$user->avatar}
-                                    {/if}
-                                    "
-                                 alt="{$user->nickname}" class="img-rounded pull-left" style="max-width: 64px; margin-right: 10px"/>
-                            <p class="pull-left">{$user->nickname}</p>
+                            <img src="/assets/avatar/{$user->avatar|escape:'html'|default:"default.png"}"
+                                 alt="{$user->username|escape:'html'}"
+                                 class="img-rounded pull-left sidebar-avatar" />
+                            <p class="pull-left">{$user->username|escape:'html'}</p>
                         </div>
                     </div>
                 {/if}

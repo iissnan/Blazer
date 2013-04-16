@@ -96,3 +96,8 @@ a.btn{
     width: 120px;
     height: 170px;
 }
+
+.sidebar-avatar{
+    margin-right: 10px;
+    max-width: 64px;
+}

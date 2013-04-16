@@ -12,21 +12,15 @@
             <ul class="cover-list clearfix">
                 {foreach $books as $book}
                     <li {if ($book@index+1) % 5 == 0}class="last"{/if}>
-                        <a href="book/detail.php?id={$book["id"]}">
+                        <a href="book/detail.php?id={$book["id"]|escape:'url'}">
                             <div class="book-info">
                                 <dl>
-                                    <dt>{$book["title"]}</dt>
-                                    <dd>{$book["author"]}</dd>
+                                    <dt>{$book["title"]|escape:'html'}</dt>
+                                    <dd>{$book["author"]|escape:'html'}</dd>
                                 </dl>
                             </div>
-                            <img src="
-                                {if $book["cover"] == ""}
-                                    ../assets/cover/default.png
-                                {else}
-                                    ../assets/cover/{$book["cover"]}
-                                {/if}"
-                                 alt="{$book["title"]}"
-                            />
+                            <img src="/assets/cover/{$book["cover"]|escape:'html'|default:"default.png"}"
+                                 alt="{$book["title"]|escape:'html'}"/>
                         </a>
                     </li>
                 {/foreach}

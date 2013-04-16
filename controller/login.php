@@ -7,28 +7,27 @@
     require_once("../include/smarty.php");
     require_once("../model/user.class.php");
 
-    $alert = "";
+    $alert_mode = "alert-error";
+    $alert_message = "";
+    $error = false;
+
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
-        $isValidate = true;
-        $email = trim($_POST["email"]);
-        $password = trim($_POST["password"]);
+        $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+        $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
         $remember = $_POST["remember"];
 
-        if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
-            $isValidate = false;
-            $error_message = $error_message .  '<li>请输入正确的登录邮箱地址</li>';
+        $smarty->assign("email", $email);
+
+        if (!preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
+            $error = true;
+            $alert_message = $alert_message .  '请输入正确的登录邮箱地址';
+        } else if (!preg_match("/[_a-zA-Z0-9\.,#]{6,}/", $password)) {
+            // 密码至少6位，并且仅包含: _ , # . 字母 数字
+            $error = true;
+            $alert_message = $alert_message . '登录密码不正确';
         }
 
-        if ($password == "") {
-            $isValidate = false;
-            $error_message = $error_message . '<li>请输入登录密码</li>';
-        }
-
-        if (!$isValidate) {
-            $smarty->assign("email", $email);
-            $smarty->assign("password", $password);
-            $alert = "<div class='alert alert-error' id='alert'><ul>$error_message</ul></div>";
-        } else {
+        if (!$error) {
             $user_instance = new UserModel();
             $user = $user_instance->get($email, $password);
             if ($user->error == 0) {
@@ -37,32 +36,34 @@
                 // 自动登录
                 if (isset($remember)) {
                     setcookie(
-                        "bs_auth",
+                        "auth",
                         $email . "|" . sha1($password),
                         time() + 14 * 24 * 3600
                     );
                 }
                 header("location: index.php");
             } else {
-                $smarty->assign("email", $email);
-                $smarty->assign("password", $password);
-                $error_message = "$user->msg";
-                $alert = "<div class='alert alert-error' id='alert'>" .
-                    $error_message . "</div>";
+                $error = true;
+                $alert_message = $user->msg;
             }
         }
     }
 
-    $smarty->assign("alert", $alert);
-
+    // 来源检测
     $source = isset($_GET["s"]) ? $_GET["s"] : "";
     $code = isset($_GET["code"]) ? $_GET["code"] : "0";
 
-    if ($source == "reg") {
-        if ($code == "1") {
-            $alert = "<div class='alert alert-success' id='alert'>注册成功，请登录</div>";
-            $smarty->assign("alert", $alert);
-        }
+    if ($source == "reg" && $code == "1") {
+        $alert_mode = "alert-info";
+        $alert_message = "注册成功，请登录";
+        $show_alert = true;
     }
+
+    // 若出现错误或者明确指定显示alert则显示
+    if ($error || $show_alert) {
+        $alert = "<div class='alert $alert_mode'>$alert_message</div>";
+        $smarty->assign("alert", $alert);
+    }
+
 
     $smarty->display("login.tpl");

@@ -8,7 +8,7 @@
             </li>
             <li class="active">
                 {if !$error}
-                    书籍：{$book->title}</li>
+                    书籍：{$book->title|escape:'html'}</li>
                 {/if}
         </ul>
     </div>
@@ -20,19 +20,19 @@
         </ul>
     {else}
         <div class="book-detail">
-            <img src="{$book->cover}" alt="{$book->title}" class="pull-left cover"/>
+            <img src="{$book->cover}" alt="{$book->title|escape:'html'}" class="pull-left cover"/>
             <div class="info">
-                <p class="title">{$book->title}</p>
-                <p class="author">作者：{$book->author}</p>
-                <p>ISBN: {$book->isbn}</p>
-                <p>页数：{$book->pages}</p>
-                <p>类别：{$book->category}</p>
-                {if $book->douban_link}
-                    <p><a href="{$book->douban_link}" target="_blank">豆瓣链接</a></p>
+                <p class="title">{$book->title|escape:'html'}</p>
+                <p class="author">作者：{$book->author|escape:'html'}</p>
+                <p>ISBN: {$book->isbn|escape:'html'}</p>
+                <p>页数：{$book->pages|escape:'html'}</p>
+                <p>类别：{$book->category|escape:'html'}</p>
+                {if $book->douban_link|escape:'html'}
+                    <p><a href="{$book->douban_link|escape:'html'}" target="_blank">豆瓣链接</a></p>
                 {/if}
             </div>
             <div class="intro">
-                {$book->intro}
+                {$book->intro|escape:'html'}
             </div>
         </div>
     {/if}

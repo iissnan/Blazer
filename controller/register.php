@@ -7,53 +7,53 @@
     require_once("../include/smarty.php");
     require_once("../model/user.class.php");
 
-    $alert = "";
-    if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
-        $email = trim($_POST["email"]);
-        $password = trim($_POST["password"]);
-        $re_password = trim($_POST["re-password"]);
-        $nickname = trim($_POST["nickname"]);
-        $invitation = trim($_POST["invitation"]);
+    $alert_mode = "alert-error";
+    $alert_message = "";
+    $error = false;
 
-        $isValidate = true;
-        if ($nickname == "") {
-            $isValidate = false;
-            $error_message .= "用户名不能为空";
-        } else if ($email == "" || !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
-            $isValidate = false;
-            $error_message = "登录邮箱有误";
-        } else if (strlen($password) < 7 ) {
-            $isValidate = false;
-            $error_message .= "密码不能为空";
-        } else if ($password != trim($_POST["re-password"])) {
-            $isValidate = false;
-            $error_message .= "确认密码不匹配";
+    if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
+        $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+        $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
+        $re_password = isset($_POST["re-password"]) ? trim($_POST["re-password"]) : "";
+        $username = isset($_POST["username"]) ? trim($_POST["username"]) : "";
+        $invitation = isset($_POST["username"]) ? trim($_POST["invitation"]) : "";
+
+        if ($username == "") {
+            $error = true;
+            $alert_message = "用户名不能为空";
+        } else if (!preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
+            $error = true;
+            $alert_message = "登录邮箱不正确";
+        } else if (!preg_match("/[_a-zA-Z0-9\.#,]{6,}/", $password)) {
+            $error = true;
+            $alert_message = "登录密码不正确";
+        } else if ($password != $re_password) {
+            $error = true;
+            $alert_message = "确认密码不匹配";
         } else if ($invitation == "") {
-            $isValidate = false;
-            $error_message = "请输入邀请码";
+            $error = true;
+            $alert_message = "请输入邀请码";
         }
 
-        if ($isValidate) {
+        if (!$error) {
             $user = new UserModel();
-            $result = $user->add(array($email, $password, $nickname, $invitation));
+            $result = $user->add(array($email, $password, $username, $invitation));
             if ($result) {
                 header("location: login.php?s=reg&code=1");
             } else {
-                $error_message = "注册失败，请稍后再试";
-                $alert = "<div class='alert alert-error' id='alert'>" .
-                    $error_message . "</div>";
-                $smarty->assign("alert", $alert);
+                $error = true;
+                $alert_message = "注册失败，请稍后再试";
             }
         } else {
-            $alert = "<div class='alert alert-error' id='alert'>" .
-                $error_message . "</div>";
-            $smarty->assign("alert", $alert);
             $smarty->assign("email", $email);
-            $smarty->assign("password", $password);
-            $smarty->assign("re_password", $re_password);
-            $smarty->assign("nickname", $nickname);
+            $smarty->assign("username", $username);
             $smarty->assign("invitation", $invitation);
         }
+    }
+
+    if ($error) {
+        $alert = "<div class='alert $alert_mode' id='alert'>$alert_message</div>";
+        $smarty->assign("alert", $alert);
     }
 
     $smarty->display("register.tpl");

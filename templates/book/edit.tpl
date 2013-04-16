@@ -7,7 +7,7 @@
                 <span class="divider">&gt;</span>
             </li>
             <li class="active">
-                更新书籍 {if !$error}《{$book->title}》{/if}
+                更新书籍 {if !$error}《{$book->title|escape:'html'}》{/if}
             </li>
         </ul>
     </div>

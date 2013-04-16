@@ -7,7 +7,7 @@
                 <span class="divider">&gt;</span>
             </li>
             <li>
-                <a href="/user/index.php">{$user->nickname}</a>
+                <a href="/user/index.php">{$user->username|escape:'html'}</a>
                 <span class="divider">&gt;</span>
             </li>
             <li class="active">我的收藏</li>

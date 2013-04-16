@@ -13,9 +13,9 @@
         {$alert}
         <form action="register.php" method="post" id="registerForm">
             <div class="control-group">
-                <label for="nickname" class="control-label">用户名</label>
-                <input type="text" name="nickname" id="nickname"
-                       class="control input-block-level" value="{$nickname}" />
+                <label for="username" class="control-label">用户名</label>
+                <input type="text" name="username" id="username"
+                       class="control input-block-level" value="{$username}" />
             </div>
             <div class="control-group">
                 <label for="email" class="control-label">登录邮箱</label>

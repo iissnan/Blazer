@@ -6,7 +6,7 @@
                 <a href="/index.php">首页</a>
                 <span class="divider">&gt;</span>
             </li>
-            <li class="active">{$user->nickname}</li>
+            <li class="active">{$user->username|escape:'html'}</li>
         </ul>
     </div>
     <a href="edit_avatar.php">更新头像</a>

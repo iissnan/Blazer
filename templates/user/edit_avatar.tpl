@@ -14,7 +14,7 @@
                 <span class="divider">&gt;</span>
             </li>
             <li>
-                <a href="/user/index.php">{$user->nickname}</a>
+                <a href="/user/index.php">{$user->username|escape:'html'}</a>
                 <span class="divider">&gt;</span>
             </li>
             <li class="active">设置头像</li>
@@ -25,22 +25,11 @@
         <div class="current-avatar">
             <span>当前头像：</span>
             <span class="controls">
-                {if $current_avatar != ""}
-                    <img src="{$current_avatar}" class="img-rounded" alt="" width="120" />
-                    &nbsp;
-                    <img src="{$current_avatar}" class="img-rounded" alt="" width="80" />
-                    &nbsp;
-                    <img src="{$current_avatar}" class="img-rounded" alt="" width="40" />
-                {else}
-                    <img src="/assets/img/default_avatar.png" alt="默认头像"
-                            width="120" class="img-rounded"/>
-                    &nbsp;
-                    <img src="/assets/img/default_avatar.png" alt="默认头像"
-                         width="80" class="img-rounded"/>
-                    &nbsp;
-                    <img src="/assets/img/default_avatar.png" alt="默认头像"
-                         width="40" class="img-rounded"/>
-                {/if}
+                <img src="{$current_avatar}" class="img-rounded" alt="" width="120" />
+                &nbsp;
+                <img src="{$current_avatar}" class="img-rounded" alt="" width="80" />
+                &nbsp;
+                <img src="{$current_avatar}" class="img-rounded" alt="" width="40" />
             </span>
         </div>
         <div class="control-group mt30">
