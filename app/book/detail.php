@@ -22,7 +22,7 @@
     } else {
         $book_model = new BookModel();
         $book_query_result = $book_model->getItem("id", $book_id);
-        if ($book_query_result) {
+        if ($book_query_result && $book_query_result->num_rows > 0) {
             $book = $book_query_result->fetch_object();
             $page_title = $book->title;
 
@@ -73,6 +73,7 @@
 
     $alert = "<div class='alert $alert_mode'>$alert_message</div>";
     $error and $smarty->assign("alert", $alert);
+    $smarty->assign("error", $error);
     $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("page_title", $page_title);
     $smarty->display("book/detail.tpl");
