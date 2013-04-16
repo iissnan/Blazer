@@ -74,9 +74,7 @@ class BookModel extends Model{
         if (!$authors) {
             return true;
         }
-        $authors = gettype($authors) == "array" ?
-            $authors :
-            explode(",", $authors);
+        $authors = is_array($authors) ? $authors : explode(",", $authors);
         $author_model = new Model("authors");
         $book_author_model = new Model("books_authors");
         $processResult = false;

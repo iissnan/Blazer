@@ -7,6 +7,19 @@
     </style>
 {/block}
 {block name="content"}
+    <div class="nav-position clearfix">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/index.php">首页</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li>
+                <a href="/user/index.php">{$user->nickname}</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li class="active">设置头像</li>
+        </ul>
+    </div>
     {$alert}
     <form action="edit_avatar.php" method="post" enctype="multipart/form-data" class="form-inline">
         <div class="current-avatar">

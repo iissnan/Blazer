@@ -1,5 +1,14 @@
 {extends "layout.tpl"}
 {block name="content"}
+    <div class="nav-position clearfix">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/index.php">首页</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li class="active">操作结果</li>
+        </ul>
+    </div>
     <p class="alert alert-{$alert_type}">{$action}{$result}</p>
     <p>
         <a href="/index.php">返回书架</a>

@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `authors` (
 CREATE TABLE IF NOT EXISTS `books` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
-  `author` varchar(100) DEFAULT NULL,
   `isbn` varchar(100) DEFAULT NULL,
   `cover` varchar(100) NOT NULL DEFAULT 'default.png',
   `douban_link` varchar(100) DEFAULT NULL,

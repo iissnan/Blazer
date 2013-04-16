@@ -1,6 +1,15 @@
 {extends "layout.tpl"}
+{$title = $page_title}
 {block name="content"}
-    <h2>添加书籍</h2>
+    <div class="nav-position clearfix">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/index.php">首页</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li class="active">添加书籍</li>
+        </ul>
+    </div>
     {$alert}
     <form action="add.php" method="post" enctype="multipart/form-data"
           id="J_FormAdd" class="form-horizontal">

@@ -1,5 +1,18 @@
 {extends "layout.tpl"}
 {block name="content"}
+    <div class="nav-position clearfix">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/index.php">首页</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li>
+                <a href="/user/index.php">{$user->nickname}</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li class="active">设置密码</li>
+        </ul>
+    </div>
     {$alert}
     <form action="edit_password.php" method="post" class="form-horizontal">
         <div class="control-group">

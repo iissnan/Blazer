@@ -1,5 +1,18 @@
 {extends "layout.tpl"}
 {block name="content"}
+    <div class="nav-position clearfix">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/index.php">首页</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li>
+                <a href="/user/index.php">{$user->nickname}</a>
+                <span class="divider">&gt;</span>
+            </li>
+            <li class="active">我的邀请码</li>
+        </ul>
+    </div>
     <div class="action">
         <a href="add.php" class="btn btn-primary pull-right">生  成</a>
     </div>
