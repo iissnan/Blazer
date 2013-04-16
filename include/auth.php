@@ -8,12 +8,12 @@
 function is_login() {
     if (!isset($_SESSION["user"])) {
         // 校验cookie
-        if (empty($_COOKIE["bs_auth"])) {
+        if (empty($_COOKIE["auth"])) {
             return false;
         }
 
         // 校验cookie值的有效性
-        require_once(dirname(__FILE__) . "/../class/user.class.php");
+        require_once(__DIR__ . "/../model/user.class.php");
 
         $User = new UserModel();
         list($email, $password) = explode("|", $_COOKIE["bs_auth"]);

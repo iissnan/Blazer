@@ -1,12 +1,12 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../include/auth.php");
+    require_once("../../include/auth.php");
     redirect_unless_login("../login.php");
 
-    require_once("../include/smarty.php");
-    require_once("../class/model.class.php");
-    require_once("../class/book.class.php");
+    require_once("../../include/smarty.php");
+    require_once("../../model/model.class.php");
+    require_once("../../model/book.class.php");
 
     // 避免与书籍的title冲突
     $smarty->assign("page_title", "添加书籍");

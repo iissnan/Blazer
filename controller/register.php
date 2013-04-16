@@ -1,11 +1,11 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("include/auth.php");
+    require_once("../include/auth.php");
     is_login() and header("location: index.php");
 
-    require_once("include/smarty.php");
-    require_once("class/user.class.php");
+    require_once("../include/smarty.php");
+    require_once("../model/user.class.php");
 
     $alert = "";
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {

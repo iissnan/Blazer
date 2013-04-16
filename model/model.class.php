@@ -1,5 +1,6 @@
 <?php
 
+require_once(__DIR__ . "/../include/app.config.php");
 require_once("dbc.class.php");
 
 /**
@@ -10,8 +11,9 @@ class Model {
     protected $table;
 
     public function __construct($table) {
-        $table and $this->table = $table or die("表格未设置");
-        $this->dbc = new DatabaseConnection("localhost", "root", "123456", "bookshelf");
+        !$table and die("未指定操作表格");
+        $this->table = $table;
+        $this->dbc = new DatabaseConnection(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     }
 
     public function setTable($table) {

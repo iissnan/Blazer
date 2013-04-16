@@ -1,7 +1,11 @@
 <?php
     session_start();
-    require_once("../include/auth.php");
-    redirect_unless_login("../login.php");
+    require_once("../../include/auth.php");
+    redirect_unless_login("/login.php");
+
+    require_once("../../model/user.class.php");
+    require_once("../../include/smarty.php");
+
     $user = $_SESSION["user"];
 
     // 获取Gravatar.com头像
@@ -15,8 +19,7 @@
         return $url;
     }
 
-    require_once("../class/user.class.php");
-    require_once("../include/smarty.php");
+
     $smarty->assign("page_title", "头像设置");
 
     if (isset($_POST["submit"]) && $_POST["submit"] == "yes") {
@@ -52,7 +55,6 @@
                     $alert = "<div class='alert alert-error'>程序处理上传失败</div>";
                 } else {
                     // 更新数据库
-                    require_once("../class/user.class.php");
                     $user_model = new UserModel();
                     $result = $user_model->update(
                         $_SESSION["user"]->email,

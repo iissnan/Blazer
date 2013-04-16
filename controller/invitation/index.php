@@ -1,12 +1,13 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../include/auth.php");
+    require_once("../../include/auth.php");
     redirect_unless_login("../login.php");
 
     // TODO: Show Invitation when user belongs to "Admin" group
-    require_once("../class/invitation.class.php");
-    require_once("../class/paginator.class.php");
+    require_once("../../include/smarty.php");
+    require_once("../../model/invitation.class.php");
+    require_once("../../include/paginator.class.php");
     $Invitation = new Invitation();
     $page = !isset($_GET["page"]) ? 1 : $_GET["page"];
     $page_size = 10;
@@ -16,8 +17,6 @@
     $page_total = $paginator->getTotal();
     $invitations = $Invitation->getItems($page_size, $page, "number > 0");
 
-    require_once("../include/smarty.php");
-    $smarty->assign("page_title", "我的邀请码");
     $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("invitations_size", $inv_total);
     $smarty->assign("invitations", $invitations);
@@ -27,5 +26,6 @@
         $smarty->assign("page_current", $page);
         $smarty->assign("page_total", $page_total);
     }
+    $smarty->assign("page_title", "我的邀请码");
     $smarty->display("invitation/index.tpl");
 

@@ -1,11 +1,11 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../include/auth.php");
+    require_once("../../include/auth.php");
     redirect_unless_login("../login.php");
 
-    require_once("../include/smarty.php");
-    require_once("../class/book.class.php");
+    require_once("../../include/smarty.php");
+    require_once("../../model/book.class.php");
     $book_model = new BookModel();
 
     $smarty->assign("page_title", "编辑书籍");

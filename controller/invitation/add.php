@@ -1,15 +1,14 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../include/auth.php");
+    require_once("../../include/auth.php");
     redirect_unless_login("../login.php");
 
-    require_once("../class/invitation.class.php");
+    require_once("../../model/invitation.class.php");
     $inv = new Invitation();
     $inv_value = uniqid();
 
-    require_once("../include/smarty.php");
-    $smarty->assign("page_title", "添加邀请码");
+    require_once("../../include/smarty.php");
     $smarty->assign("user", $_SESSION["user"]);
     if ($inv->add(array("value" => $inv_value, "number" => 5))) {
         $smarty->assign("alert_type", "success");
@@ -19,4 +18,5 @@
         $smarty->assign("alert_type", "error");
         $smarty->assign("result", "失败");
     }
+    $smarty->assign("page_title", "添加邀请码");
     $smarty->display("invitation/add.tpl");

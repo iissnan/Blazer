@@ -1,13 +1,14 @@
 <?php
     session_start();
-    require_once("include/auth.php");
+    require_once("../include/auth.php");
+    require_once("../include/smarty.php");
+    require_once("../model/book.class.php");
+    require_once("../include/paginator.class.php");
 
-    require_once("class/book.class.php");
-    require_once("class/paginator.class.php");
     $book_model = new BookModel();
     $books_total = $book_model->total();
 
-    // 分页
+    // 分页参数
     $page = !isset($_GET["page"]) ? 1 : $_GET["page"];
     $page_size = 10;
     $paginator = new Paginator($books_total, $page, $page_size);
@@ -56,8 +57,6 @@
         }
     }
 
-    require_once("include/smarty.php");
-    $smarty->assign("page_title", "书架");
     if ($paginator->hasPagination()) {
         $smarty->assign(array(
             "pagination" => true,
@@ -73,4 +72,5 @@
 
     $smarty->assign("total", $books_total);
     $smarty->assign("books", $books);
+    $smarty->assign("page_title", "书架");
     $smarty->display("index.tpl");
