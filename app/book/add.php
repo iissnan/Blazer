@@ -42,6 +42,7 @@
                 "title" => $title,
                 "isbn" => $isbn,
                 "cover" => $cover,
+                "intro" => $intro,
                 "pages" => intval($pages),
                 "douban_link" => $douban_link,
                 "create_at" => date("Y-m-d H:i:s"),

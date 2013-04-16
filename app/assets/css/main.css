@@ -88,5 +88,11 @@ a.btn{
 .action-add-book{
     position: absolute;
     top: 3px;
-    right: 0px;
+    right: 0;
+}
+
+
+.cover{
+    width: 120px;
+    height: 170px;
 }

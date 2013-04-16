@@ -16,6 +16,8 @@
         $title = $_POST["title"];
         $id = $_POST["id"];
         $author = $_POST["author"];
+        $intro = $_POST["intro"];
+        $pages = $_POST["pages"];
         $category = $_POST["category"];
         $isbn = $_POST["isbn"];
         if ($_FILES["cover"]["name"] != "") {
@@ -29,6 +31,8 @@
             "title" => $title,
             "isbn" => $isbn,
             "cover" => $cover,
+            "intro" => $intro,
+            "pages" => $pages,
             "douban_link" => $douban_link,
             "update_at" => date("Y-m-d H:i:s")
         );
