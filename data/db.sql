@@ -36,12 +36,13 @@ CREATE TABLE IF NOT EXISTS `books` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `isbn` varchar(100) DEFAULT NULL,
+  `intro` text(100) DEFAULT NULL,
+  `pages` int(11) DEFAULT NULL,
   `cover` varchar(100) NOT NULL DEFAULT 'default.png',
   `douban_link` varchar(100) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `creator` int(11) NOT NULL,
-  `pages` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -105,9 +106,10 @@ CREATE TABLE IF NOT EXISTS `invitations` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
+  `signature` text(100) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `last_login_at` datetime DEFAULT NULL,

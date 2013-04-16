@@ -42,7 +42,7 @@
                 header("location: login.php?s=reg&code=1");
             } else {
                 $error = true;
-                $alert_message = "注册失败，请稍后再试";
+                $alert_message = "注册失败了，服务器在开小差...:<br />" . $user->dbc->db->error;
             }
         } else {
             $smarty->assign("email", $email);

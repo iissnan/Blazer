@@ -54,7 +54,7 @@ class UserModel extends Model {
      * @return boolean 注册成功或者失败
      */
     public function add($data) {
-        list($email, $password, $nickname, $invitation_value) = $data;
+        list($email, $password, $username, $invitation_value) = $data;
         require_once("invitation.class.php");
         $Invitation = new Invitation();
         $invitation = $Invitation->getItem("value", $invitation_value);
@@ -75,8 +75,8 @@ class UserModel extends Model {
 
         return $this->dbc->insert(
             $this->table,
-            array("email", "password", "nickname", "create_at", "update_at"),
-            array($email, sha1($password), $nickname, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
+            array("email", "password", "username", "create_at", "update_at"),
+            array($email, sha1($password), $username, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
         );
     }
 
