@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(100) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `nickname` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `last_login_at` datetime DEFAULT NULL,
