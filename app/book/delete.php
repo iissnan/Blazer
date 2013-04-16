@@ -7,7 +7,7 @@
     require_once("../include/smarty.php");
     require_once("../class/book.class.php");
 
-    $smarty->assign("title", "删除书籍");
+    $smarty->assign("page_title", "删除书籍");
     $smarty->assign("user", $_SESSION["user"]);
 
     if (isset($_GET["id"]) && $_GET["id"] != "") {

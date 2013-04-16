@@ -34,7 +34,7 @@
     }
 
     $smarty->assign("action", $title);
-    $smarty->assign("title", "$title 操作结果");
+    $smarty->assign("page_title", "$title 操作结果");
     $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("alert_type", $alert_type);
     $smarty->assign("result", $result);

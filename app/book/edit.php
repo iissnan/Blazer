@@ -8,7 +8,7 @@
     require_once("../class/book.class.php");
     $book_model = new BookModel();
 
-    $smarty->assign("title", "编辑书籍");
+    $smarty->assign("page_title", "编辑书籍");
     $smarty->assign("user", $_SESSION["user"]);
 
     // 提交数据

@@ -57,7 +57,7 @@
     }
 
     require_once("include/smarty.php");
-    $smarty->assign("title", "书架");
+    $smarty->assign("page_title", "书架");
     if ($paginator->hasPagination()) {
         $smarty->assign(array(
             "pagination" => true,

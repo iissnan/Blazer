@@ -1,5 +1,4 @@
 {extends "layout.tpl"}
-{$title = $page_title}
 {block name="content"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
@@ -38,6 +37,18 @@
             <label for="cover" class="control-label">封面</label>
             <div class="controls">
                 <input type="file" name="cover" id="cover" class="input-xlarge"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="intro">内容简介</label>
+            <div class="controls">
+                <textarea name="intro" id="intro" rows="6" class="input-xlarge"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="pages">页数</label>
+            <div class="controls">
+                <input type="text" name="pages" id="pages" class="input-xlarge" />
             </div>
         </div>
         <div class="control-group">

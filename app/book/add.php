@@ -16,6 +16,8 @@
         $title = trim($_POST["title"]);
         $author = trim($_POST["author"]);
         $isbn = trim($_POST["isbn"]);
+        $intro = trim($_POST["intro"]);
+        $pages = trim($_POST["pages"]);
         $category = trim($_POST["category"]);
         $douban_link = trim($_POST["douban_link"]);
         $cover = $_FILES["cover"];
@@ -28,6 +30,8 @@
                 "title" => $title,
                 "author" => $author,
                 "isbn" => $isbn,
+                "intro" => $intro,
+                "pages" => $page,
                 "douban_link" => $douban_link,
                 "category" => $category
             ));
@@ -38,9 +42,11 @@
                 "title" => $title,
                 "isbn" => $isbn,
                 "cover" => $cover,
+                "pages" => intval($pages),
                 "douban_link" => $douban_link,
                 "create_at" => date("Y-m-d H:i:s"),
-                "update_at" => date("Y-m-d H:i:s")
+                "update_at" => date("Y-m-d H:i:s"),
+                "creator" => $_SESSION["user"]->id
             );
 
             $result = $book_model->add($book_data);
