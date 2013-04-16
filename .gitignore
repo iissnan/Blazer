@@ -1,16 +1,16 @@
 # 上传的封面
-app/assets/cover/*
-!app/assets/cover/default.png
+controller/assets/cover/*
+!controller/assets/cover/default.png
 
 # 用户头像
-app/assets/avatar/*
-!app/assets/avatar/default.png
+controller/assets/avatar/*
+!controller/assets/avatar/default.png
 
 # Smarty编译后的文件
 templates_c/
 cache/
 
 # 通过Bower管理的第三方前端框架/库
-app/assets/vendor/
+controller/assets/vendor/
 
 .idea/
