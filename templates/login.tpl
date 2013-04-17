@@ -26,6 +26,15 @@
                        class="input-block-level" value="{$password}" />
             </div>
 
+            {if $recaptcha}
+                <div class="control-group">
+                    <label class="control-label" for="recaptcha">验证码</label>
+                    <div class="controls">
+                        {$recaptcha}
+                    </div>
+                </div>
+            {/if}
+
             <label for="remember" class="checkbox">
                 <input type="checkbox" name="remember" id="remember" />  下次自动登录?
             </label>

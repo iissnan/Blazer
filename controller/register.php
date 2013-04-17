@@ -24,7 +24,7 @@
         } else if (!preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
             $error = true;
             $alert_message = "登录邮箱不正确";
-        } else if (!preg_match("/[_a-zA-Z0-9\.#,]{6,}/", $password)) {
+        } else if (!preg_match("/[-_a-zA-Z0-9\.#,]{6,}/", $password)) {
             $error = true;
             $alert_message = "登录密码不正确";
         } else if ($password != $re_password) {
