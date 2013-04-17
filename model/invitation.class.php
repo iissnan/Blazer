@@ -16,6 +16,6 @@ class Invitation extends Model {
     public function minus($value) {
         $inv = $this->getItem('value', $value);
         list(, , $inv_num) = $inv->fetch_array();
-        //TODO: update and return result
+        $this->update("value='$value'", array("number"=>$inv_num - 1));
     }
 }

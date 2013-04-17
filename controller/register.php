@@ -6,6 +6,7 @@
 
     require_once("../include/smarty.php");
     require_once("../model/user.class.php");
+    require_once("../model/invitation.class.php");
 
     $alert_mode = "alert-error";
     $alert_message = "";
@@ -39,6 +40,12 @@
             $user = new UserModel();
             $result = $user->add(array($email, $password, $username, $invitation));
             if ($result) {
+
+                // 生成此用户的邀请码
+                $user_id = $user->dbc->db->insert_id;
+                $invitation_model = new Invitation();
+                $invitation_model->add(array("value" => uniqid(), "user_id" => $user_id));
+
                 header("location: login.php?s=reg&code=1");
             } else {
                 $error = true;

@@ -13,9 +13,11 @@
             <li class="active">我的邀请码</li>
         </ul>
     </div>
-    <div class="action">
-        <a href="add.php" class="btn btn-primary pull-right">生  成</a>
-    </div>
+    {if $user->group == "admin"}
+        <div class="action">
+            <a href="add.php" class="btn btn-primary pull-right">生  成</a>
+        </div>
+    {/if}
     {if $invitations_size > 0}
         <table class="table table-striped table-hover">
             <thead>

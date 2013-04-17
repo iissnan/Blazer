@@ -17,8 +17,8 @@
             <li class="active">添加邀请码</li>
         </ul>
     </div>
-    <p class="alert alert-{$alert_type}">添加{$result}</p>
-    {if $alert_type == "success"}
+    <p class="alert alert-{$alert_mode}">添加{$result}</p>
+    {if $alert_mode == "success"}
         <p>
             新生成的邀请码： <span class="label label-info">{$invitation}</span><br />
             个数： <span class="label label-important">5</span>

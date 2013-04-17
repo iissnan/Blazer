@@ -56,27 +56,27 @@ class UserModel extends Model {
     public function add($data) {
         list($email, $password, $username, $invitation_value) = $data;
         require_once("invitation.class.php");
-        $Invitation = new Invitation();
-        $invitation = $Invitation->getItem("value", $invitation_value);
+        $invitation_model = new Invitation();
+        $invitation_result = $invitation_model->getItem("value", $invitation_value);
 
         // 邀请码不存在
-        if ($invitation->num_rows == 0) {
+        if ($invitation_result->num_rows == 0) {
             return false;
         }
 
         // 检测邀请码个数
-        list(, , $inv_num) = $invitation->fetch_array();
+        list($inv_id, $inv_value, $inv_num, $inv_refer) = $invitation_result->fetch_array();
         if ($inv_num < 1) {
             // 邀请码无效
             return false;
         }
 
-        $Invitation->minus($invitation_value);
+        $invitation_model->minus($invitation_value);
 
         return $this->dbc->insert(
             $this->table,
-            array("email", "password", "username", "create_at", "update_at"),
-            array($email, sha1($password), $username, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"))
+            array("email", "password", "username", "create_at", "update_at", "refer"),
+            array($email, sha1($password), $username, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $inv_refer)
         );
     }
 

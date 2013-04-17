@@ -94,8 +94,11 @@ CREATE TABLE IF NOT EXISTS `categories` (
 CREATE TABLE IF NOT EXISTS `invitations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` varchar(100) NOT NULL,
-  `number` int(11) NOT NULL DEFAULT '10',
-  PRIMARY KEY (`id`)
+  `number` int(11) NOT NULL DEFAULT '5',
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -117,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `deactive` tinyint(1) NOT NULL DEFAULT '0',
   `group` varchar(100) NOT NULL DEFAULT 'user',
   `avatar` varchar(100) DEFAULT NULL,
+  `refer` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -138,3 +142,9 @@ ADD CONSTRAINT `books_authors_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books`
 ALTER TABLE `books_categories`
 ADD CONSTRAINT `books_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `books_categories_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `invitations`
+--
+ALTER TABLE `invitations`
+ADD CONSTRAINT `invitations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
