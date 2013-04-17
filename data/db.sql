@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `signature` text(100) DEFAULT NULL,
+  `signature` varchar(140) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `last_login_at` datetime DEFAULT NULL,
