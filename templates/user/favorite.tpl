@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -13,6 +13,9 @@
             <li class="active">我的收藏</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
+
     我的收藏
 {/block}
 {block name="sidebar"}

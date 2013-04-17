@@ -1,13 +1,15 @@
 {extends "layout.tpl"}
-    {block name="content"}
-        <div class="nav-position clearfix">
+    {block "safari"}
+        <div class="safari clearfix">
             <ul class="breadcrumb">
                 <li><a href="/index.php">首页</a></li>
             </ul>
             {if $is_login}
-                <a href="book/add.php" class="btn btn-primary action-add-book">添  加</a>
+                <a href="book/add.php" class="btn btn-primary btn-small action-add-book">添  加</a>
             {/if}
         </div>
+    {/block}
+    {block name="content"}
         {if $total > 0}
             <ul class="cover-list clearfix">
                 {foreach $books as $book}
@@ -48,7 +50,7 @@
                 <div class="box-header">
                     <i class="icon-user"></i>
                     用户登录
-                    <a href="register.php" class="pull-right">注  册 &raquo;</a>
+                    <a href="register.php" class="pull-right btn btn-mini btn-danger">注  册 &raquo;</a>
                 </div>
                 <div class="box-body">
                     <form action="login.php" method="post" >

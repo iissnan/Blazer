@@ -23,8 +23,17 @@
                     </ul>
                     <ul class="nav pull-right">
                         {if $is_login}
-                            <li><a href="/user/index.php">设置</a></li>
-                            <li><a href="/logout.php">退出登录</a></li>
+                            <li class="dropdown">
+                                <a href="/user/index.php" data-target="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                                    {$user->username|escape:'html'}的账号
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/user/index.php">账户设置</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/logout.php">退出登录</a></li>
+                                </ul>
+                            </li>
                         {else}
                             {*
                             <li><a href="/login.php">登录</a></li>
@@ -37,20 +46,21 @@
             </div>
         </div>
     </div>
-    <div class="admin-wrap container">
+    <div class="wrap container">
         <div class="row">
-            <div class="span9 box-wrap">
-                <div class="box">
-                    {block name="content"}{/block}
-                </div>
+            <div class="span9 box-wrap main">
+                {block "safari"}{/block}
+                <div class="content">{block name="content"}{/block}</div>
             </div>
-            <div class="span3 box-wrap sidebar">
+            <div class="span3 sidebar">
                 {if $is_login }
                     <div class="user-profile">
                         <div class="user-summary clearfix">
-                            <img src="/assets/avatar/{$user->avatar|escape:'html'|default:"default.png"}"
-                                 alt="{$user->username|escape:'html'}"
-                                 class="img-rounded pull-left sidebar-avatar" />
+                            <a href="/user/index.php">
+                                <img src="/assets/avatar/{$user->avatar|escape:'html'|default:"default.png"}"
+                                     alt="{$user->username|escape:'html'}"
+                                     class="img-rounded pull-left sidebar-avatar" />
+                            </a>
                             <p class="pull-left">{$user->username|escape:'html'}</p>
                         </div>
                     </div>
@@ -60,6 +70,9 @@
             </div>
         </div>
     </div>
-    {block name="footer_link"}{/block}
+    {block name="footer_link"}
+        <script type="text/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    {/block}
 </body>
 </html>

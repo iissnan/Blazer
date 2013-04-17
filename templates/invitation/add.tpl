@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -17,6 +17,8 @@
             <li class="active">添加邀请码</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
     <p class="alert alert-{$alert_mode}">添加{$result}</p>
     {if $alert_mode == "success"}
         <p>

@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block "content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -12,6 +12,9 @@
                 {/if}
         </ul>
     </div>
+{/block}
+{block "content"}
+
     {if $error}
         {$alert}
         <ul>

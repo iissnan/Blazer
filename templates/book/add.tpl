@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -9,6 +9,9 @@
             <li class="active">添加书籍</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
+
     {$alert}
     <form action="add.php" method="post" enctype="multipart/form-data"
           id="J_FormAdd" class="form-horizontal">

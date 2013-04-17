@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -13,6 +13,9 @@
             <li class="active">设置密码</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
+
     {$alert}
     <form action="edit_password.php" method="post" class="form-horizontal">
         <div class="control-group">

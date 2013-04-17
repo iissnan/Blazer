@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -9,6 +9,9 @@
             <li class="active">操作结果</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
+
     <p class="alert alert-{$alert_type}">{$action}{$result}</p>
     <p>
         <a href="/index.php">返回书架</a>

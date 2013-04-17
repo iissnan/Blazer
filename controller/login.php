@@ -95,6 +95,8 @@
         $smarty->assign("recaptcha", recaptcha_get_html($public_recaptcha_key));
     }
 
+    $smarty->assign("page_title", "帐号登录");
+    $smarty->assign("page_class", "login");
     $smarty->display("login.tpl");
 
     isset($user_model) and $user_model->release();

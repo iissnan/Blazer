@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>注册</title>
-    <link rel="shortcut icon" href="assets/img/favicon.ico"/>
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/css/gbootstrap.css"/>
-    <link rel="stylesheet" href="assets/css/main.css"/>
-</head>
-<body>
-    <div class="container login-wrap mt30">
-        {$alert}
-        <form action="register.php" method="post" id="registerForm">
+{extends "entry.tpl"}
+{block "header_link"}{/block}
+{block "safari"}
+    <div class="safari">
+        <ul class="breadcrumb">
+            <li>
+                <a href="/index.php"><i class="icon-home"></i>返回首页</a>
+            </li>
+        </ul>
+        <a class="btn btn-small action-login" href="/login.php">登录</a>
+    </div>
+{/block}
+{block "main"}
+    <form action="register.php" method="post" id="registerForm">
+            {$alert}
             <div class="control-group">
                 <label for="username" class="control-label">用户名</label>
                 <input type="text" name="username" id="username"
@@ -41,13 +42,6 @@
                 <input type="hidden" name="submitted" value="yes" />
                 <input type="submit" class="btn btn-large btn-primary btn-block" value="注  册"/>
             </div>
-
-            <p class="mt30">
-                <a href="login.php" class="pull-right">登录 &raquo;</a>
-            </p>
         </form>
-    </div>
-    <script type="text/javascript" src="assets/vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/account.js"></script>
-</body>
-</html>
+{/block}
+{block "footer_link"}{/block}

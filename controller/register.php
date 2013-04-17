@@ -64,6 +64,8 @@
         $smarty->assign("alert", $alert);
     }
 
+    $smarty->assign("page_title", "帐号注册");
+    $smarty->assign("page_class", "register");
     $smarty->display("register.tpl");
 
     isset($user_model) and $user_model->release();

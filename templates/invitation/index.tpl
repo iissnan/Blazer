@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -13,6 +13,8 @@
             <li class="active">我的邀请码</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
     {if $user->group == "admin"}
         <div class="action">
             <a href="add.php" class="btn btn-primary pull-right">生  成</a>

@@ -6,7 +6,7 @@
         }
     </style>
 {/block}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -20,6 +20,9 @@
             <li class="active">设置头像</li>
         </ul>
     </div>
+{/block}
+{block name="content"}
+
     {$alert}
     <form action="edit_avatar.php" method="post" enctype="multipart/form-data" class="form-inline">
         <div class="current-avatar">

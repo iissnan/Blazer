@@ -2,37 +2,26 @@
 body{
     color: #666;
     background: #ccc url("../img/noise-f1.gif");
+    font-size: 14px;
     font-family: "WenQuanYi Micro Hei", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif
 }
 input, button, select, textarea {
     font-family: "WenQuanYi Micro Hei", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif
 }
-.login-wrap{
-    margin-top: 100px;
-    padding: 30px;
-    width: 300px;
-    background: #fff;
-    border: 1px solid #ddd;
-}
+
 label{
     font-size: 14px;
 }
 
-.mt30{
-    margin-top: 30px;
-}
 
-.admin-wrap{
+
+.wrap{
     margin-top: 20px;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    background: #fafafa;
     min-height: 500px;
-}
-.admin-wrap td{
-    vertical-align: middle;
-}
-.admin-main h2{
-    margin-bottom: 25px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #ccc;
 }
 
 .box-wrap{
@@ -40,6 +29,22 @@ label{
 }
 .box{
     margin: 20px;
+}
+
+.main{
+    min-height: 620px;
+    border-right: 1px solid #eaeaea;
+}
+
+.breadcrumb{
+}
+.content {
+    margin: 0 20px;
+}
+
+.sidebar{
+    margin-left: 10px;
+    width: 228px;
 }
 .sidebar .box{
     margin: 0;
@@ -58,11 +63,11 @@ a.btn{
 }
 
 .sidebar .user-profile{
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .cover-list{
-    margin: 10px 0;
+    margin: 0;
     list-style: none;
 }
 .cover-list .book-info{
@@ -87,8 +92,8 @@ a.btn{
 }
 .action-add-book{
     position: absolute;
-    top: 3px;
-    right: 0;
+    top: 4px;
+    right: 5px;
 }
 
 
@@ -109,4 +114,37 @@ a.btn{
 .book-detail .title{
     font-size: 15px;
     font-weight: bold;
+}
+
+
+/*覆盖gbootstrap对dropmenu的设置*/
+.dropdown-menu{
+    margin: 4px 0 0;
+    padding: 6px 0;
+}
+
+/* 注册 / 登录页面 */
+.entry-wrap{
+    margin-top: 100px;
+    width: 360px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+}
+    .entry-wrap form{
+        margin: 30px;
+    }
+.register,
+.login{
+    position: relative
+}
+.register .action-login,
+.login .action-register{
+    position: absolute; right: 5px; top: 5px;
+}
+
+
+
+
+.mt30{
+    margin-top: 30px;
 }

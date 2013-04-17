@@ -1,5 +1,5 @@
 {extends "layout.tpl"}
-{block name="content"}
+{block "safari"}
     <div class="nav-position clearfix">
         <ul class="breadcrumb">
             <li>
@@ -11,6 +11,9 @@
             </li>
         </ul>
     </div>
+{/block}
+{block name="content"}
+
     {$alert}
     {if $error}
         <p><a href='index.php'>返回列表</a></p>

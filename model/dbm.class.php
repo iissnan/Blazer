@@ -133,7 +133,7 @@ class DatabaseManipulate {
     public function execute() {
         self::$conn->query("SET NAMES 'utf8'");
         $query_result = false;
-        echo $this->query . "<br />";
+        //echo $this->query . "<br />";
         !empty($this->query) and $query_result = self::$conn->query($this->query);
         return $query_result;
     }
