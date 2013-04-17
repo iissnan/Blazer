@@ -123,3 +123,5 @@
             $smarty->display("book/edit.tpl");
         }
     }
+
+    isset($book_model) and $book_model->release();

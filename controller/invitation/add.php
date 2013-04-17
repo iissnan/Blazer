@@ -27,3 +27,5 @@
 
     $smarty->assign("page_title", "添加邀请码");
     $smarty->display("invitation/add.tpl");
+
+    isset($inv) and $inv->release();

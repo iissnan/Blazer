@@ -45,3 +45,5 @@
         $smarty->assign("user", $_SESSION["user"]);
         $smarty->display("user/edit_password.tpl");
     }
+
+    isset($user_model) and $user_model->release();

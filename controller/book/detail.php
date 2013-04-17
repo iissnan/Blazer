@@ -75,3 +75,6 @@
     $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("page_title", $page_title);
     $smarty->display("book/detail.tpl");
+
+
+    isset($book_model) and $book_model->release();

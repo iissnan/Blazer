@@ -6,10 +6,7 @@
 
     require_once("../../include/smarty.php");
     require_once("../../model/book.class.php");
-    require_once("../../model/tag.class.php");
-    require_once("../../model/author.class.php");
 
-    // 避免与书籍的title冲突
     $smarty->assign("page_title", "添加书籍");
     $smarty->assign("user", $_SESSION["user"]);
 
@@ -78,3 +75,5 @@
     } else {
         $smarty->display("book/add.tpl");
     }
+
+    isset($book_model) and $book_model->release();

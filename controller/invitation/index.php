@@ -49,3 +49,5 @@
     $smarty->assign("page_title", "我的邀请码");
     $smarty->display("invitation/index.tpl");
 
+    isset($invitation_model) and $invitation_model->release();
+

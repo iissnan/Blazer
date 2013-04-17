@@ -94,3 +94,5 @@
         $smarty->assign("user", $_SESSION["user"]);
         $smarty->display("user/edit_avatar.tpl");
     }
+
+    isset($user_model) and $user_model->release();

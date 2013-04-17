@@ -96,3 +96,5 @@
     }
 
     $smarty->display("login.tpl");
+
+    isset($user_model) and $user_model->release();

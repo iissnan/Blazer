@@ -76,3 +76,5 @@
     $smarty->assign("books", $books);
     $smarty->assign("page_title", "书架");
     $smarty->display("index.tpl");
+
+    $book_model->release();

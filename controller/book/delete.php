@@ -21,3 +21,5 @@
         $smarty->display("book/delete.tpl");
     }
 
+    isset($book_model) and $book_model->release();
+

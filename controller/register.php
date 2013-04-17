@@ -37,12 +37,12 @@
         }
 
         if (!$error) {
-            $user = new UserModel();
-            $result = $user->add(array($email, $password, $username, $invitation));
+            $user_model = new UserModel();
+            $result = $user_model->add(array($email, $password, $username, $invitation));
             if ($result) {
 
                 // 生成此用户的邀请码
-                $user_id = $user->dbc->db->insert_id;
+                $user_id = $user_model->get_last_id();
                 $invitation_model = new InvitationModel();
                 $new_invitation = array("value" => uniqid(), "user_id" => $user_id);
                 $invitation_model->insert($new_invitation)->execute();
@@ -65,3 +65,5 @@
     }
 
     $smarty->display("register.tpl");
+
+    isset($user_model) and $user_model->release();
