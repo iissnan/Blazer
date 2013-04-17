@@ -64,17 +64,38 @@
                             </label>
                         </div>
                         {if $recaptcha}
-                            <div class="control-group">
-                                <label class="control-label" for="recaptcha">验证码</label>
-                                <div class="controls">
-                                    {$recaptcha}
+                            <div class="modal hide fade modal-recaptcha">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>请输入验证码：</h3>
+                                </div>
+                                <div class="modal-body">
+                                        {$recaptcha}
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                                    <a href="#" class="btn btn-primary" id="J_ActionLoginWithCaptcha">提交</a>
                                 </div>
                             </div>
+                            <input type="button" class="btn btn-primary btn-block" value="登  录" id="J_ActionLogin"/>
+                        {else}
+                            <input class="btn btn-primary btn-block" type="submit" value="登  录"/>
                         {/if}
-                        <input class="btn btn-primary btn-block" type="submit" value="登  录"/>
                         <input type="hidden" name="submitted" value="yes"/>
                     </form>
                 </div>
             </div>
         {/if}
+    {/block}
+
+    {block "footer_link"}
+        <script type="text/javascript">
+            $("#J_ActionLoginWithCaptcha").on("click", function(){
+                $("form").submit();
+            });
+            $("#J_ActionLogin").on("click", function(){
+                $(".modal-recaptcha").modal();
+                return false;
+            });
+        </script>
     {/block}

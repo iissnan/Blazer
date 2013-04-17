@@ -2,7 +2,6 @@
     session_start();
     header("Content-type: text/html; charset=utf-8");
     require_once("../../include/auth.php");
-    redirect_unless_login("/login.php");
 
     require_once("../../include/smarty.php");
     require_once("../../model/book.class.php");
