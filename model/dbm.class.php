@@ -60,10 +60,12 @@ class DatabaseManipulate {
             $values_raw = array_values($insert_data);
 
             // 过滤输入
-            $values_raw = array_map(function($item){
-                return "'" . self::$conn->real_escape_string($item) . "'";
-            }, $values_raw);
-            $values = join(",", $values_raw);
+            $values_clean = array();
+            foreach ($values_raw as $value) {
+                array_push($values_clean, "'" . self::$conn->real_escape_string($value) . "'");
+            }
+
+            $values = join(",", $values_clean);
             $this->query = "INSERT INTO $table ($columns) VALUES($values)";
         }
         return $this;
@@ -131,7 +133,7 @@ class DatabaseManipulate {
     public function execute() {
         self::$conn->query("SET NAMES 'utf8'");
         $query_result = false;
-        //echo $this->query . "<br />";
+        echo $this->query . "<br />";
         !empty($this->query) and $query_result = self::$conn->query($this->query);
         return $query_result;
     }
@@ -213,7 +215,7 @@ class DatabaseManipulate {
     /**
      * 释放数据库链接
      */
-    public function free() {
+    public function release() {
         self::$conn->close();
     }
 }
