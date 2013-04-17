@@ -101,3 +101,12 @@ a.btn{
     margin-right: 10px;
     max-width: 64px;
 }
+
+/* 书籍详情 */
+.book-detail .cover{
+    margin-right: 10px;
+}
+.book-detail .title{
+    font-size: 15px;
+    font-weight: bold;
+}

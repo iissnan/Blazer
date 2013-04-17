@@ -1,8 +1,8 @@
 <?php
 
-require_once("model.class.php");
+require_once("dbm.class.php");
 
-class UserModel extends Model {
+class UserModel extends DatabaseManipulate {
     public $dbc;
     protected $table = "users";
 
@@ -19,7 +19,7 @@ class UserModel extends Model {
      */
     public function get($email, $password) {
         $user = (object) array("error" => 0, "msg" => "");
-        $result = $this->dbc->get($this->table, 1, 0, "email='" . $email . "'");
+        $result = $this->get_item("email", $email);
         if ($result->num_rows == 0) {
             $user->error = 1;
             $user->msg = "用户不存在";
@@ -35,13 +35,12 @@ class UserModel extends Model {
                 $user->error = 0;
 
                 // 登录次数++ 与 最后登录时间
-                $this->update(
-                    $email,
-                    array(
+                $this->update(array(
                         "times" => $user->times + 1,
                         "last_login_at" => date("Y-m-d H:i:s")
-                    )
-                );
+                    ))
+                    ->where("email='$email'")
+                    ->execute();
             }
         }
         return $user;
@@ -56,8 +55,8 @@ class UserModel extends Model {
     public function add($data) {
         list($email, $password, $username, $invitation_value) = $data;
         require_once("invitation.class.php");
-        $invitation_model = new Invitation();
-        $invitation_result = $invitation_model->getItem("value", $invitation_value);
+        $invitation_model = new InvitationModel();
+        $invitation_result = $invitation_model->get_item("value", $invitation_value);
 
         // 邀请码不存在
         if ($invitation_result->num_rows == 0) {
@@ -73,26 +72,16 @@ class UserModel extends Model {
 
         $invitation_model->minus($invitation_value);
 
-        return $this->dbc->insert(
-            $this->table,
-            array("email", "password", "username", "create_at", "update_at", "refer"),
-            array($email, sha1($password), $username, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $inv_refer)
+        $insert_data = array(
+            "email" => $email,
+            "password" => $password,
+            "username" => sha1($password),
+            "create_at" => date("Y-m-d H:i:s"),
+            "update_at" => date("Y-m-d H:i:s"),
+            "refer" => $inv_refer
         );
-    }
 
-    /**
-     * 更新用户信息
-     *
-     * @param string $email
-     * @param array $pair
-     * @return boolean 更新成功或者失败
-     */
-    public function update($email, $pair) {
-        return $this->dbc->update(
-            $this->table,
-            $pair,
-            "email='$email'"
-        );
+        return $this->insert($insert_data)->execute();
     }
 
     /**
@@ -102,7 +91,9 @@ class UserModel extends Model {
      * @return boolean 更新成功或者失败
      */
     public function deactive($email) {
-        return $this->update($email, array("deactive" => 1));
+        return $this->update(array("deactive" => 1))
+                    ->where("email='$email'")
+                    ->execute();
     }
 
     /**
@@ -112,6 +103,8 @@ class UserModel extends Model {
      * @return bool 更新成功或者失败
      */
     public function active($email) {
-        return $this->update($email, array("deactive" => 0));
+        return $this->update(array("deactive" => 0))
+                    ->where("email='$email'")
+                    ->execute();
     }
 }

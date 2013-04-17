@@ -5,8 +5,9 @@
     redirect_unless_login("../login.php");
 
     require_once("../../include/smarty.php");
-    require_once("../../model/model.class.php");
     require_once("../../model/book.class.php");
+    require_once("../../model/tag.class.php");
+    require_once("../../model/author.class.php");
 
     // 避免与书籍的title冲突
     $smarty->assign("page_title", "添加书籍");
@@ -52,7 +53,7 @@
 
             $result = $book_model->add($book_data);
             if ($result) {
-                $book_id = $book_model->dbc->db->insert_id;
+                $book_id = $book_model->get_last_id();
                 $isProcessWell = true;
 
                 // 分类处理
@@ -64,12 +65,12 @@
                 if ($isProcessWell) {
                     echo "<script>location.href = 'result.php?action=add&code=" . $result . "';</script>";
                 } else {
-                    $alert = "<div class='alert alert-error' id='alert'>" . $book_model->dbc->db->error . "</div>";
+                    $alert = "<div class='alert alert-error' id='alert'>" . $book_model->get_last_error() . "</div>";
                     $smarty->assign("alert", $alert);
                     $smarty->display("book/add.tpl");
                 }
             } else {
-                $alert = "<div class='alert alert-error' id='alert'>" . $book_model->dbc->db->error . "</div>";
+                $alert = "<div class='alert alert-error' id='alert'>" . $book_model->get_last_error() . "</div>";
                 $smarty->assign("alert", $alert);
                 $smarty->display("book/add.tpl");
             }

@@ -25,10 +25,8 @@
             $alert_message = "当前密码不正确，请重新输入";
         } else {
             $user_model = new UserModel();
-            $update_result = $user_model->update(
-                $user->email,
-                array("password" => sha1($new_password), "update_at" => date("Y-m-d H:i:s"))
-            );
+            $update_data = array("password" => sha1($new_password), "update_at" => date("Y-m-d H:i:s"));
+            $update_result = $user_model->update($update_data)->where("email='$user->email'")->execute();
             if ($update_result) {
                 $alert_type = "alert-success";
                 $alert_message = "密码已更新，请牢记密码";

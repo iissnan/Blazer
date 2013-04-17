@@ -1,8 +1,8 @@
 <?php
 
-require_once("model.class.php");
+require_once("dbm.class.php");
 
-class Invitation extends Model {
+class InvitationModel extends DatabaseManipulate {
     protected $table = "invitations";
 
     public function __construct() {
@@ -14,8 +14,10 @@ class Invitation extends Model {
      * @param string $value
      */
     public function minus($value) {
-        $inv = $this->getItem('value', $value);
+        $inv = $this->get_item('value', $value);
         list(, , $inv_num) = $inv->fetch_array();
-        $this->update("value='$value'", array("number"=>$inv_num - 1));
+        $this->update(array("number"=>$inv_num - 1))
+            ->where("value='$value'")
+            ->execute();
     }
 }

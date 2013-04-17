@@ -6,6 +6,9 @@
 
     require_once("../../include/smarty.php");
     require_once("../../model/book.class.php");
+    require_once("../../model/tag.class.php");
+    require_once("../../model/author.class.php");
+
     $book_model = new BookModel();
 
     $smarty->assign("page_title", "编辑书籍");
@@ -45,12 +48,16 @@
             $smarty->assign("book", $book);
             $smarty->display("book/edit.tpl");
         } else {
-            $result = $book_model->update("id=" . $id, $book);
+            $result = $book_model->update($book)
+                                ->where("id='$id'")
+                                ->execute();
 
             if ($result) {
                 $book_model->update_category($id, $category);
                 $book_model->update_author($id, $author);
-                echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
+
+
+               echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
             } else {
                 $alert = "<div class='alert alert-error' id='alert'>更新失败</div>";
                 $smarty->assign("alert", $alert);
@@ -61,17 +68,17 @@
         // 获取数据
         if (isset($_GET["id"])) {
             $id = (int)$_GET["id"];
-            $book = $book_model->getItem("id", $id);
+            $book = $book_model->get_item("id", $id);
             if ($book->num_rows > 0) {
                 $book = $book->fetch_object();
 
                 // 获取作者
-                $author_model = new Model("authors");
+                $author_model = new AuthorModel();
                 $authors = "";
-                $author_result = $author_model->getJoinItems(
-                    array("books_authors"),
-                    "books_authors.book_id=$book->id AND authors.id=books_authors.author_id"
-                );
+                $author_result = $author_model->select("*", "books_authors, authors")
+                                                ->where("books_authors.book_id=$book->id")
+                                                ->where("authors.id=books_authors.author_id")
+                                                ->execute();
                 if ($author_result) {
                     $author_numbers = $author_result->num_rows;
                     for ($i = 0; $i < $author_numbers; $i++) {
@@ -84,12 +91,12 @@
                 $book->author = $authors;
 
                 // 获取分类
-                $category_model = new Model("categories");
+                $category_model = new TagModel("categories");
                 $categories = "";
-                $category_result = $category_model->getJoinItems(
-                    array("books_categories"),
-                    "books_categories.book_id=$book->id AND categories.id=books_categories.category_id"
-                );
+                $category_result = $category_model->select("*", "books_categories, categories")
+                                                    ->where("books_categories.book_id=$book->id")
+                                                    ->where("categories.id=books_categories.category_id")
+                                                    ->execute();
                 if ($category_result) {
                     $category_numbers = $category_result->num_rows;
                     for ($i = 0; $i < $category_numbers; $i++) {

@@ -8,8 +8,15 @@
 
     $user = $_SESSION["user"];
 
-    // 获取Gravatar.com头像
-    function getGravatar($email, $size=80, $default="mm") {
+    /**
+     * 获取Gravatar.com头像
+     *
+     * @param string $email
+     * @param integer $size
+     * @param string $default
+     * @return string url
+     */
+    function get_gravatar($email, $size=80, $default="mm") {
         $email = md5(strtolower(trim($email)));
         $url = "http://www.gravatar.com/avatar/" .
             $email .
@@ -56,10 +63,10 @@
                 } else {
                     // 更新数据库
                     $user_model = new UserModel();
-                    $result = $user_model->update(
-                        $_SESSION["user"]->email,
-                        array("avatar" => $filename)
-                    );
+
+                    $result = $user_model->update(array("avatar" => $filename))
+                                            ->where("email='" . $_SESSION["user"]->email . "'")
+                                            ->execute();
                     !$result and $alert_message = "更新用户数据时出错";
                 }
             }

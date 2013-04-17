@@ -49,8 +49,8 @@
         }
 
         if (!$error) {
-            $user_instance = new UserModel();
-            $user = $user_instance->get($email, $password);
+            $user_model = new UserModel();
+            $user = $user_model->get($email, $password);
             if ($user->error == 0) {
                 $_SESSION["user"] = $user;
 

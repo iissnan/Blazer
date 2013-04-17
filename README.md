@@ -14,6 +14,7 @@
 * `__DIR__` available in PHP 5.3.0
 * `mysqli::fetch_all()` available in PHP 5.3.0
 * `mysqli::connect_error` 5.2.9以上版本上可用
+* `mysqli` 长链接(Persistent Connections)
 
 
 ###目录说明：

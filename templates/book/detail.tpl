@@ -19,8 +19,8 @@
             <li><a href="/user/favorite.php">我的藏书</a></li>
         </ul>
     {else}
-        <div class="book-detail">
-            <img src="{$book->cover}" alt="{$book->title|escape:'html'}" class="pull-left cover"/>
+        <div class="book-detail clearfix">
+            <img src="{$book->cover}" alt="{$book->title|escape:'html'}" class="pull-left cover img-polaroid"/>
             <div class="info">
                 <p class="title">{$book->title|escape:'html'}</p>
                 <p class="author">作者：{$book->author|escape:'html'}</p>

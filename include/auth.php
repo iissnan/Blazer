@@ -15,9 +15,9 @@ function is_login() {
         // 校验cookie值的有效性
         require_once(__DIR__ . "/../model/user.class.php");
 
-        $User = new UserModel();
+        $user_model = new UserModel();
         list($email, $password) = explode("|", $_COOKIE["bs_auth"]);
-        $user = $User->get($email, $password);
+        $user = $user_model->get($email, $password);
         if ($user->error != 0) {
             return false;
         }

@@ -13,7 +13,7 @@
     if (isset($_GET["id"]) && $_GET["id"] != "") {
         $item_id = $_GET["id"];
         $book_model = new BookModel();
-        $result = (int)$book_model->remove("id='$item_id'");
+        $result = (int)$book_model->remove()->where("id='$item_id'")->execute();
         $result and $book_model->update_category($item_id, "");
 
         echo "<script>location.href = 'result.php?action=delete&code=" . $result . "'</script>";

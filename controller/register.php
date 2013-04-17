@@ -43,13 +43,14 @@
 
                 // 生成此用户的邀请码
                 $user_id = $user->dbc->db->insert_id;
-                $invitation_model = new Invitation();
-                $invitation_model->add(array("value" => uniqid(), "user_id" => $user_id));
+                $invitation_model = new InvitationModel();
+                $new_invitation = array("value" => uniqid(), "user_id" => $user_id);
+                $invitation_model->insert($new_invitation)->execute();
 
                 header("location: login.php?s=reg&code=1");
             } else {
                 $error = true;
-                $alert_message = "注册失败了，服务器在开小差...:<br />" . $user->dbc->db->error;
+                $alert_message = "注册失败了，服务器在开小差...:<br />" . $user->get_last_error();
             }
         } else {
             $smarty->assign("email", $email);

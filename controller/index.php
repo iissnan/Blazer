@@ -1,12 +1,15 @@
 <?php
     session_start();
+    header("Content-Type: text/html; charset=utf-8");
     require_once("../include/auth.php");
     require_once("../include/smarty.php");
-    require_once("../model/book.class.php");
     require_once("../include/paginator.class.php");
+    require_once("../model/book.class.php");
+    require_once("../model/tag.class.php");
+    require_once("../model/author.class.php");
 
     $book_model = new BookModel();
-    $books_total = $book_model->total();
+    $books_total = $book_model->get_total();
 
     // 分页参数
     $page = !isset($_GET["page"]) ? 1 : $_GET["page"];
@@ -19,20 +22,19 @@
 
 
     // 获取多本书籍
-    $books_rs = $book_model->getItems($page_size, $page, "");
+    $books_rs = $book_model->get_items($page_size, $page);
     if ($books_rs) {
-        $Category = new Model("categories");
-        $Author = new Model("authors");
-        //$books = $books->fetch_all(); // require PHP5.3.0
+        $category_model = new TagModel();
+        $author_model = new AuthorModel();
         $books = array();
         for($i = 0; $i < $books_rs->num_rows; $i++) {
             $book = $books_rs->fetch_array();
 
             // 获取作者信息
-            $category_result = $Category->getJoinItems(
-                array("books_categories" ),
-                "books_categories.book_id=" . $book["id"] . " AND books_categories.category_id=categories.id"
-            );
+            $category_result = $category_model->select("*", "categories, books_categories")
+                                              ->where("books_categories.book_id=" . $book["id"])
+                                              ->where("books_categories.category_id=categories.id")
+                                              ->execute();
             if ($category_result) {
                 $categories = array();
                 for ($j = 0; $j < $category_result->num_rows; $j++) {
@@ -42,10 +44,10 @@
             }
 
             // 获取分类信息
-            $author_result = $Author->getJoinItems(
-                array("books_authors"),
-                "books_authors.book_id=" . $book["id"] . " AND books_authors.author_id=authors.id"
-            );
+            $author_result = $author_model->select("*", "authors, books_authors")
+                                          ->where("books_authors.book_id=" . $book["id"])
+                                          ->where("books_authors.author_id=authors.id")
+                                          ->execute();
             if ($author_result) {
                 $authors = array();
                 for ($k = 0; $k < $author_result->num_rows; $k++) {

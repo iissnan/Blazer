@@ -8,11 +8,12 @@
     require_once("../../model/invitation.class.php");
 
     if ($_SESSION["user"]->group == "admin") {
-        $inv = new Invitation();
+        $inv = new InvitationModel();
         $inv_value = uniqid();
 
         $smarty->assign("user", $_SESSION["user"]);
-        if ($inv->add(array("value" => $inv_value, "number" => 5, "user_id" => $_SESSION["user"]->id))) {
+        $new_invitation = array("value" => $inv_value, "number" => 5, "user_id" => $_SESSION["user"]->id);
+        if ($inv->insert($new_invitation)->execute()) {
             $smarty->assign("alert_mode", "success");
             $smarty->assign("result", "成功");
             $smarty->assign("invitation", $inv_value);
