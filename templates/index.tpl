@@ -63,6 +63,14 @@
                                 <input type="checkbox" name="remember" />下次自动登录？
                             </label>
                         </div>
+                        {if $recaptcha}
+                            <div class="control-group">
+                                <label class="control-label" for="recaptcha">验证码</label>
+                                <div class="controls">
+                                    {$recaptcha}
+                                </div>
+                            </div>
+                        {/if}
                         <input class="btn btn-primary btn-block" type="submit" value="登  录"/>
                         <input type="hidden" name="submitted" value="yes"/>
                     </form>

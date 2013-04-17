@@ -5,8 +5,7 @@
     require_once("../include/smarty.php");
     require_once("../include/paginator.class.php");
     require_once("../model/book.class.php");
-    require_once("../model/tag.class.php");
-    require_once("../model/author.class.php");
+    require_once("../vendor/recaptchalib.php");
 
     $book_model = new BookModel();
     $books_total = $book_model->get_total();
@@ -70,6 +69,12 @@
     // 获取用户信息
     if (isset($_SESSION["user"])) {
         $smarty->assign("user", $_SESSION["user"]);
+    }
+
+    // 若尝试次数大于3次，显示验证码
+    if ($_SESSION["login_try_count"] > 3) {
+        $public_recaptcha_key = "6LfbAeASAAAAAKGOX1J5uXfYX_QBBGOkoze4WA6H";
+        $smarty->assign("recaptcha", recaptcha_get_html($public_recaptcha_key));
     }
 
     $smarty->assign("total", $books_total);
