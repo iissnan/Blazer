@@ -10,39 +10,41 @@
                 <a href="/user/index.php">{$user->username|escape:'html'}</a>
                 <span class="divider">&gt;</span>
             </li>
-            <li class="active">设置密码</li>
+            <li class="active">更新信息</li>
         </ul>
     </div>
 {/block}
 {block name="content"}
-
     {$alert}
-    <form action="edit_password.php" method="post" class="form-horizontal">
+    <form action="edit_profile.php" method="post" class="form-horizontal">
         <div class="control-group">
-            <label class="control-label" for="old-password">旧密码：</label>
+            <label class="control-label" for="email">登录邮箱</label>
             <div class="controls">
-                <input type="password" name="old_password" id="old-password"/>
+                <input type="text" disabled="disabled" value="{$user->email|escape:'email'}" />
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="new-password">新密码：</label>
+            <label class="control-label" for="username">用户名：</label>
             <div class="controls">
-                <input type="password" name="new_password" id="new-password"/>
+                <input type="text" name="username" id="username" value="{$username|escape:'html'}"/>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="re-password">确认新密码：</label>
+            <label class="control-label" for="signature">
+                签  名：
+            </label>
             <div class="controls">
-                <input type="password" name="re_password" id="re-password"/>
+                <textarea name="signature" rows="4" id="signature">{$signature|escape:'html'}</textarea>
+                <span class="label label-important">限140字以内</span>
             </div>
         </div>
         <div class="control-group mt30">
             <label for="submit" class="control-label"></label>
             <div class="controls">
-                <input type="submit" value="更  改" class="btn-primary"/>
+                <input type="submit" value="更  新" class="btn-primary"/>
             </div>
         </div>
-        <input type="hidden" name="submit" value="yes"/>
+        <input type="hidden" name="submitted" value="yes"/>
     </form>
 {/block}
 

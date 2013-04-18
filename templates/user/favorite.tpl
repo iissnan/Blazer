@@ -19,5 +19,5 @@
     我的收藏
 {/block}
 {block name="sidebar"}
-
+    {include "user/user_sidebar.tpl"}
 {/block}

@@ -53,5 +53,5 @@
 {/block}
 
 {block name="sidebar"}
-
+    {include "user/user_sidebar.tpl"}
 {/block}

@@ -61,7 +61,12 @@
                                      alt="{$user->username|escape:'html'}"
                                      class="img-rounded pull-left sidebar-avatar" />
                             </a>
-                            <p class="pull-left">{$user->username|escape:'html'}</p>
+                            <div class="pull-left">
+                                <p class="username">{$user->username|escape:'html'}</p>
+                                <p class="signature" title="{$user->signature|escape:'html'}">
+                                    {$user->signature|escape:'html'|truncate:13:"..."}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 {/if}

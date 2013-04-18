@@ -54,6 +54,9 @@
             if ($user->error == 0) {
                 $_SESSION["user"] = $user;
 
+                // 登录计数++
+                $user_model->update(array("times"=>$user->times + 1));
+
                 // 清除登录尝试统计
                 unset($_SESSION["login_try_count"]);
 

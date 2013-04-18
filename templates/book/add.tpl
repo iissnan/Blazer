@@ -16,7 +16,7 @@
           id="J_FormAdd" class="form-horizontal">
 
         <div class="form-divider">
-            <span class="label label-info">关键信息</span>
+            关键信息
         </div>
 
         <div class="control-group">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-divider">
-            <span class="label label-info">选填信息</span>
+            选填信息
         </div>
 
         <div class="control-group">

@@ -68,6 +68,8 @@ a.btn{
 .sidebar .user-profile{
     margin: 10px 0;
 }
+    .sidebar .user-profile .username{margin-top: 10px; margin-bottom: 0}
+    .sidebar .user-profile .signature{font-size: 12px; color: #999;}
 
 .cover-list{
     margin: 0;
