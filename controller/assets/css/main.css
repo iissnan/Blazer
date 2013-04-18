@@ -35,6 +35,9 @@ label{
     min-height: 620px;
     border-right: 1px solid #eaeaea;
 }
+.safari{
+    position: relative;
+}
 
 .breadcrumb{
 }
@@ -143,6 +146,11 @@ a.btn{
 }
 
 
+.form-divider {
+    margin: 10px 0 20px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
 
 
 .mt30{

@@ -21,11 +21,17 @@
         <form action="edit.php" method="post" enctype="multipart/form-data"
               id="J_FormAdd" class="form-horizontal">
             <input type="hidden" name="id" value="{$book->id}"/>
+
+            <div class="form-divider">
+                <span class="label label-info">关键信息</span>
+            </div>
+
             <div class="control-group">
                 <label for="title" class="control-label">标题</label>
                 <div class="controls">
                     <input type="text" name="title" id="title" value="{$book->title}"
                            class="input-xlarge"/>
+                    <span class="label label-important">必填</span>
                 </div>
             </div>
             <div class="control-group">
@@ -35,13 +41,7 @@
                             class="input-xlarge"/>
                 </div>
             </div>
-            <div class="control-group">
-                <label for="isbn"  class="control-label">ISBN</label>
-                <div class="controls">
-                    <input type="text" name="isbn" id="isbn" value="{$book->isbn}"
-                            class="input-xlarge"/>
-                </div>
-            </div>
+
             <div class="control-group">
                 <label for="cover"  class="control-label">封面</label>
                 <div class="controls">
@@ -50,16 +50,29 @@
                     <input type="file" name="cover" id="cover" />
                 </div>
             </div>
+             <div class="control-group">
+                <label class="control-label" for="pages">页数</label>
+                <div class="controls">
+                    <input type="text" name="pages" id="pages" value="{$book->pages}" class="input-xlarge"/>
+                </div>
+            </div>
+
+            <div class="form-divider">
+                <span class="label label-info">选填信息</span>
+            </div>
+
             <div class="control-group">
                 <label class="control-label" for="intro">内容简介</label>
                 <div class="controls">
                     <textarea name="intro" id="intro" rows="6" class="input-xlarge">{$book->intro}</textarea>
                 </div>
             </div>
+
             <div class="control-group">
-                <label class="control-label" for="pages">页数</label>
+                <label for="isbn"  class="control-label">ISBN</label>
                 <div class="controls">
-                    <input type="text" name="pages" id="pages" value="{$book->pages}" class="input-xlarge"/>
+                    <input type="text" name="isbn" id="isbn" value="{$book->isbn}"
+                            class="input-xlarge"/>
                 </div>
             </div>
             <div class="control-group">
@@ -69,6 +82,7 @@
                            class="input-xlarge"/>
                 </div>
             </div>
+            {*
             <div class="control-group">
                 <label for="douban-link"  class="control-label">豆瓣链接</label>
                 <div class="controls">
@@ -76,6 +90,7 @@
                            class="input-xlarge"/>
                 </div>
             </div>
+            *}
 
             <div class="control-group">
                 <input type="hidden" name="submitted" value="yes"/>
