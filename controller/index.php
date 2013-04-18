@@ -73,8 +73,7 @@
 
     // 若尝试次数大于3次，显示验证码
     if ($_SESSION["login_try_count"] > 3) {
-        $public_recaptcha_key = "6LfbAeASAAAAAKGOX1J5uXfYX_QBBGOkoze4WA6H";
-        $smarty->assign("recaptcha", recaptcha_get_html($public_recaptcha_key));
+        $smarty->assign("recaptcha", recaptcha_get_html(RECAPTCHA_PUBLIC));
     }
 
     $smarty->assign("total", $books_total);

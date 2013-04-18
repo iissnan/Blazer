@@ -29,7 +29,7 @@
 
             // recaptcha 私有密钥
             $recaptcha_private_key = "";
-            $resp = recaptcha_check_answer ($recaptcha_private_key,
+            $resp = recaptcha_check_answer (RECAPTCHA_PRIVATE,
                 $_SERVER["REMOTE_ADDR"],
                 $_POST["recaptcha_challenge_field"],
                 $_POST["recaptcha_response_field"]);
@@ -77,10 +77,17 @@
     $source = isset($_GET["s"]) ? $_GET["s"] : "";
     $code = isset($_GET["code"]) ? $_GET["code"] : "0";
 
-    if ($source == "reg" && $code == "1") {
+    if ($code == "1") {
         $alert_mode = "alert-info";
-        $alert_message = "注册成功，请登录";
         $show_alert = true;
+
+        switch($source) {
+            case "reg":
+                $alert_message = "注册成功，请登录"; break;
+            case "install":
+                $alert_message = "安装成功，请登录"; break;
+            default:
+        }
     }
 
     // 若出现错误或者明确指定显示alert则显示
@@ -91,8 +98,7 @@
 
     // 若尝试次数大于3次，显示验证码
     if ($_SESSION["login_try_count"] > 3) {
-        $public_recaptcha_key = "6LfbAeASAAAAAKGOX1J5uXfYX_QBBGOkoze4WA6H";
-        $smarty->assign("recaptcha", recaptcha_get_html($public_recaptcha_key));
+        $smarty->assign("recaptcha", recaptcha_get_html(RECAPTCHA_PUBLIC));
     }
 
     $smarty->assign("page_title", "帐号登录");

@@ -56,9 +56,15 @@ class DatabaseManipulate {
     public function insert($insert_data, $table="") {
         empty($table) and $table = $this->table;
         if (is_array($insert_data) && count($insert_data) > 0) {
-            $columns = join(",", array_keys($insert_data));
-            $values_raw = array_values($insert_data);
 
+            $columns_raw = array_keys($insert_data);
+            $columns_clean = array();
+            foreach($columns_raw as $column) {
+                array_push($columns_clean, "`" . $column . "`");
+            }
+            $columns = join(",", $columns_clean);
+
+            $values_raw = array_values($insert_data);
             // 过滤输入
             $values_clean = array();
             foreach ($values_raw as $value) {

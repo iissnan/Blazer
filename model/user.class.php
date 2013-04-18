@@ -53,31 +53,37 @@ class UserModel extends DatabaseManipulate {
      * @return boolean 注册成功或者失败
      */
     public function add($data) {
-        list($email, $password, $username, $invitation_value) = $data;
+        list($email, $password, $username, $invitation_value, $group) = $data;
+        !$group and $group = "user";
         require_once("invitation.class.php");
-        $invitation_model = new InvitationModel();
-        $invitation_result = $invitation_model->get_item("value", $invitation_value);
 
-        // 邀请码不存在
-        if ($invitation_result->num_rows == 0) {
-            return false;
+        $inv_refer = 0;
+
+        $is_first_user = !empty($_SESSION["first_user"]);
+        if (!$is_first_user) {
+            $invitation_model = new InvitationModel();
+            $invitation_result = $invitation_model->get_item("value", $invitation_value);
+
+            // 邀请码不存在
+            if ($invitation_result->num_rows == 0) {
+                return false;
+            }
+
+            // 检测邀请码个数
+            list($inv_id, $inv_value, $inv_num, $inv_refer) = $invitation_result->fetch_array();
+            if ($inv_num < 1) {
+                // 邀请码无效
+                return false;
+            }
+            $invitation_model->minus($invitation_value);
         }
-
-        // 检测邀请码个数
-        list($inv_id, $inv_value, $inv_num, $inv_refer) = $invitation_result->fetch_array();
-        if ($inv_num < 1) {
-            // 邀请码无效
-            return false;
-        }
-
-        $invitation_model->minus($invitation_value);
-
         $insert_data = array(
             "email" => $email,
-            "password" => $password,
-            "username" => sha1($password),
+            "password" => sha1($password),
+            "username" => $username,
             "create_at" => date("Y-m-d H:i:s"),
             "update_at" => date("Y-m-d H:i:s"),
+            "group" => $group,
             "refer" => $inv_refer
         );
 

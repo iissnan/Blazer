@@ -20,3 +20,9 @@
 ###目录说明：
 
 ###安装步骤：
+
+* 配置数据库链接数据 和 Google reCaptcha API 密钥
+* 上传文件
+* 上传完成后浏览器中打开安装页面： http://example.com/install/
+* 填写账户信息
+* 完成安装，__务必删除__`install`目录

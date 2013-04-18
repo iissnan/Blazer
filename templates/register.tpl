@@ -33,11 +33,14 @@
                 <input type="password" name="re-password" id="re-password"
                        class="control input-block-level" value="{$re_password}" />
             </div>
+            {if !$is_first_user}
             <div class="control-group">
                 <label for="invitation" class="control-label">邀请码</label>
                 <input type="text" name="invitation" id="invitation"
                        class="control input-block-level" value="{$invitation}" />
             </div>
+            {/if}
+
             <div class="mt30">
                 <input type="hidden" name="submitted" value="yes" />
                 <input type="submit" class="btn btn-large btn-primary btn-block" value="注  册"/>
