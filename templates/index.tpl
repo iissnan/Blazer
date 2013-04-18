@@ -53,7 +53,7 @@
                     <a href="register.php" class="pull-right btn btn-mini btn-danger">注  册 &raquo;</a>
                 </div>
                 <div class="box-body">
-                    <form action="login.php" method="post" >
+                    <form action="login.php" method="post" class="J_LoginForm">
                         <input id="email" type="text"  name="email" placeholder="登录邮箱"
                                 class="email input-block-level"/>
                         <input type="password" name="password" placeholder="登录密码"
@@ -89,11 +89,22 @@
     {/block}
 
     {block "footer_link"}
+        <script type="text/javascript" src="/assets/js/account.js"></script>
         <script type="text/javascript">
             $("#J_ActionLoginWithCaptcha").on("click", function(){
                 $("form").submit();
             });
             $("#J_ActionLogin").on("click", function(){
+                var email = $("#email");
+                var password = $("#password");
+                if (!account.validator.isEmail(email.val())) {
+                    email.focus();
+                    return false;
+                }
+                if (!account.validator.isPassword(password.val())) {
+                    password.focus();
+                    return false;
+                }
                 $(".modal-recaptcha").modal();
                 return false;
             });

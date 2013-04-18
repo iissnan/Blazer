@@ -11,7 +11,7 @@
     </div>
 {/block}
 {block "main"}
-    <form action="login.php" method="post" id="J_LoginForm">
+    <form action="login.php" method="post" class="J_LoginForm">
         {$alert}
         <div class="control-group">
             <label for="email" class="control-label">登录邮箱</label>
