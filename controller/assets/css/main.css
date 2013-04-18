@@ -93,9 +93,9 @@ a.btn{
 .nav-position{
     position: relative;
 }
-.action-add-book{
+.actions{
     position: absolute;
-    top: 4px;
+    top: 5px;
     right: 5px;
 }
 
@@ -115,7 +115,7 @@ a.btn{
     margin-right: 10px;
 }
 .book-detail .title{
-    font-size: 15px;
+    font-size: 25px;
     font-weight: bold;
 }
 

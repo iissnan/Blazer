@@ -1,6 +1,6 @@
 {extends "layout.tpl"}
 {block "safari"}
-    <div class="nav-position clearfix">
+    <div class="safari clearfix">
         <ul class="breadcrumb">
             <li>
                 <a href="/index.php">首页</a>
@@ -11,6 +11,15 @@
                     书籍：{$book->title|escape:'html'}</li>
                 {/if}
         </ul>
+        {if $user->group == "admin" || $user->id !== $book->creator}
+            <div class="actions">
+                <a class="btn btn-primary btn-small" href="edit.php?id={$book->id}">编辑</a>
+                {if $user->group == "admin"}
+                    &nbsp;
+                    <a class="btn btn-danger btn-small action-book-delete" href="delete.php?id={$book->id}">删除</a>
+                {/if}
+            </div>
+        {/if}
     </div>
 {/block}
 {block "content"}
@@ -25,7 +34,7 @@
         <div class="book-detail clearfix">
             <img src="{$book->cover}" alt="{$book->title|escape:'html'}" class="pull-left cover img-polaroid"/>
             <div class="info">
-                <p class="title">{$book->title|escape:'html'}</p>
+                <h1 class="title">{$book->title|escape:'html'}</h1>
                 <p class="author">作者：{$book->author|escape:'html'}</p>
                 <p>ISBN: {$book->isbn|escape:'html'}</p>
                 <p>页数：{$book->pages|escape:'html'}</p>
@@ -42,3 +51,6 @@
 {/block}
 
 {block "sidebar"}{/block}
+{block "footer_link"}
+    <script type="text/javascript" src="/assets/js/book.js"></script>
+{/block}

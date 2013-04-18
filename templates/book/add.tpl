@@ -97,3 +97,7 @@
 
 {block name="sidebar"}{/block}
 
+{block "footer_link"}
+    <script type="text/javascript" src="/assets/js/book.js"></script>
+{/block}
+

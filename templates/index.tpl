@@ -5,7 +5,9 @@
                 <li><a href="/index.php">首页</a></li>
             </ul>
             {if $is_login}
-                <a href="book/add.php" class="btn btn-primary btn-small action-add-book">添  加</a>
+                <div class="actions">
+                    <a href="book/add.php" class="btn btn-primary btn-small action-add-book">添  加</a>
+                </div>
             {/if}
         </div>
     {/block}

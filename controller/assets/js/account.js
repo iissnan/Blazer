@@ -6,7 +6,7 @@ account.validator = {
         return /[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/.test(email);
     },
     isPassword: function(password) {
-        return /[\s\S]{8,}/.test(password);
+        return /[\s\S]{6,}/.test(password);
     }
 };
 
