@@ -19,16 +19,17 @@
                     {*<a href="index.php" class="brand">BookShelf</a>*}
                     <ul class="nav">
                         <li><a href="/index.php">书架</a>
-                        <li><a href="/user/favorite.php">我的收藏</a></li>
                     </ul>
                     <ul class="nav pull-right">
                         {if $is_login}
+                            <li><a href="/position/index.php">阅读进度</a></li>
                             <li class="dropdown">
                                 <a href="/user/index.php" data-target="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
                                     {$user->username|escape:'html'}的账号
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/user/favorite.php">我的收藏</a></li>
                                     <li><a href="/user/index.php">账户设置</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/logout.php">退出登录</a></li>

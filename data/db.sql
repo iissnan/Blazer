@@ -8,7 +8,7 @@
 -- PHP 版本: 5.3.15
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "+08:00";
 
 --
 -- 数据库: `bookshelf`
@@ -119,11 +119,30 @@ CREATE TABLE IF NOT EXISTS `users` (
   `times` int(11) NOT NULL DEFAULT '0',
   `deactive` tinyint(1) NOT NULL DEFAULT '0',
   `group` varchar(100) NOT NULL DEFAULT 'user',
-  `avatar` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100) DEFAULT 'default.png',
   `refer` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+--
+-- 表的结构 `positions`
+--
+
+CREATE TABLE IF NOT EXISTS `positions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `position` int(11) NOT NULL DEFAULT '0',
+  `create_at` datetime NOT NULL,
+  `update_at` datetime NOT NULL,
+  `note` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `book_id` (`book_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='阅读进度';
+
 
 --
 -- 限制导出的表
@@ -148,3 +167,10 @@ ADD CONSTRAINT `books_categories_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `boo
 --
 ALTER TABLE `invitations`
 ADD CONSTRAINT `invitations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `reading_position`
+--
+ALTER TABLE `positions`
+  ADD CONSTRAINT `positions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `positions_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

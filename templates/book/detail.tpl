@@ -11,19 +11,20 @@
                     书籍：{$book->title|escape:'html'}</li>
                 {/if}
         </ul>
-        {if $user->group == "admin" || $user->id !== $book->creator}
-            <div class="actions">
-                <a class="btn btn-primary btn-small" href="edit.php?id={$book->id}">编辑</a>
-                {if $user->group == "admin"}
+        <div class="actions">
+
+            {if $user->group == "admin" || $user->id !== $book->creator}
                     &nbsp;
-                    <a class="btn btn-danger btn-small action-book-delete" href="delete.php?id={$book->id}">删除</a>
-                {/if}
-            </div>
-        {/if}
+                    <a class="btn btn-primary btn-small" href="edit.php?id={$book->id}">编辑</a>
+                    {if $user->group == "admin"}
+                        &nbsp;
+                        <a class="btn btn-danger btn-small action-book-delete" href="delete.php?id={$book->id}">删除</a>
+                    {/if}
+            {/if}
+        </div>
     </div>
 {/block}
 {block "content"}
-
     {if $error}
         {$alert}
         <ul>
@@ -43,10 +44,16 @@
                     <p><a href="{$book->douban_link|escape:'html'}" target="_blank">豆瓣链接</a></p>
                 {/if}
             </div>
-            <div class="intro">
-                {$book->intro|escape:'html'}
-            </div>
         </div>
+        {if $is_login}
+            <div class="action-position-edit">
+                <a class="btn btn-primary btn-small" href="/position/add.php?book_id={$book->id}">更新我的进度</a>
+            </div>
+        {/if}
+        {if $book->intro|escape:'html' != "" }
+            <div class="form-divider">内容简介</div>
+            <div class="intro">{$book->intro|escape:'html'}</div>
+        {/if}
     {/if}
 {/block}
 

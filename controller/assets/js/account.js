@@ -135,7 +135,6 @@ account.validator = {
             emailInput.parent().addClass("error");
             showCustomPopOver(emailInput[0]);
             return false;
-            return false;
         }
 
         // 密码有效性验证
