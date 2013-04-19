@@ -12,17 +12,18 @@
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $title = trim($_POST["title"]);
+        $pages = trim($_POST["pages"]);
         $author = trim($_POST["author"]);
         $isbn = trim($_POST["isbn"]);
         $intro = trim($_POST["intro"]);
-        $pages = trim($_POST["pages"]);
         $category = trim($_POST["category"]);
         $douban_link = trim($_POST["douban_link"]);
         $cover = $_FILES["cover"];
 
         // title为必需值
-        if ($title == "") {
-            $alert = "<div class='alert alert-error' id='alert'>请输入书籍标题</div>";
+        if ($title == "" || empty($pages)) {
+            $title == "" and $alert = "<div class='alert alert-error' id='alert'>请输入书籍标题</div>";
+            empty($pages) and $alert = "<div class='alert alert-error' id='alert'>请输入书籍总页数</div>";
             $smarty->assign("alert", $alert);
             $smarty->assign(array(
                 "title" => $title,

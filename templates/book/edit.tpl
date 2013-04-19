@@ -34,6 +34,15 @@
                     <span class="label label-important">必填</span>
                 </div>
             </div>
+
+            <div class="control-group">
+                <label class="control-label" for="pages">页数</label>
+                <div class="controls">
+                    <input type="text" name="pages" id="pages" value="{$book->pages}" class="input-xlarge"/>
+                    <span class="label label-important">必填</span>
+                </div>
+            </div>
+
             <div class="control-group">
                 <label for="author" class="control-label">作者</label>
                 <div class="controls">
@@ -50,21 +59,17 @@
                     <input type="file" name="cover" id="cover" />
                 </div>
             </div>
-             <div class="control-group">
-                <label class="control-label" for="pages">页数</label>
-                <div class="controls">
-                    <input type="text" name="pages" id="pages" value="{$book->pages}" class="input-xlarge"/>
-                </div>
-            </div>
+
 
             <div class="form-divider">
                 <span class="label label-info">选填信息</span>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="intro">内容简介</label>
+                <label for="category"  class="control-label">分类</label>
                 <div class="controls">
-                    <textarea name="intro" id="intro" rows="6" class="input-xlarge">{$book->intro}</textarea>
+                    <input type="text" name="category" id="category" value="{$book->category}"
+                           class="input-xlarge"/>
                 </div>
             </div>
 
@@ -75,13 +80,16 @@
                             class="input-xlarge"/>
                 </div>
             </div>
+
             <div class="control-group">
-                <label for="category"  class="control-label">分类</label>
+                <label class="control-label" for="intro">内容简介</label>
                 <div class="controls">
-                    <input type="text" name="category" id="category" value="{$book->category}"
-                           class="input-xlarge"/>
+                    <textarea name="intro" id="intro" rows="6" class="input-xlarge">{$book->intro}</textarea>
                 </div>
             </div>
+
+
+
             {*
             <div class="control-group">
                 <label for="douban-link"  class="control-label">豆瓣链接</label>

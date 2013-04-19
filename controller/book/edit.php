@@ -16,13 +16,13 @@
 
     // 提交数据
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
-        $title = $_POST["title"];
-        $id = $_POST["id"];
-        $author = $_POST["author"];
-        $intro = $_POST["intro"];
-        $pages = $_POST["pages"];
-        $category = $_POST["category"];
-        $isbn = $_POST["isbn"];
+        $title = trim($_POST["title"]);
+        $id = trim($_POST["id"]);
+        $author = trim($_POST["author"]);
+        $intro = trim($_POST["intro"]);
+        $pages = trim($_POST["pages"]);
+        $category = trim($_POST["category"]);
+        $isbn = trim($_POST["isbn"]);
         if ($_FILES["cover"]["name"] != "") {
             $cover = $_FILES["cover"];
         } else {
@@ -40,10 +40,11 @@
             "update_at" => date("Y-m-d H:i:s")
         );
 
-        if ($title == "") {
+        if ($title == "" || empty($pages)) {
+            $alert = "<div class='alert alert-error' id='alert'>请输入书籍标题</div>";
+            $alert = "<div class='alert alert-error' id='alert'>请输入书籍总页数</div>";
             $book["id"] = $id;
             $book = (object)$book;
-            $alert = "<div class='alert alert-error' id='alert'>标题不能为空</div>";
             $smarty->assign("alert", $alert);
             $smarty->assign("book", $book);
             $smarty->display("book/edit.tpl");

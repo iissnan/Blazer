@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   `title` varchar(100) NOT NULL,
   `isbn` varchar(100) DEFAULT NULL,
   `intro` text(100) DEFAULT NULL,
-  `pages` int(11) DEFAULT NULL,
+  `pages` int(11) NOT NULL,
   `cover` varchar(100) NOT NULL DEFAULT 'default.png',
   `douban_link` varchar(100) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,

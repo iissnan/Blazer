@@ -15,9 +15,7 @@
     <form action="add.php" method="post" enctype="multipart/form-data"
           id="J_FormAdd" class="form-horizontal">
 
-        <div class="form-divider">
-            关键信息
-        </div>
+        <div class="form-divider">关键信息</div>
 
         <div class="control-group">
             <label for="title" class="control-label">标题</label>
@@ -27,6 +25,15 @@
                 <span class="label label-important">必填</span>
             </div>
         </div>
+
+        <div class="control-group">
+            <label class="control-label" for="pages">页数</label>
+            <div class="controls">
+                <input type="text" name="pages" id="pages" class="input-xlarge" />
+                <span class="label label-important">必填</span>
+            </div>
+        </div>
+
         <div class="control-group">
             <label for="author" class="control-label">作者</label>
             <div class="controls">
@@ -42,21 +49,17 @@
             </div>
         </div>
 
-        <div class="control-group">
-            <label class="control-label" for="pages">页数</label>
-            <div class="controls">
-                <input type="text" name="pages" id="pages" class="input-xlarge" />
-            </div>
-        </div>
+
 
         <div class="form-divider">
             选填信息
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="intro">内容简介</label>
+            <label for="category" class="control-label">类别</label>
             <div class="controls">
-                <textarea name="intro" id="intro" rows="6" class="input-xlarge"></textarea>
+                <input type="text" name="category" id="category" value="{$category}"
+                       class="input-xlarge"/>
             </div>
         </div>
 
@@ -69,10 +72,9 @@
         </div>
 
         <div class="control-group">
-            <label for="category" class="control-label">类别</label>
+            <label class="control-label" for="intro">内容简介</label>
             <div class="controls">
-                <input type="text" name="category" id="category" value="{$category}"
-                       class="input-xlarge"/>
+                <textarea name="intro" id="intro" rows="6" class="input-xlarge"></textarea>
             </div>
         </div>
 
