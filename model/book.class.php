@@ -22,6 +22,13 @@ class BookModel extends DatabaseManipulate{
         return parent::execute();
     }
 
+    public function update($data) {
+        $cover = $data["cover"];
+        $cover = is_array($cover) ? $this->handle_cover($cover) : $cover;
+        $data["cover"] = $cover;
+        return parent::update($data);
+    }
+
     /**
      * 添加分类
      *
