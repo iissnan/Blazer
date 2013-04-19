@@ -88,11 +88,13 @@ class DatabaseManipulate {
         empty($table) and $table = $this->table;
         if (is_array($update_data) && count($update_data) > 0) {
             $index = 0;
+            $format_data = "";
             foreach ($update_data as $column=>$value) {
                 $value = self::$conn->real_escape_string($value);
-                $format_data = $index == 0 ?
-                    "$column='$value'" :
-                    ", $column='$value'";
+                $format_data = $format_data . ($index == 0 ?
+                    "`$column`='$value'" :
+                    ", `$column`='$value'");
+                $index++;
             }
             $this->query = "UPDATE $table SET $format_data WHERE 1";
         }
@@ -186,11 +188,12 @@ class DatabaseManipulate {
     /**
      * 获取表数据的总数
      *
+     * @param string $where
      * @return int
      */
-    public function get_total() {
+    public function get_total($where="1") {
         $total = 0;
-        $query_result = $this->select("COUNT(*) AS total", $this->table)->execute();
+        $query_result = $this->select("COUNT(*) AS total", $this->table)->where($where)->execute();
         $query_result and $total = $query_result->fetch_object()->total;
         return $total;
     }
