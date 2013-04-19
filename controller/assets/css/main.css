@@ -18,6 +18,10 @@ table caption{
     padding: 10px 0;
 }
 
+table .progress{
+    margin-bottom: 0;
+}
+
 
 
 .wrap{

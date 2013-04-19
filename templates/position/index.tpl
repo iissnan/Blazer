@@ -24,16 +24,12 @@
 {/block}
 {block "content"}
     {if $total > 0}
-        正在阅读{$total}本书...
-
         <table class="position-list table table-striped">
-            <caption>进度列表</caption>
             <thead>
                 <tr>
                     <th>书籍封面</th>
                     <th>书籍标题</th>
-                    <th style="width: 120px;">进度</th>
-                    <th>时间</th>
+                    <th style="width: 120px;">进度@时间</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -53,12 +49,12 @@
                         <div class="progress progress-striped active">
                             <div class="bar"
                                  style="width: {$position->position|escape:'html'/$position->pages * 100}%;">
-                             </div>
+                            </div>
                         </div>
+                        <span class="label">{$position->create_at|escape:'html'}</span>
                     </td>
-                    <td>{$position->create_at|escape:'html'}</td>
                     <td>
-                        <a href="/position.php?id={$position->id}" class="btn btn-danger btn-mini">删除</a>
+                        <a href="/position.php?id={$position->id}" class="btn btn-danger btn-mini">&times;</a>
                     </td>
                 </tr>
             {/while}

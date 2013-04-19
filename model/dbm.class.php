@@ -125,7 +125,7 @@ class DatabaseManipulate {
      * @return $this
      */
     public function order_by($column) {
-        $this->query .= " ORDER BY $column";
+        $this->query .= " ORDER BY $column DESC";
         return $this;
     }
     public function limit($row_count, $offset=0) {

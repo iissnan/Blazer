@@ -35,9 +35,7 @@
                 );
                 $insert_result = $model->insert($new_position)->execute();
                 if ($insert_result) {
-                    $show_alert = true;
-                    $alert_mode = "alert-success";
-                    $alert_message = "添加成功";
+                    header("location: /position/add.php?book_id=$book_id&source=add&code=1");
                 } else {
                     $error = true;
                     $alert_message = "执行数据插入失败";
@@ -52,30 +50,45 @@
             $error = true;
             $alert_message = "参数无效";
         } else {
-            $smarty->assign("book_id", $book_id);
-            $model = new DatabaseManipulate("positions");
-            $join_query = $model->select("*", "books, positions")
-                                ->where("`positions`.`user_id`='$user->id'")
-                                ->where("`positions`.`book_id`='$book_id'")
-                                ->where("books.id=positions.book_id")
-                                ->execute();
 
-            if ($join_query && $join_query->num_rows > 0) {
-                $smarty->assign("book_info", $join_query->fetch_object());
+            if ($_GET["code"] === "1") {
+                $show_alert = true;
+                $alert_mode = "alert-success";
+                switch ($_GET["source"]){
+                    case "add":
+                        $alert_message = "添加成功"; break;
+                }
+            }
 
-                // 重置结果指针
-                $join_query->data_seek(0);
-                $smarty->assign("positions", $join_query);
+            // 获取书籍信息
+            $book_model = new BookModel();
+            $book_result = $book_model->get_item("id", $book_id);
+            if ($book_result && $book_result->num_rows > 0) {
+
+                $smarty->assign("book", $book_result->fetch_object());
+
+                // 获取进度信息
+                $model = new DatabaseManipulate("positions");
+                $join_query = $model->select("*")
+                                    ->where("`user_id`='$user->id'")
+                                    ->where("`book_id`='$book_id'")
+                                    ->order_by("id")
+                                    ->execute();
+
+                if ($join_query && $join_query->num_rows > 0) {
+                    $smarty->assign("positions", $join_query);
+                }
+            } else {
+                $error = true;
+                $alert_message = "未找到请求的书籍信息";
             }
         }
     }
 
-    $alert = "<div class='alert $alert_mode'>$alert_message</div>";
-    if ($error) {
-        $smarty->assign("error", $error);
-        $smarty->assign("alert", $alert);
-    }
-    $show_alert and $smarty->assign("alert", $alert);
+    $smarty->assign("error", $error);
+    $smarty->assign("show_alert", $show_alert);
+    $smarty->assign("alert_mode", $alert_mode);
+    $smarty->assign("alert_message", $alert_message);
     $smarty->assign("user", $user);
     $smarty->display("position/add.tpl");
 
