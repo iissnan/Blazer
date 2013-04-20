@@ -1,11 +1,10 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../include/auth.php");
-    require_once("../include/smarty.php");
-    require_once("../include/paginator.class.php");
-    require_once("../model/book.class.php");
-    require_once("../vendor/recaptchalib.php");
+    require_once("require.global.php");
+    require_once(FUNCTION_DIR . "/paginator.class.php");
+    require_once(MODEL_DIR . "/book.class.php");
+    require_once(VENDOR_DIR . "/recaptchalib.php");
 
     $book_model = new BookModel();
     $books_total = $book_model->get_total();

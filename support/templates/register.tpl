@@ -40,7 +40,7 @@
                     <div class="arrow"></div>
                     <div class="popover-content">
                         密码要求包含 <span class="label label-important">字母和数字</span>
-                        <br />并且至少要<span class="label label-important">8</span> 位以上
+                        <br />并且至少要<span class="label label-important">6</span> 位以上
                     </div>
                 </div>
             </div>

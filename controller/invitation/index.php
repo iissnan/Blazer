@@ -1,12 +1,10 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../../include/auth.php");
-    redirect_unless_login("../login.php");
-
-    require_once("../../include/smarty.php");
-    require_once("../../model/invitation.class.php");
-    require_once("../../include/paginator.class.php");
+    require_once("../require.global.php");
+    redirect_unless_login("/login.php");
+    require_once(MODEL_DIR . "/invitation.class.php");
+    require_once(FUNCTION_DIR . "/paginator.class.php");
 
     $invitation_model = new InvitationModel();
     $page = !isset($_GET["page"]) ? 1 : $_GET["page"];

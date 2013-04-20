@@ -1,10 +1,8 @@
 <?php
     session_start();
-    require_once("../../include/auth.php");
+    require_once("../require.global.php");
     redirect_unless_login("/login.php");
-
-    require_once("../../include/smarty.php");
-    require_once("../../model/dbm.class.php");
+    require_once(MODEL_DIR . "/dbm.class.php");
 
     $alert_mode = "alert-error";
     $alert_message = "";

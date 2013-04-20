@@ -1,11 +1,10 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../../include/auth.php");
-    redirect_unless_login("../login.php");
+    require_once("../require.global.php");
+    redirect_unless_login("/login.php");
 
-    require_once("../../include/smarty.php");
-    require_once("../../model/book.class.php");
+    require_once(MODEL_DIR . "/book.class.php");
 
     $smarty->assign("page_title", "删除书籍");
     $smarty->assign("user", $_SESSION["user"]);

@@ -1,11 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../../include/auth.php");
-    redirect_unless_login("../login.php");
-
-    require_once("../../include/smarty.php");
-    require_once("../../model/book.class.php");
+    require_once("../require.global.php");
+    redirect_unless_login("/login.php");
+    require_once(MODEL_DIR . "/book.class.php");
 
     $smarty->assign("page_title", "添加书籍");
     $smarty->assign("user", $_SESSION["user"]);
@@ -40,7 +38,6 @@
             $book_data = array(
                 "title" => $title,
                 "isbn" => $isbn,
-                "cover" => $cover,
                 "intro" => $intro,
                 "pages" => intval($pages),
                 "douban_link" => $douban_link,
@@ -48,6 +45,8 @@
                 "update_at" => date("Y-m-d H:i:s"),
                 "creator" => $_SESSION["user"]->id
             );
+
+            !empty($cover["size"]) and $book_data["cover"] = $cover;
 
             $result = $book_model->add($book_data);
             if ($result) {

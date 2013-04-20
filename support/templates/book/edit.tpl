@@ -16,7 +16,7 @@
 
     {$alert}
     {if $error}
-        <p><a href='index.php'>返回列表</a></p>
+        <p><a href='/index.php'>返回书籍列表</a></p>
     {else}
         <form action="edit.php" method="post" enctype="multipart/form-data"
               id="J_FormAdd" class="form-horizontal">

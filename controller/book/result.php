@@ -1,10 +1,8 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../../include/auth.php");
-    redirect_unless_login("../login.php");
-
-    require_once("../../include/smarty.php");
+    require_once("../require.global.php");
+    redirect_unless_login("/login.php");
 
     $action = $_GET["action"];
     $code = $_GET["code"];

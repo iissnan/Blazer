@@ -16,7 +16,7 @@ function is_login() {
         require_once(__DIR__ . "/../model/user.class.php");
 
         $user_model = new UserModel();
-        list($email, $password) = explode("|", $_COOKIE["bs_auth"]);
+        list($email, $password) = explode("|", $_COOKIE["auth"]);
         $user = $user_model->get($email, $password);
         if ($user->error != 0) {
             return false;

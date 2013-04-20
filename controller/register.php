@@ -1,12 +1,10 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../include/auth.php");
+    require_once("require.global.php");
     is_login() and header("location: index.php");
-
-    require_once("../include/smarty.php");
-    require_once("../model/user.class.php");
-    require_once("../model/invitation.class.php");
+    require_once(MODEL_DIR . "/user.class.php");
+    require_once(MODEL_DIR . "/invitation.class.php");
 
     $alert_mode = "alert-error";
     $alert_message = "";

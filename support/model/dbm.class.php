@@ -1,6 +1,5 @@
 <?php
 
-require_once(__DIR__ . "/../include/app.config.php");
 require_once("dbc.class.php");
 
 /**

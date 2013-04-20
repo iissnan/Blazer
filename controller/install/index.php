@@ -2,10 +2,8 @@
     session_start();
     header("Content-Type: text/html; charset=utf-8");
 
-    require_once("../../include/app.config.php");
-    require_once("../../include/auth.php");
-    require_once("../../include/smarty.php");
-    require_once("../../model/dbc.class.php");
+    require_once("../require.global.php");
+    require_once(MODEL_DIR . "/dbc.class.php");
 
     $good_to_go = true;
     $result_string = "";
@@ -21,10 +19,10 @@
     $result_string .= "<p>正在确认目录可读写性...</p>";
     $writable_result = "<ul>";
     $dir_array = array(
-        "templates_c" => __DIR__ . "/../../templates_c",
-        "cache" => __DIR__ . "/../../cache",
-        "avatar" => __DIR__ . "/../assets/avatar",
-        "cover" => __DIR__ . "/../assets/cover"
+        "templates_c" => $smarty->getCompileDir(),
+        "cache" => $smarty->getCacheDir(),
+        "avatar" => AVATAR_DIR,
+        "cover" => COVER_DIR
     );
 
     $string_writable = "<span class='label label-success'><i class='icon-ok icon-white'></i></span>";

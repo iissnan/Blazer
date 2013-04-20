@@ -1,11 +1,9 @@
 <?php
     session_start();
     header("Content-Type: text/html; charset=utf-8");
-    require_once("../../include/auth.php");
-    redirect_unless_login("../login.php");
-
-    require_once("../../include/smarty.php");
-    require_once("../../model/invitation.class.php");
+    require_once("../require.global.php");
+    redirect_unless_login("/login.php");
+    require_once(MODEL_DIR . "/invitation.class.php");
 
     if ($_SESSION["user"]->group == "admin") {
         $inv = new InvitationModel();

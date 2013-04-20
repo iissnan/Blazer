@@ -15,9 +15,13 @@ class BookModel extends DatabaseManipulate{
     }
 
     public function add($data) {
-        $cover = $data["cover"];
-        $cover = is_array($cover) ? $this->handle_cover($cover) : $cover;
-        $data["cover"] = $cover;
+
+        // 封面处理
+        if (isset($data["cover"])) {
+            $cover = $data["cover"];
+            $cover = is_array($cover) ? $this->handle_cover($cover) : $cover;
+            $data["cover"] = $cover;
+        };
         parent::insert($data);
         return parent::execute();
     }

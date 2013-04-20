@@ -1,11 +1,10 @@
 <?php
     session_start();
-    require_once("../../include/auth.php");
+    require_once("../require.global.php");
     redirect_unless_login("/login.php");
-    require_once("../../include/smarty.php");
-    require_once("../../model/user.class.php");
-    require_once("../../model/book.class.php");
-    require_once("../../include/paginator.class.php");
+    require_once(MODEL_DIR . "/user.class.php");
+    require_once(MODEL_DIR . "/book.class.php");
+    require_once(FUNCTION_DIR . "/paginator.class.php");
 
     $user = $_SESSION["user"];
     $position_model = new DatabaseManipulate("positions");
