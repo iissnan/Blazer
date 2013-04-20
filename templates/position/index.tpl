@@ -23,6 +23,7 @@
     </div>
 {/block}
 {block "content"}
+    {include "include/alert.tpl"}
     {if $total > 0}
         <table class="position-list table table-striped">
             <thead>
@@ -37,7 +38,8 @@
                 <tr>
                     <td>
                         <a href="/book/detail.php?id={$position->book_id}">
-                            <img src="/assets/cover/{$position->cover}" width="60" alt="{$position->title|escape:'html'}"/>
+                            <img src="/assets/cover/{$position->cover}" width="60"
+                                 alt="{$position->title|escape:'html'}"/>
                         </a>
                     </td>
                     <td>
@@ -54,7 +56,8 @@
                         <span class="label">{$position->create_at|escape:'html'}</span>
                     </td>
                     <td>
-                        <a href="/position.php?id={$position->id}" class="btn btn-danger btn-mini">&times;</a>
+                        <a href="/position/delete.php?id={$position->id}"
+                           class="btn btn-danger btn-mini action-position-delete">&times;</a>
                     </td>
                 </tr>
             {/while}
@@ -64,4 +67,12 @@
     {/if}
 {/block}
 {block "sidebar"}{/block}
-{block "footer_link"}{/block}
+{block "footer_link"}
+    {literal}
+        <script type="text/javascript">
+            $(".action-position-delete").on("click", function(){
+                return window.confirm("确认删除此条进度信息?");
+            });
+        </script>
+    {/literal}
+{/block}

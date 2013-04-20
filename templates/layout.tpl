@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{$page_title} - Bookshelf</title>
+    <title>{$page_title} - 6unt</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/css/gbootstrap.css"/>
@@ -16,7 +16,7 @@
         <div class="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">
-                    <a href="index.php" class="brand">
+                    <a href="/" class="brand">
                         <img src="/assets/img/logo.png" alt="6unit"/>
                     </a>
                     {*
@@ -34,7 +34,7 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/user/favorite.php">我的收藏</a></li>
-                                    <li><a href="/user/index.php">账户设置</a></li>
+                                    <li><a href="/user/index.php">我的账户</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/logout.php">退出登录</a></li>
                                 </ul>

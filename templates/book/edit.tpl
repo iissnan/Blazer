@@ -23,7 +23,7 @@
             <input type="hidden" name="id" value="{$book->id}"/>
 
             <div class="form-divider">
-                <span class="label label-info">关键信息</span>
+                关键信息
             </div>
 
             <div class="control-group">
@@ -62,7 +62,7 @@
 
 
             <div class="form-divider">
-                <span class="label label-info">选填信息</span>
+                选填信息
             </div>
 
             <div class="control-group">
