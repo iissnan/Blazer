@@ -36,9 +36,8 @@
                                                 ->execute();
             $authors = array();
             if ($author_query_result && $author_query_result->num_rows > 0) {
-                $authors_raw = $author_query_result->fetch_all();
-                foreach ($authors_raw as $author) {
-                    array_push($authors, $author[0]);
+                while($author = $author_query_result->fetch_object()) {
+                    array_push($authors, $author->name);
                 }
             }
             $authors = join(", ", $authors);
@@ -52,9 +51,8 @@
                                                 ->execute();
             $categories = array();
             if ($category_query_result && $category_query_result->num_rows > 0) {
-                $categories_raw = $category_query_result->fetch_all();
-                foreach ($categories_raw as $category) {
-                    array_push($categories, $category[0]);
+                while($category = $category_query_result->fetch_object()) {
+                    array_push($categories, $category->name);
                 }
             }
             $categories = join(", ", $categories);

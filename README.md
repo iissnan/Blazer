@@ -12,6 +12,7 @@
 
 ###安装步骤：
 
+0. 在MySQL中导入`sql/db.sql`
 1. 在`controller/app.config.php`中配置 `MySQL` 数据库连接信息
 2. 在`controller/app.config.php`中配置 `Google reCaptcha` API 密钥
 3. 获取前端依赖的库：`bower install`

@@ -29,6 +29,7 @@
             $book = $books_rs->fetch_array();
 
             // 获取作者信息
+            /*
             $category_result = $category_model->select("*", "categories, books_categories")
                                               ->where("books_categories.book_id=" . $book["id"])
                                               ->where("books_categories.category_id=categories.id")
@@ -40,8 +41,10 @@
                 }
                 $book["category"] = join(",", $categories);
             }
+            */
 
             // 获取分类信息
+            /*
             $author_result = $author_model->select("*", "authors, books_authors")
                                           ->where("books_authors.book_id=" . $book["id"])
                                           ->where("books_authors.author_id=authors.id")
@@ -53,6 +56,7 @@
                     $book["author"] = join(",", $authors);
                 }
             }
+            */
             array_push($books, $book);
         }
     }
