@@ -25,8 +25,8 @@
     </div>
 {/block}
 {block "content"}
+    {include "include/alert.tpl"}
     {if $error}
-        {$alert}
         <ul>
             <li><a href="/index.php">返回首页</a></li>
             <li><a href="/user/favorite.php">我的藏书</a></li>

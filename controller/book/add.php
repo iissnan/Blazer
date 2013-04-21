@@ -60,7 +60,7 @@
                 $isProcessWell = $book_model->add_author($book_id, $author);
 
                 if ($isProcessWell) {
-                    echo "<script>location.href = 'result.php?action=add&code=" . $result . "';</script>";
+                    header("location: /book/detail.php?id=$book_id&source=add&code=1");
                 } else {
                     $alert = "<div class='alert alert-error' id='alert'>" . $book_model->get_last_error() . "</div>";
                     $smarty->assign("alert", $alert);

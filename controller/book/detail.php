@@ -11,6 +11,7 @@
     $alert_mode = "alert-error";
     $alert_message = "";
     $error = false;
+    $show_alert = false;
 
     // 获取书籍
     $book_id = isset($_GET["id"]) ? $_GET["id"] : false;
@@ -59,15 +60,29 @@
             $book->category = $categories;
 
             $smarty->assign("book", $book);
+
+            if (isset($_GET["code"]) && $_GET["code"] == "1") {
+                if (isset($_GET["source"])) {
+                    switch ($_GET["source"]) {
+                        case "add":
+                            $alert_mode = "alert-success";
+                            $alert_message = "添加成功";
+                            $show_alert = true;
+                    }
+
+                }
+            }
+
         } else {
             $alert_message = "未能找到相关书籍";
             $error = true;
         }
     }
 
-    $alert = "<div class='alert $alert_mode'>$alert_message</div>";
-    $error and $smarty->assign("alert", $alert);
     $smarty->assign("error", $error);
+    $smarty->assign("show_alert", $show_alert);
+    $smarty->assign("alert_mode", $alert_mode);
+    $smarty->assign("alert_message", $alert_message);
     $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("page_title", $page_title);
     $smarty->display("book/detail.tpl");
