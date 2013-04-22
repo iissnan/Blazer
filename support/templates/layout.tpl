@@ -19,11 +19,9 @@
                     <a href="/" class="brand">
                         <img src="/assets/img/logo.png" alt="6unit"/>
                     </a>
-                    {*
                     <ul class="nav">
-                        <li><a href="/index.php">书架</a>
+                        <li><a href="/tag/index.php">标签</a>
                     </ul>
-                    *}
                     <ul class="nav pull-right">
                         {if $is_login}
                             <li><a href="/position/index.php">阅读进度</a></li>

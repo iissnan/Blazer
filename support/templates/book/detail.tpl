@@ -39,7 +39,12 @@
                 <p class="author">作者：{$book->author|escape:'html'}</p>
                 <p>ISBN: {$book->isbn|escape:'html'}</p>
                 <p>页数：{$book->pages|escape:'html'}</p>
-                <p>类别：{$book->category|escape:'html'}</p>
+                <p>
+                    类别：
+                    {foreach $book->category as $category}
+                        <a href="/tag/tag.php?tagname={$category|escape:'html'}">{$category|escape:'html'}</a>
+                    {/foreach}
+                </p>
                 {if $book->douban_link|escape:'html'}
                     <p><a href="{$book->douban_link|escape:'html'}" target="_blank">豆瓣链接</a></p>
                 {/if}

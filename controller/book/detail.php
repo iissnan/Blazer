@@ -55,7 +55,7 @@
                     array_push($categories, $category->name);
                 }
             }
-            $categories = join(", ", $categories);
+            //$categories = join(", ", $categories);
             $book->category = $categories;
 
             $smarty->assign("book", $book);

@@ -67,7 +67,7 @@ class DatabaseManipulate {
             // 过滤输入
             $values_clean = array();
             foreach ($values_raw as $value) {
-                array_push($values_clean, "'" . self::$conn->real_escape_string($value) . "'");
+                array_push($values_clean, "'" . $this->escape($value) . "'");
             }
 
             $values = join(",", $values_clean);
@@ -218,6 +218,16 @@ class DatabaseManipulate {
      */
     public function get_last_error() {
         return self::$conn->error;
+    }
+
+    /**
+     * 过滤string
+     *
+     * @param $string
+     * @return string
+     */
+    public function escape($string) {
+        return self::$conn->real_escape_string($string);
     }
 
     /**
