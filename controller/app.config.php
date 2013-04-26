@@ -44,3 +44,6 @@ define("AVATAR_DIR", __DIR__ . "/assets/avatar");
 
 // 书籍封面存储目录
 define("COVER_DIR", __DIR__ . "/assets/cover");
+
+// 版本
+define("VERSION", "0.1.0");
