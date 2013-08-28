@@ -221,6 +221,15 @@ class DatabaseManipulate {
     }
 
     /**
+     * 获取最后一个mysql执行语句的错误id
+     *
+     * @return mixed
+     */
+    public function get_last_error_no() {
+        return self::$conn->errno;
+    }
+
+    /**
      * 过滤string
      *
      * @param $string

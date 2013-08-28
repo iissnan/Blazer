@@ -5,11 +5,6 @@
     require_once(MODEL_DIR . "/user.class.php");
     require_once(MODEL_DIR . "/book.class.php");
 
-
-    $alert_mode = "alert-error";
-    $alert_message = "";
-    $error = false;
-
     $view_user = false;
     $view_user_id = !empty($_GET["id"]) ? $_GET["id"] : 0;
     if ($view_user_id !== 0) {
@@ -23,9 +18,7 @@
                 $is_self = true;
             }
         } else {
-            $error = true;
-            $alert_mode = "alert-warning";
-            $alert_message = "未找到所请求的用户";
+            $alert->set_message("未找到所请求的用户")->show();
         }
     } else {
         $user = $_SESSION["user"];
@@ -52,9 +45,7 @@
         $smarty->assign("page_title", "未找到用户");
     }
 
-    $smarty->assign("error", $error);
-    $smarty->assign("alert_mode", $alert_mode);
-    $smarty->assign("alert_message", $alert_message);
+    $smarty->assign("alert", $alert);
     $smarty->assign("is_self", $is_self);
     $smarty->assign("view_user", $view_user);
     $smarty->assign("user", $user);

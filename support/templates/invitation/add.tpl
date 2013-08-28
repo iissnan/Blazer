@@ -19,8 +19,8 @@
     </div>
 {/block}
 {block name="content"}
-    <p class="alert alert-{$alert_mode}">添加{$result}</p>
-    {if $alert_mode == "success"}
+    {include file="include/alert.tpl"}
+    {if $invitation}
         <p>
             新生成的邀请码： <span class="label label-info">{$invitation}</span><br />
             个数： <span class="label label-important">5</span>

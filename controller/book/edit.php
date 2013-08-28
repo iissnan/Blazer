@@ -40,11 +40,11 @@
         );
 
         if ($title == "" || empty($pages)) {
-            $alert = "<div class='alert alert-error' id='alert'>请输入书籍标题</div>";
-            $alert = "<div class='alert alert-error' id='alert'>请输入书籍总页数</div>";
+            $title == "" and $alert->set_message("请输入书籍标题");
+            empty($pages) and $alert->set_message("请输入书籍总页数");
             $book["id"] = $id;
             $book = (object)$book;
-            $smarty->assign("alert", $alert);
+
             $smarty->assign("book", $book);
             $smarty->display("book/edit.tpl");
         } else {
@@ -55,11 +55,9 @@
             if ($result) {
                 $book_model->update_category($id, $category);
                 $book_model->update_author($id, $author);
-
-
                echo "<script>location.href='result.php?action=edit&code=" . $result . "';</script>";
             } else {
-                $alert = "<div class='alert alert-error' id='alert'>更新失败</div>";
+                $alert->set_message("更新失败")->show();
                 $smarty->assign("alert", $alert);
                 $smarty->display("book/edit.tpl");
             }
@@ -111,14 +109,12 @@
                 $smarty->assign("book", $book);
                 $smarty->display("book/edit.tpl");
             } else {
-                $alert = "<div class='alert alert-error' id='alert'>书籍未找到</div>";
-                $smarty->assign("error", true);
+                $alert->set_message("书籍未找到")->show();
                 $smarty->assign("alert", $alert);
                 $smarty->display("book/edit.tpl");
             }
         } else {
-            $alert = "<div class='alert alert-error' id='alert'>id参数丢失</div>";
-            $smarty->assign("error", true);
+            $alert->set_message("id参数丢失");
             $smarty->assign("alert", $alert);
             $smarty->display("book/edit.tpl");
         }

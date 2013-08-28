@@ -17,9 +17,8 @@
     </div>
 {/block}
 {block "main"}
+    {include file="include/alert.tpl"}
     <form action="register.php" method="post" class="J_RegisterForm">
-            {$alert}
-
             <div class="control-group">
                 <label for="email" class="control-label">登录邮箱</label>
                 <input type="text" name="email" id="email"

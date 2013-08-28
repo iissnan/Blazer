@@ -1,5 +1,6 @@
 <?php
     session_start();
+    !isset($_SESSION["user"]) and header("location: /login.php");
     unset($_SESSION["user"]);
     session_destroy();
     setcookie("auth", "", time() - 1);

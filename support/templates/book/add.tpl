@@ -11,7 +11,7 @@
     </div>
 {/block}
 {block name="content"}
-    {$alert}
+    {include file="include/alert.tpl"}
     <form action="add.php" method="post" enctype="multipart/form-data"
           id="J_FormAdd" class="form-horizontal">
 

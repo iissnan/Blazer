@@ -12,7 +12,7 @@
 {/block}
 {block "main"}
     <form action="login.php" method="post" class="J_LoginForm">
-        {$alert}
+        {include file="include/alert.tpl"}
         <div class="control-group">
             <label for="email" class="control-label">登录邮箱</label>
             <input type="text" name="email" id="email"

@@ -1,6 +1,6 @@
-{if $error || $show_alert}
-    <div class="alert {$alert_mode}">
+{if $alert and $alert->is_display() }
+    <div class="alert {$alert->get_mode()}">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {$alert_message}
+        {$alert->get_message()}
     </div>
 {/if}

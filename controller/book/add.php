@@ -20,8 +20,9 @@
 
         // title为必需值
         if ($title == "" || empty($pages)) {
-            $title == "" and $alert = "<div class='alert alert-error' id='alert'>请输入书籍标题</div>";
-            empty($pages) and $alert = "<div class='alert alert-error' id='alert'>请输入书籍总页数</div>";
+            $title == "" and $alert->set_message("请输入书籍标题");
+            empty($pages) and $alert->set_message("请输入书籍总页数");
+            $alert->show();
             $smarty->assign("alert", $alert);
             $smarty->assign(array(
                 "title" => $title,
@@ -62,12 +63,18 @@
                 if ($isProcessWell) {
                     header("location: /book/detail.php?id=$book_id&source=add&code=1");
                 } else {
-                    $alert = "<div class='alert alert-error' id='alert'>" . $book_model->get_last_error() . "</div>";
+                    $alert->set_message($book_model->get_last_error())->show();
                     $smarty->assign("alert", $alert);
                     $smarty->display("book/add.tpl");
                 }
             } else {
-                $alert = "<div class='alert alert-error' id='alert'>" . $book_model->get_last_error() . "</div>";
+                if ($book_model->get_last_error_no() == 1062) {
+                    $alert->set_message("相同标题的书籍已存在");
+                } else {
+                    $alert->set_message($book_model->get_last_error());
+                }
+                $alert->show();
+
                 $smarty->assign("alert", $alert);
                 $smarty->display("book/add.tpl");
             }

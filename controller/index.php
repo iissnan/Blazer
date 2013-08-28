@@ -81,7 +81,7 @@
 
     $smarty->assign("total", $books_total);
     $smarty->assign("books", $books);
-    $smarty->assign("page_title", "书籍一览");
+    $smarty->assign("page_title", "书架");
     $smarty->display("index.tpl");
 
     $book_model->release();

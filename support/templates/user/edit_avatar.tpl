@@ -22,8 +22,7 @@
     </div>
 {/block}
 {block name="content"}
-
-    {$alert}
+    {include file="include/alert.tpl"}
     <form action="edit_avatar.php" method="post" enctype="multipart/form-data" class="form-inline">
         <div class="current-avatar">
             <span>当前头像：</span>

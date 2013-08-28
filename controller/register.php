@@ -6,10 +6,6 @@
     require_once(MODEL_DIR . "/user.class.php");
     require_once(MODEL_DIR . "/invitation.class.php");
 
-    $alert_mode = "alert-error";
-    $alert_message = "";
-    $error = false;
-
     $is_first_user = !empty($_SESSION["first_user"]);
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
@@ -19,22 +15,23 @@
         $username = isset($_POST["username"]) ? trim($_POST["username"]) : "";
         $invitation = isset($_POST["username"]) ? trim($_POST["invitation"]) : "";
 
+        $error = false;
 
         if ($username == "") {
             $error = true;
-            $alert_message = "用户名不能为空";
+            $alert->add_message("用户名不能为空<br />");
         } else if (!preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
             $error = true;
-            $alert_message = "登录邮箱不正确";
+            $alert->add_message("登录邮箱不正确<br />");
         } else if (!preg_match("/[-_a-zA-Z0-9\.#,]{6,}/", $password)) {
             $error = true;
-            $alert_message = "登录密码不正确";
+            $alert->add_message("登录密码不正确<br />");
         } else if ($password != $re_password) {
             $error = true;
-            $alert_message = "确认密码不匹配";
+            $alert->add_message("确认密码不匹配<br />");
         } else if ($invitation == "" && !$is_first_user) { // 安装时首次注册不进行邀请码校验
             $error = true;
-            $alert_message = "请输入邀请码";
+            $alert->add_message("请输入邀请码<br />");
         }
 
         if (!$error) {
@@ -59,20 +56,18 @@
                 }
             } else {
                 $error = true;
-                $alert_message = "注册失败了，服务器在开小差...:<br />" . $user_model->get_last_error();
+                $alert->set_message("注册失败了:<br />" . $user_model->get_last_error())->show();
             }
         } else {
+            $alert->show();
+            $smarty->assign("alert", $alert);
             $smarty->assign("email", $email);
             $smarty->assign("username", $username);
             $smarty->assign("invitation", $invitation);
         }
     }
 
-    if ($error) {
-        $alert = "<div class='alert $alert_mode' id='alert'>$alert_message</div>";
-        $smarty->assign("alert", $alert);
-    }
-
+    $smarty->assign("alert", $alert);
     $smarty->assign("page_title", "帐号注册");
     $smarty->assign("page_class", "register");
     $smarty->assign("is_first_user", $is_first_user);

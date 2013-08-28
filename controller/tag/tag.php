@@ -6,10 +6,6 @@
     isset($_SESSION["user"]) and $user = $_SESSION["user"];
 
     $tag_name = isset($_GET["tagname"]) ? $_GET["tagname"] : "";
-    $alert_mode = "alert-error";
-    $alert_message = "";
-    $error = false;
-    $show_alert = false;
 
     if (!empty($tag_name)) {
 
@@ -26,20 +22,16 @@
         if ($book_query && $book_query->num_rows > 0) {
             $smarty->assign("books", $book_query);
         } else{
-            $alert_mode = "alert-info";
-            $alert_message = "未找到与 {<strong>" . htmlspecialchars($tag_name). "</strong>} 相关的书籍";
-            $error = true;
+            $alert->set_mode("info")
+                ->set_message("未找到与 {<strong>" . htmlspecialchars($tag_name). "</strong>} 相关的书籍")
+                ->show();
         }
 
     } else {
-        $error = true;
-        $alert_message = "标签参数无效";
+        $alert->set_message("标签参数无效");
     }
 
-    $smarty->assign("error", $error);
-    $smarty->assign("show_alert", $show_alert);
-    $smarty->assign("alert_mode", $alert_mode);
-    $smarty->assign("alert_message", $alert_message);
+    $smarty->assign("alert", $alert);
     $smarty->assign("tag_name", $tag_name);
     $smarty->assign("user", $user);
     $smarty->assign("page_title", "图书标签:" . htmlspecialchars($tag_name));

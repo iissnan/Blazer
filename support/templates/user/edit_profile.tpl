@@ -15,12 +15,12 @@
     </div>
 {/block}
 {block name="content"}
-    {$alert}
+    {include file="include/alert.tpl"}
     <form action="edit_profile.php" method="post" class="form-horizontal">
         <div class="control-group">
             <label class="control-label" for="email">登录邮箱</label>
             <div class="controls">
-                <input type="text" disabled="disabled" value="{$user->email|escape:'email'}" />
+                <input type="text" id="email" readonly="readonly" value="{$user->email|escape:'email'}" />
             </div>
         </div>
         <div class="control-group">

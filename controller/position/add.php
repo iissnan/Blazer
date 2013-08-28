@@ -4,10 +4,6 @@
     redirect_unless_login("/login.php");
     require_once(MODEL_DIR . "/book.class.php");
 
-    $alert_mode = "alert-error";
-    $alert_message = "";
-    $error = false;
-
     $user = $_SESSION["user"];
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
@@ -16,12 +12,10 @@
         $note = isset($_SESSION["position_note"]) ? $_SESSION["position_note"] : "";
 
         if (empty($book_id)) {
-            $error = true;
-            $alert_message = "书籍ID无效";
+            $alert->set_message("书籍ID无效")->show();
         } else {
             if (empty($position)) {
-                $error = true;
-                $alert_message = "进度不能为空或者0";
+                $alert->set_message("进度不能为空或者0")->show();
             } else {
                 $model = new DatabaseManipulate("positions");
 
@@ -36,8 +30,7 @@
                 if ($insert_result) {
                     header("location: /position/add.php?book_id=$book_id&source=add&code=1");
                 } else {
-                    $error = true;
-                    $alert_message = "执行数据插入失败";
+                    $alert->set_message("执行数据插入失败")->show();
                 }
             }
         }
@@ -46,16 +39,14 @@
         // 获取书籍ID
         $book_id = isset($_GET["book_id"]) ? intval($_GET["book_id"]) : "";
         if (empty($book_id)) {
-            $error = true;
-            $alert_message = "参数无效";
+            $alert->set_message("参数无效")->show();
         } else {
 
             if ($_GET["code"] === "1") {
-                $show_alert = true;
-                $alert_mode = "alert-success";
                 switch ($_GET["source"]){
                     case "add":
-                        $alert_message = "添加成功"; break;
+                        $alert->set_mode("pass")->set_message("添加成功")->show();
+                        break;
                 }
             }
 
@@ -78,16 +69,12 @@
                     $smarty->assign("positions", $join_query);
                 }
             } else {
-                $error = true;
-                $alert_message = "未找到请求的书籍信息";
+                $alert->set_message("未找到请求的书籍信息")->show();
             }
         }
     }
 
-    $smarty->assign("error", $error);
-    $smarty->assign("show_alert", $show_alert);
-    $smarty->assign("alert_mode", $alert_mode);
-    $smarty->assign("alert_message", $alert_message);
+    $smarty->assign("alert", $alert);
     $smarty->assign("user", $user);
     $smarty->display("position/add.tpl");
 

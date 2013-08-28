@@ -8,16 +8,11 @@
 
     // 变量初始化
     $page_title = "未找到书籍";
-    $alert_mode = "alert-error";
-    $alert_message = "";
-    $error = false;
-    $show_alert = false;
 
     // 获取书籍
     $book_id = isset($_GET["id"]) ? $_GET["id"] : false;
     if ($book_id === false) {
-        $alert_message = "书籍 id 参数无效";
-        $error = true;
+        $alert->set_message("书籍 id 参数无效")->show();
     } else {
         $book_model = new BookModel();
         $book_query_result = $book_model->get_item("id", $book_id);
@@ -65,24 +60,17 @@
                 if (isset($_GET["source"])) {
                     switch ($_GET["source"]) {
                         case "add":
-                            $alert_mode = "alert-success";
-                            $alert_message = "添加成功";
-                            $show_alert = true;
+                            $alert->set_mode("pass")->set_message("添加成功")->show();
                     }
 
                 }
             }
-
         } else {
-            $alert_message = "未能找到相关书籍";
-            $error = true;
+            $alert->set_message("未能找到相关书籍")->show();
         }
     }
 
-    $smarty->assign("error", $error);
-    $smarty->assign("show_alert", $show_alert);
-    $smarty->assign("alert_mode", $alert_mode);
-    $smarty->assign("alert_message", $alert_message);
+    $smarty->assign("alert", $alert);
     $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("page_title", $page_title);
     $smarty->display("book/detail.tpl");

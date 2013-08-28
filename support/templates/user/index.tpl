@@ -59,7 +59,7 @@
                 <td>{$view_user->signature|escape:'html'}</td>
             </tr>
             <tr>
-                <td class="td-right">最近一次登录于：</td>
+                <td class="td-right">上次登录于：</td>
                 <td>{$view_user->last_login_at}</td>
             </tr>
             <tr>

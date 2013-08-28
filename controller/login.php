@@ -7,14 +7,12 @@
     require_once(MODEL_DIR . "/user.class.php");
     require_once(VENDOR_DIR . "/recaptchalib.php");
 
-    $alert_mode = "alert-error";
-    $alert_message = "";
-    $error = false;
-
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
         $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
         $remember = $_POST["remember"];
+
+        $error = false;
 
         // 登录尝试统计，超三次后提示验证码
         $_SESSION["login_try_count"] = isset($_SESSION["login_try_count"]) ?
@@ -35,16 +33,16 @@
 
             if (!$resp->is_valid) {
                 $error = true;
-                $alert_message = "验证码不正确";
+                $alert->set_message("验证码不正确");
             }
         }
+
+
         if (!$error && !preg_match("/[-\w\.]+@(?:[a-zA-Z0-9]+\.)*[a-zA-Z0-9]+/", $email)) {
-            $error = true;
-            $alert_message = $alert_message .  '请输入正确的登录邮箱地址';
+            $alert->add_message('请输入正确的登录邮箱地址<br />');
         } else if (!preg_match("/[-_a-zA-Z0-9\.,#]{6,}/", $password)) {
             // 密码至少6位，并且仅包含: - _ , # . 字母 数字
-            $error = true;
-            $alert_message = $alert_message . '登录密码不正确';
+            $alert->add_message('请输入6位以上的密码');
         }
 
         if (!$error) {
@@ -71,7 +69,7 @@
                 header("location: index.php");
             } else {
                 $error = true;
-                $alert_message = $user->msg;
+                $alert->set_message($user->msg);
             }
         }
     }
@@ -81,22 +79,16 @@
     $code = isset($_GET["code"]) ? $_GET["code"] : "0";
 
     if ($code == "1") {
-        $alert_mode = "alert-info";
-        $show_alert = true;
-
         switch($source) {
             case "reg":
-                $alert_message = "注册成功，请登录"; break;
+                $alert->set_message("注册成功，请登录");
+                break;
             case "install":
-                $alert_message = "安装成功，请登录"; break;
+                $alert->set_message("安装成功，请登录");
+                break;
             default:
         }
-    }
-
-    // 若出现错误或者明确指定显示alert则显示
-    if ($error || $show_alert) {
-        $alert = "<div class='alert $alert_mode'>$alert_message</div>";
-        $smarty->assign("alert", $alert);
+        $alert->set_mode("info")->show();
     }
 
     // 若尝试次数大于3次，显示验证码
@@ -104,6 +96,7 @@
         $smarty->assign("recaptcha", recaptcha_get_html(RECAPTCHA_PUBLIC));
     }
 
+    $smarty->assign("alert", $alert);
     $smarty->assign("page_title", "帐号登录");
     $smarty->assign("page_class", "login");
     $smarty->display("login.tpl");

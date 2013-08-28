@@ -15,8 +15,7 @@
     </div>
 {/block}
 {block name="content"}
-
-    {$alert}
+    {include file="include/alert.tpl"}
     <form action="edit_password.php" method="post" class="form-horizontal">
         <div class="control-group">
             <label class="control-label" for="old-password">旧密码：</label>
@@ -31,7 +30,7 @@
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="re-password">确认新密码：</label>
+            <label class="control-label" for="re-password">再次输入新密码：</label>
             <div class="controls">
                 <input type="password" name="re_password" id="re-password"/>
             </div>

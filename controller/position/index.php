@@ -39,9 +39,10 @@
         if (isset($_GET["source"])) {
             switch ($_GET["source"]) {
                 case "remove":
-                    $smarty->assign("show_alert", true);
-                    $smarty->assign("alert_mode", "alert-success");
-                    $smarty->assign("alert_message", "成功移除进度信息");
+                    $alert->set_mode("pass")
+                            ->set_message("成功移除进度信息")
+                            ->show();
+                    $smarty->assign("alert", $alert);
                     break;
             }
         }
@@ -49,4 +50,5 @@
 
     $smarty->assign("total", $position_total);
     $smarty->assign("user", $_SESSION["user"]);
+    $smarty->assign("page_title", $_SESSION["user"]->username . "的阅读记录");
     $smarty->display("position/index.tpl");

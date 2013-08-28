@@ -9,20 +9,19 @@
         $inv = new InvitationModel();
         $inv_value = uniqid();
 
-        $smarty->assign("user", $_SESSION["user"]);
         $new_invitation = array("value" => $inv_value, "number" => 5, "user_id" => $_SESSION["user"]->id);
         if ($inv->insert($new_invitation)->execute()) {
-            $smarty->assign("alert_mode", "success");
-            $smarty->assign("result", "成功");
+            $alert->set_mode("pass")->set_message("添加成功")->show();
             $smarty->assign("invitation", $inv_value);
         } else {
-            $smarty->assign("alert_mode", "error");
-            $smarty->assign("result", "失败");
+            $alert->set_message("添加失败")->show();
         }
     } else {
         header("location: /invitation/index.php");
     }
 
+    $smarty->assign("alert", $alert);
+    $smarty->assign("user", $_SESSION["user"]);
     $smarty->assign("page_title", "添加邀请码");
     $smarty->display("invitation/add.tpl");
 

@@ -71,7 +71,7 @@
         </div>
     </div>
     <script type="text/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     {block name="footer_link"}{/block}
 </body>
 </html>
