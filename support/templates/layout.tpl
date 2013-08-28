@@ -6,8 +6,10 @@
     <title>{$page_title} - 6unt</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="/assets/css/gbootstrap.css"/>
-    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css?t=20130827"/>
+    <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'>
     {block name="header_link"}{/block}
 </head>
 
@@ -16,35 +18,25 @@
         <div class="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">
-                    <a href="/" class="brand">
-                        <img src="/assets/img/logo.png" alt="6unit"/>
-                    </a>
-                    <ul class="nav">
-                        <li><a href="/tag/index.php">标签</a>
-                    </ul>
-                    <ul class="nav pull-right">
-                        {if $is_login}
-                            <li><a href="/position/index.php">阅读进度</a></li>
-                            <li class="dropdown">
-                                <a href="/user/index.php" data-target="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                                    {$user->username|escape:'html'}的账号
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/user/favorite.php">我的收藏</a></li>
-                                    <li><a href="/user/index.php">我的账户</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="/logout.php">退出登录</a></li>
-                                </ul>
-                            </li>
-                        {else}
-                            {*
+                    <a href="/" class="brand">six unit</a>
+                    <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            {if $is_login}
+                            <li><a href="/user/index.php">{$user->username|escape:'html'}的账号</a></li>
+                            <li><a href="/position/index.php">我的进度</a></li>
+                            <li><a href="/user/favorite.php">我的收藏</a></li>
+                            <li><a href="/logout.php">退出登录</a></li>
+                            {else}
                             <li><a href="/login.php">登录</a></li>
-                            <li class="divider-vertical"></li>
                             <li><a href="/register.php">注册</a></li>
-                            *}
-                        {/if}
-                    </ul>
+                            {/if}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,9 +45,9 @@
         <div class="row">
             <div class="span9 box-wrap main">
                 {block "safari"}{/block}
-                <div class="content">{block name="content"}{/block}</div>
+                <div class="content" id="content">{block name="content"}{/block}</div>
             </div>
-            <div class="span3 sidebar">
+            <div class="span3 sidebar" id="sidebar">
                 {if $is_login }
                     <div class="user-profile">
                         <div class="user-summary clearfix">

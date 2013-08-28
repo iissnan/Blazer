@@ -57,7 +57,7 @@
         {/if}
         {if $book->intro|escape:'html' != "" }
             <div class="form-divider">内容简介</div>
-            <div class="intro">{$book->intro|escape:'html'}</div>
+            <div class="book-detail-intro">{$book->intro|escape:'html'}</div>
         {/if}
     {/if}
 {/block}

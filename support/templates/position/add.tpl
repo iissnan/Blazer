@@ -17,7 +17,7 @@
 {block "content"}
     {include "include/alert.tpl"}
     {if !$error}
-        <div class="clearfix">
+        <div class="clearfix position-add">
             <h3>{$book->title}</h3>
             <form action="/position/add.php" method="post" class="pull-left">
                 <input type="hidden" name="book_id" value="{$book->id}" readonly="readonly"/>

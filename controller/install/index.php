@@ -53,4 +53,6 @@
 
     $smarty->assign("ok", $good_to_go);
     $smarty->assign("result_string", $result_string);
+    $smarty->assign("page_title", "环境检测");
+    $smarty->assign("page_class", "install");
     $smarty->display("install.tpl");

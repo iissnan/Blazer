@@ -15,7 +15,7 @@
         {if $total > 0}
             <ul class="cover-list clearfix">
                 {foreach $books as $book}
-                    <li {if ($book@index+1) % 5 == 0}class="last"{/if}>
+                    <li>
                         <a href="book/detail.php?id={$book["id"]|escape:'url'}">
                             <div class="book-info">
                                 <dl>
