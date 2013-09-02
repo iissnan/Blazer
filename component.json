@@ -1,6 +1,0 @@
-{
-    "dependencies": {
-        "jquery": "1.9.*",
-        "bootstrap" : "http://twitter.github.io/bootstrap/assets/bootstrap.zip"
-    }
-}

@@ -10,7 +10,6 @@ controller/assets/avatar/*
 templates_c/
 cache/
 
-# 通过Bower管理的第三方前端框架/库
-controller/assets/vendor/
-
+# Intellij IDEA configuration files
 .idea/
+*.iml

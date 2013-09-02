@@ -7,7 +7,6 @@
 * [PHP](http://www.php.net/) >= 5.3.0
 * [MySQL](http://dev.mysql.com/downloads/)
 * [Smarty3](http://www.smarty.net/)
-* [Bower](http://twitter.github.io/bower/) (Bower requires [node.js](http://nodejs.org))
 
 
 ###安装步骤：
