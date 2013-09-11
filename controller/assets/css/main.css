@@ -229,3 +229,21 @@ a.btn{
 }
 
 
+/**
+ * Override Gbootstrap
+*/
+
+.pagination ul > li > a,
+.pagination ul > li > span {
+    color: #4D90FE;
+    background-color: #f3f3f3;
+    border: 1px solid #dcdcdc;
+    border-left-width: 0;
+}
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+    color: #333333;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}

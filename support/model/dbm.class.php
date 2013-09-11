@@ -180,12 +180,12 @@ class DatabaseManipulate {
         empty($table) and $table = $this->table;
         return $this->select("*", $table)
                     ->order_by("id")
-                    ->limit($row_count, $page - 1)
+                    ->limit($row_count, ($page - 1) * $row_count)
                     ->execute();
     }
 
     /**
-     * 获取表数据的总数
+     * 获取表数据的总条数
      *
      * @param string $where
      * @return int

@@ -14,20 +14,20 @@
     {block name="content"}
         {if $total > 0}
             <ul class="cover-list clearfix">
-                {foreach $books as $book}
+                {while $book = $books->fetch_object() }
                     <li>
-                        <a href="book/detail.php?id={$book["id"]|escape:'url'}">
+                        <a href="book/detail.php?id={$book->id|escape:'url'}">
                             <div class="book-info">
                                 <dl>
-                                    <dt>{$book["title"]|escape:'html'}</dt>
-                                    <dd>{$book["author"]|escape:'html'}</dd>
+                                    <dt>{$book->title|escape:'html'}</dt>
+                                    <dd>{$book->author|escape:'html'}</dd>
                                 </dl>
                             </div>
-                            <img src="/assets/cover/{$book["cover"]|escape:'html'|default:"default.png"}"
-                                 alt="{$book["title"]|escape:'html'}"/>
+                            <img src="/assets/cover/{$book->cover|escape:'html'|default:"default.png"}"
+                                 alt="{$book->title|escape:'html'}"/>
                         </a>
                     </li>
-                {/foreach}
+                {/while}
             </ul>
 
             {*分页*}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{$page_title} - 6unt</title>
+    <title>{$page_title} - Blazer</title>
     <link rel="shortcut icon" href="/assets/img/favicon.ico"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap-responsive.min.css" />
@@ -18,7 +18,7 @@
         <div class="navbar navbar-static-top navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">
-                    <a href="/" class="brand">six unit</a>
+                    <a href="/" class="brand">blazer</a>
                     <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>

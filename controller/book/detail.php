@@ -11,11 +11,12 @@
 
     // 获取书籍
     $book_id = isset($_GET["id"]) ? $_GET["id"] : false;
+
     if ($book_id === false) {
         $alert->set_message("书籍 id 参数无效")->show();
     } else {
         $book_model = new BookModel();
-        $book_query_result = $book_model->get_item("id", $book_id);
+        $book_query_result = $book_model->get_item("id", $book_id);  // +1 DB Query
         if ($book_query_result && $book_query_result->num_rows > 0) {
             $book = $book_query_result->fetch_object();
             $page_title = $book->title;
@@ -24,7 +25,7 @@
             $cover = "/assets/cover/" . (!$book->cover ? "default.png" : $book->cover);
             $book->cover = $cover;
 
-            // 获取作者信息
+            // 获取作者信息  // +1 DB Query
             $author_query_result = $book_model->select("authors.name", "books_authors, authors, books")
                                                 ->where("books_authors.book_id=$book->id")
                                                 ->where("books.id=books_authors.book_id")
@@ -39,7 +40,7 @@
             $authors = join(", ", $authors);
             $book->author = $authors;
 
-            // 获取分类信息
+            // 获取分类信息 // +1 DB Query
             $category_query_result = $book_model->select("categories.name", "books, books_categories, categories")
                                                 ->where("books_categories.book_id=$book->id")
                                                 ->where("books_categories.book_id=books.id")
@@ -66,13 +67,13 @@
                 }
             }
         } else {
-            $alert->set_message("未能找到相关书籍")->show();
+            $alert->set_message("未找到书籍")->show();
         }
     }
 
     $smarty->assign("alert", $alert);
     $smarty->assign("user", $_SESSION["user"]);
-    $smarty->assign("page_title", $page_title);
+    $smarty->assign("page_title", $page_title . "Blazer");
     $smarty->display("book/detail.tpl");
 
 

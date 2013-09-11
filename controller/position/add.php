@@ -5,6 +5,7 @@
     require_once(MODEL_DIR . "/book.class.php");
 
     $user = $_SESSION["user"];
+    $page_title = "进度更新";
 
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "yes") {
         $book_id = isset($_POST["book_id"]) ? intval($_POST["book_id"]) : 0;
@@ -76,6 +77,7 @@
 
     $smarty->assign("alert", $alert);
     $smarty->assign("user", $user);
+    $smarty->assign("page_title", $page_title);
     $smarty->display("position/add.tpl");
 
     isset($position_model) and $position_model->release();
